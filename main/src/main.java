@@ -3,10 +3,12 @@ import codenames.*;
 import codenames.states.*;
 import codenames.exceptions.*;
 
-public class main {
-    public static void main(String[] args) throws CnNetworkException {
-        CodeNamesClient codenameClient = new CodeNamesClient("http://51.178.49.138:3000/api/v0");
+import java.io.IOException;
 
+public class main {
+    public static void main(String[] args) throws CnNetworkException, IOException {
+        CodeNamesClient codenameClient = new CodeNamesClient("http://51.178.49.138:3000/api/v0");
+/*
         State etat = null;
         joueur j1 = new joueur("Paul8");
         int id = -1;
@@ -51,7 +53,13 @@ public class main {
         }
         System.out.println(etat.state() + "\n" + etat.creator());
 
-
+*/
+        joueur j1 = new joueur("Paul", "mdp1");
+        j1.enregistrement();
+        joueur j2 = j1;
+        j2.enregistrement();
+        joueur j3 = new joueur("Paul", "mdp2");
+        j3.enregistrement();
     }
 }
 
