@@ -5,9 +5,11 @@ import codenames.iPlayer;
 public class joueur implements iPlayer {
 
     private String nom;
+    private String mdp;
 
     public joueur(String lenom) {
         nom = lenom;
+        mdp = null;
     }
 
     @Override
@@ -15,5 +17,10 @@ public class joueur implements iPlayer {
         return nom;
     }
 
-
+    public void setMdp(String s) {
+        mdp = s;
+    }
+    public String getMdp() {
+        return mdp;
+    }
 }
