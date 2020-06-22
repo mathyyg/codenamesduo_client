@@ -13,12 +13,12 @@ public class Fenetre extends JFrame {
     public Fenetre(String titre) {
         super(titre);
 
-        JPanel panelPrincipal = new JPanel();
+        JPanel panelPrincipal = new LoginPan();
         this.setContentPane(panelPrincipal);
         //JPanel log = new LoginPan();
         //JPanel search = new RecherchePan();
         //JPanel game = new PartiePan();
-
+        /*
         JButton suivante = new JButton("Fenêtre suivante");
 
         panelPrincipal.add(suivante);
@@ -28,7 +28,8 @@ public class Fenetre extends JFrame {
             deuxieme.setVisible(true);
             dispose();
         });
-
+        */
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
+
 }

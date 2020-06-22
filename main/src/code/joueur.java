@@ -10,6 +10,7 @@ public class joueur implements iPlayer {
 
     private String nom;
     private String mdp;
+    private int partieWin, partieLoos;
 
     public joueur(String lenom) {
         nom = lenom;

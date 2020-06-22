@@ -4,9 +4,9 @@ import code.joueur;
 import codenames.CodeNamesClient;
 import codenames.exceptions.CnBadLoginException;
 import codenames.exceptions.CnNetworkException;
-import swing.vue.Fenetre;
 import swing.vue.LoginPan;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -23,6 +23,10 @@ public class controleurRegister implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         joueur j = new joueur(pan.getPseudoReg());
+
+        if (pan.getPseudoReg().isBlank())
+            pan.ouvrirMessageErreur("zone de texte vide", "Erreur d'input");
+
 
         try {
             if (serv.isRegisteredPlayer(pan.getPseudoReg())){
@@ -44,6 +48,7 @@ public class controleurRegister implements ActionListener {
             //fail enregistrement
             ex.printStackTrace();
         }
+        System.out.println("Création du nouveau joueur et authentification réussite");
         pan.setJoueur(j);
     }
 }

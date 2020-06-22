@@ -20,10 +20,13 @@ public class LoginPan extends JPanel {
 
     public LoginPan() {
 
-
+        JPanel identif = new JPanel();
+        identif.setBorder(BorderFactory
+                .createTitledBorder("Identification"));
         JTabbedPane choix = new JTabbedPane();
 
         JPanel login = new JPanel();
+        login.setLayout(new BoxLayout(login, BoxLayout.Y_AXIS));
         login.add(new JLabel("Pseudo : "));
         login.add(pseudoLog = new JTextField());
         login.add(new JLabel("mot de passe : "));
@@ -31,10 +34,16 @@ public class LoginPan extends JPanel {
         login.add(logBut = new JButton("login"));
 
         JPanel register = new JPanel();
+        register.setLayout(new BoxLayout(register, BoxLayout.Y_AXIS));
+
         register.add(new JLabel("Choisissez un pseudo : "));
         register.add(pseudoReg = new JTextField());
         register.add(regBut = new JButton("register"));
 
+        choix.addTab("Login", login);
+        choix.addTab("Register", register);
+        identif.add(choix);
+        this.add(identif);
         logBut.addActionListener(new controleurLogin(this));
         regBut.addActionListener(new controleurRegister(this));
     }
@@ -43,4 +52,11 @@ public class LoginPan extends JPanel {
     public String getmdpLog() { return mdpLog.getText(); }
     public String getPseudoReg() { return pseudoReg.getText(); }
     public void setJoueur(joueur j) { this.j = j; }
+
+    public void ouvrirMessageErreur(String msg, String titre) {
+        JOptionPane.showMessageDialog(this,
+                msg,
+                titre,
+                JOptionPane.ERROR_MESSAGE);
+    }
 }
