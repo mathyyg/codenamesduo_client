@@ -1,4 +1,6 @@
 package swing.vue;
 
-public class LoginPan {
+import javax.swing.*;
+
+public class LoginPan extends JPanel {
 }

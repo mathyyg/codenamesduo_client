@@ -1,4 +1,6 @@
 package swing.vue;
 
-public class PartiePan {
+import javax.swing.*;
+
+public class PartiePan extends JPanel {
 }

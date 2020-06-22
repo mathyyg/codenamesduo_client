@@ -1,4 +1,6 @@
 package swing.vue;
 
-public class RecherchePan {
+import javax.swing.*;
+
+public class RecherchePan extends JPanel {
 }
