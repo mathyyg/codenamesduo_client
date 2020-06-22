@@ -14,4 +14,6 @@ public class joueur implements iPlayer {
     public String login() {
         return nom;
     }
+
+
 }

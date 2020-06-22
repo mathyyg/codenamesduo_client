@@ -8,7 +8,7 @@ public class main {
         CodeNamesClient codenameClient = new CodeNamesClient("http://51.178.49.138:3000/api/v0");
 
         State etat = null;
-        joueur j1 = new joueur("Paul3");
+        joueur j1 = new joueur("Paul6");
         String mdp1 = null;
         int id = -1;
         try {
@@ -30,7 +30,27 @@ public class main {
                 e.printStackTrace();
         }
 
-        System.out.println(etat);
+        System.out.println(etat.state() + "\n" + etat.creator() + "\n");
+
+        joueur j2 = new joueur("Thomas2");
+
+        try {
+            codenameClient.addPlayer(j2);
+            codenameClient.joinGame(id, j2);
+        } catch (CnBadIdException e) {
+            e.printStackTrace();
+        } catch (CnBadLoginException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            etat = codenameClient.consultGame(id);
+        } catch (CnBadIdException e) {
+            e.printStackTrace();
+        }
+        System.out.println(etat.state() + "\n" + etat.creator());
+
+
     }
 }
 
