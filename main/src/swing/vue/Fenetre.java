@@ -13,6 +13,9 @@ public class Fenetre extends JFrame {
 
         JPanel panelPrincipal = new JPanel();
         this.setContentPane(panelPrincipal);
+        JPanel log = new LoginPan();
+        JPanel search = new RecherchePan();
+        JPanel game = new PartiePan();
 
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }

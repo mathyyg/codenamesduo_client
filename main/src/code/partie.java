@@ -17,6 +17,7 @@ public class partie {
     private List<String> plateau;
     private List<CARD_ROLE> keyCard;
 
+
     public partie(CodeNamesClient c, int lid, int leNbTour, State letat, joueur j1) throws CnBadIdException, CnNetworkException, CnBadLoginException, CnBadPwdException {
         nbTour = leNbTour;
         etat = letat;
