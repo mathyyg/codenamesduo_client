@@ -12,5 +12,4 @@ public class partie {
     private iPlayer p2;
     private List<indice> indices;
 
-
 }
