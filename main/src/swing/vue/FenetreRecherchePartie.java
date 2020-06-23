@@ -79,6 +79,7 @@ public class FenetreRecherchePartie extends JFrame {
         creerPan.add(new JLabel("Ajouter un nombre de tour personnalisé :"));
         JPanel tourPan = new JPanel();
         tourPan.add(nbTour = new JCheckBox("NB : "));
+        nbTour.addItemListener(new controleurRechercheTours(this));
         nbTourText = new JTextField();
         nbTourText.setColumns(10);
         nbTourText.setEditable(false);
@@ -96,7 +97,6 @@ public class FenetreRecherchePartie extends JFrame {
         nbTour.addItemListener(new controleurRechercheTours(this));
         creer.addActionListener(new controleurCreerPartie(this, serv, joueur));
         rejoindre.addActionListener(new controleurRejoindrePartie(this, serv, joueur));
-        refresh.addActionListener(new controleurRefreshPartie(this,serv));
 
         // vue
         this.pack();

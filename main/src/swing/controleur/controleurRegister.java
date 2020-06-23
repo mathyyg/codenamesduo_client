@@ -49,7 +49,6 @@ public class controleurRegister implements ActionListener {
         }
         System.out.println("Création du nouveau joueur et authentification réussite");
         pan.setJoueur(j);
-
-
+        pan.setLabelMdp(j.getMdp());
     }
 }
