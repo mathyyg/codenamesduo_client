@@ -4,15 +4,11 @@ import codenames.CodeNamesClient;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.TimerTask;
-import java.util.Vector;
 
+import swing.timerControleur.*;
+import codenames.states.*;
 import code.*;
 import codenames.cards.CARD_ROLE;
-import codenames.states.STATE_STEP;
-import swing.timerControleur.AttenteDeJ2Listener;
 
 public class FenetrePartie extends JFrame {
 
@@ -28,31 +24,6 @@ public class FenetrePartie extends JFrame {
     private JLabel pWin;
     private JLabel pLoos;
     private JPanel BureauDesLegendes ;
-    private JButton nc1 = new JButton("Button");
-    private JButton nc2 = new JButton("Button");
-    private JButton nc3 = new JButton("Button");
-    private JButton nc4 = new JButton("Button");
-    private JButton nc5 = new JButton("Button");
-    private JButton nc6 = new JButton("Button");
-    private JButton nc7 = new JButton("Button");
-    private JButton nc8 = new JButton("Button");
-    private JButton nc9 = new JButton("Button");
-    private JButton nc10 = new JButton("Button");
-    private JButton nc11 = new JButton("Button");
-    private JButton nc12 = new JButton("Button");
-    private JButton nc13 = new JButton("Button");
-    private JButton nc14 = new JButton("Button");
-    private JButton nc15 = new JButton("Button");
-    private JButton nc16 = new JButton("Button");
-    private JButton nc17 = new JButton("Button");
-    private JButton nc18 = new JButton("Button");
-    private JButton nc19 = new JButton("Button");
-    private JButton nc20 = new JButton("Button");
-    private JButton nc21 = new JButton("Button");
-    private JButton nc22 = new JButton("Button");
-    private JButton nc23 = new JButton("Button");
-    private JButton nc24 = new JButton("Button");
-    private JButton nc25 = new JButton("Button");
 
     private JButton keycardBut;
     private JList<CARD_ROLE> keycardsList;
@@ -64,6 +35,8 @@ public class FenetrePartie extends JFrame {
     private JTextField reponseInput;
     private JButton sendReponse;
 
+    private PlateauPan plateau;
+    private KeyCardPan keyCardPan;
 
     public FenetrePartie(String titre, Joueur lejoueur, CodeNamesClient leserv, Partie lapartie) {
         super(titre);
@@ -83,37 +56,9 @@ public class FenetrePartie extends JFrame {
 
 
 
-        JPanel plateau = new JPanel();
+        plateau = new PlateauPan();
         plateau.setBorder(BorderFactory
                 .createTitledBorder("Plateau"));
-
-        plateau.setLayout(new GridLayout(5,5));
-
-        plateau.add(nc1);
-        plateau.add(nc2);
-        plateau.add(nc3);
-        plateau.add(nc4);
-        plateau.add(nc5);
-        plateau.add(nc6);
-        plateau.add(nc7);
-        plateau.add(nc8);
-        plateau.add(nc9);
-        plateau.add(nc10);
-        plateau.add(nc11);
-        plateau.add(nc12);
-        plateau.add(nc13);
-        plateau.add(nc14);
-        plateau.add(nc15);
-        plateau.add(nc16);
-        plateau.add(nc17);
-        plateau.add(nc18);
-        plateau.add(nc19);
-        plateau.add(nc20);
-        plateau.add(nc21);
-        plateau.add(nc22);
-        plateau.add(nc23);
-        plateau.add(nc24);
-        plateau.add(nc25);
 
         BureauDesLegendes.add(plateau);
         main.add(BureauDesLegendes);
@@ -122,7 +67,7 @@ public class FenetrePartie extends JFrame {
         JPanel bas = new JPanel(new BorderLayout());
 
         JPanel centerPan = new JPanel();
-        centerPan.setLayout(new GridLayout(2,1));
+        centerPan.setLayout(new BorderLayout());
 
         JPanel hautCenterPan = new JPanel();
 
@@ -162,19 +107,22 @@ public class FenetrePartie extends JFrame {
         reponsePan.add(new JLabel("Listez vos réponses dans le cadre en les séparant avec une ',' : "));
         reponsePan.add(reponseInput = new JTextField());
         reponseInput.setColumns(10);
-        reponsePan.add(sendReponse = new JButton("Envoyer la réponse"));
+        sendReponse = new JButton("Envoyer la réponse");
+        reponsePan.add(sendReponse);
 
 
         indiceRepTabPan.addTab("Réponse", reponsePan);
 
         hautCenterPan.add(indiceRepTabPan);
 
-        centerPan.add(hautCenterPan);
+        centerPan.add(hautCenterPan, BorderLayout.NORTH);
 
-        JPanel keyPan = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        keyPan.add(keycardBut = new JButton("KeyCards"));
+        // KeyCard
+        keyCardPan = new KeyCardPan();
+        keyCardPan.setBorder(BorderFactory
+                .createTitledBorder("KeyCard"));
 
-        centerPan.add(keyPan);
+        centerPan.add(keyCardPan, BorderLayout.CENTER);
 
         bas.add(centerPan, BorderLayout.CENTER);
         JPanel listIndPan = new JPanel();
@@ -187,18 +135,18 @@ public class FenetrePartie extends JFrame {
 
         main.add(bas);
 
+
         // timer
-        /*
         timerAttenteJ2 = new Timer(5000, new AttenteDeJ2Listener(this, partie, serv));
         if (partie.getEtat().state().equals(STATE_STEP.GAME_INIT))
             timerAttenteJ2.start();
         else
             initGame();
-        */
+
         // vue
         this.pack();
 
-        this.setSize(new Dimension(800, 800));
+        this.setSize(new Dimension(1200, 800));
 
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
         int x = (int) ((dimension.getWidth() - this.getWidth()) /2 -400);
@@ -218,8 +166,8 @@ public class FenetrePartie extends JFrame {
 
 
     public void initGame() {
-        partie.getPlateau();
-
+        plateau.init(partie.getPlateau());
+        keyCardPan.init(partie.getKeyCard());
     }
 
 
