@@ -7,8 +7,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.TimerTask;
+import java.util.Vector;
 
 import code.*;
+import codenames.cards.CARD_ROLE;
 import codenames.states.STATE_STEP;
 import swing.timerControleur.AttenteDeJ2Listener;
 
@@ -17,14 +19,15 @@ public class FenetrePartie extends JFrame {
     private Joueur joueur;
     private CodeNamesClient serv;
     private Partie partie;
+    private Timer timerAttenteJ2;
+    private List ListIndice;
+
+
     private JLabel pseudo;
     private JLabel mdp;
     private JLabel pWin;
     private JLabel pLoos;
-    JPanel BureauDesLegendes ;
-
-    Timer timerAttenteJ2;
-
+    private JPanel BureauDesLegendes ;
     private JButton nc1 = new JButton("Button");
     private JButton nc2 = new JButton("Button");
     private JButton nc3 = new JButton("Button");
@@ -50,13 +53,16 @@ public class FenetrePartie extends JFrame {
     private JButton nc23 = new JButton("Button");
     private JButton nc24 = new JButton("Button");
     private JButton nc25 = new JButton("Button");
-    private JButton send = new JButton("Send");
-    private JButton keycard = new JButton("Display keycard");
-    private JTextField indice = new JTextField("indice");
-    private JComboBox indicechiffre = new JComboBox();
-    private List cardkey = new List();
-    private JTextField ncreponse = new JTextField("Enter an answer");
-    private JButton sendreponse = new JButton("Send");
+
+    private JButton keycardBut;
+    private JList<CARD_ROLE> keycardsList;
+    private JList<Indice> JListIndice;
+
+    private JButton sendIndice;
+    private JTextField indiceInput;
+    private JComboBox<Integer> indicechiffre;
+    private JTextField reponseInput;
+    private JButton sendReponse;
 
 
     public FenetrePartie(String titre, Joueur lejoueur, CodeNamesClient leserv, Partie lapartie) {
@@ -112,59 +118,83 @@ public class FenetrePartie extends JFrame {
         BureauDesLegendes.add(plateau);
         main.add(BureauDesLegendes);
 
-        JPanel tips = new JPanel();
-        tips.setBorder(BorderFactory
-                .createTitledBorder("Indice"));
+        // Partie bas
+        JPanel bas = new JPanel(new BorderLayout());
 
-        JPanel hint = new JPanel();
-        hint.setBorder(BorderFactory
-                .createTitledBorder("Indice"));
-        hint.setLayout(new BoxLayout(hint, BoxLayout.Y_AXIS));
+        JPanel centerPan = new JPanel();
+        centerPan.setLayout(new GridLayout(2,1));
 
-        Object [] elements = new Object [] {"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15"};
-        indicechiffre = new JComboBox(elements);
-
-        hint.add(indice);
-        hint.add(indicechiffre);
-        hint.add(keycard);
-        hint.add(send);
-        tips.add(hint);
+        JPanel hautCenterPan = new JPanel();
 
         JPanel profil = new JPanel();
         profil.setLayout(new BoxLayout(profil, BoxLayout.Y_AXIS));
         profil.setBorder(BorderFactory
                 .createTitledBorder("Profil"));
-
         profil.add(pseudo = new JLabel("Pseudo : " + joueur.getPseudo()));
         profil.add(mdp = new JLabel("Mdp : " + joueur.getMdp()));
         profil.add(pWin = new JLabel("Partie gagné : " +joueur.getPWin()));
         profil.add(pLoos = new JLabel("Partie perdue : " +joueur.getPLoos()));
 
-        JTabbedPane choix = new JTabbedPane();
+        hautCenterPan.add(profil);
 
-        JPanel reponse = new JPanel();
-        reponse.setBorder(BorderFactory
-                .createTitledBorder("Réponse"));
-        reponse.setLayout(new BoxLayout(reponse, BoxLayout.Y_AXIS));
+        JTabbedPane indiceRepTabPan = new JTabbedPane();
 
-        ncreponse.setColumns(10);
-        reponse.add(ncreponse);
-        reponse.add(sendreponse);
+        JPanel indicePan = new JPanel();
+        JPanel pan1 = new JPanel();
+        pan1.setLayout(new BoxLayout(pan1, BoxLayout.Y_AXIS));
+        pan1.add(new JLabel("Entre l'indice ci-dessous : "));
+        pan1.add(new JLabel("le nombre de mot correspondant à l'indice : "));
+        JPanel pan2 = new JPanel();
+        pan2.setLayout(new BoxLayout(pan2, BoxLayout.Y_AXIS));
+        pan2.add(indiceInput = new JTextField());
+        indiceInput.setColumns(10);
+        Integer[] chiffres = new Integer[] {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
+        pan2.add(indicechiffre = new JComboBox<>(chiffres));
+        indicePan.add(pan1);
+        indicePan.add(pan2);
+        indicePan.add(sendIndice = new JButton("Envoyer l'indice"));
+
+        indiceRepTabPan.addTab("Indice", indicePan);
+
+        JPanel reponsePan = new JPanel();
+        reponsePan.setLayout(new BoxLayout(reponsePan, BoxLayout.Y_AXIS));
+
+        reponsePan.add(new JLabel("Listez vos réponses dans le cadre en les séparant avec une ',' : "));
+        reponsePan.add(reponseInput = new JTextField());
+        reponseInput.setColumns(10);
+        reponsePan.add(sendReponse = new JButton("Envoyer la réponse"));
 
 
-        choix.addTab("Indice", hint);
-        choix.addTab("Réponse", reponse);
-        choix.addTab("Profil", profil);
+        indiceRepTabPan.addTab("Réponse", reponsePan);
 
-        main.add(choix);
+        hautCenterPan.add(indiceRepTabPan);
+
+        centerPan.add(hautCenterPan);
+
+        JPanel keyPan = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        keyPan.add(keycardBut = new JButton("KeyCards"));
+
+        centerPan.add(keyPan);
+
+        bas.add(centerPan, BorderLayout.CENTER);
+        JPanel listIndPan = new JPanel();
+        listIndPan.setBorder(BorderFactory
+                .createTitledBorder("Liste des indices donnés : "));
+        JListIndice = new JList();
+        JListIndice.setPreferredSize(new Dimension(300,300));
+        listIndPan.add(JListIndice);
+        bas.add(listIndPan, BorderLayout.EAST);
+
+        main.add(bas);
 
         // timer
+        /*
         timerAttenteJ2 = new Timer(5000, new AttenteDeJ2Listener(this, partie, serv));
         if (partie.getEtat().state().equals(STATE_STEP.GAME_INIT))
             timerAttenteJ2.start();
         else
             initGame();
-
+        */
         // vue
         this.pack();
 
