@@ -4,10 +4,8 @@ import code.joueur;
 import codenames.CodeNamesClient;
 import codenames.exceptions.CnBadLoginException;
 import codenames.exceptions.CnNetworkException;
-import swing.vue.Fenetre;
 import swing.vue.LoginPan;
 
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -16,9 +14,9 @@ public class controleurLogin implements ActionListener {
     private LoginPan pan;
     private CodeNamesClient serv;
 
-    public controleurLogin(LoginPan pan) {
+    public controleurLogin(LoginPan pan, CodeNamesClient leserv) {
         this.pan = pan;
-        this.serv = new CodeNamesClient("http://51.178.49.138:3000/api/v0");
+        this.serv = leserv;
     }
 
     @Override

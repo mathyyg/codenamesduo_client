@@ -15,9 +15,9 @@ public class controleurRegister implements ActionListener {
     private LoginPan pan;
     private CodeNamesClient serv;
 
-    public controleurRegister(LoginPan pan) {
+    public controleurRegister(LoginPan pan, CodeNamesClient leserv) {
         this.pan = pan;
-        this.serv = new CodeNamesClient("http://51.178.49.138:3000/api/v0");
+        this.serv = leserv;
     }
 
     @Override

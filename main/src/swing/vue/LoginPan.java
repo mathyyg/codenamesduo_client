@@ -1,6 +1,7 @@
 package swing.vue;
 
 import code.joueur;
+import codenames.CodeNamesClient;
 import swing.controleur.controleurLogin;
 import swing.controleur.controleurRegister;
 
@@ -9,7 +10,8 @@ import java.awt.*;
 
 public class LoginPan extends JFrame {
 
-    private joueur j;
+    private joueur joueur;
+    private CodeNamesClient serv;
 
     private JTextField pseudoReg;
     private JTextField mdpLog;
@@ -18,7 +20,11 @@ public class LoginPan extends JFrame {
     private JButton logBut;
     private JButton regBut;
 
-    public LoginPan() {
+    public LoginPan(String titre, CodeNamesClient leserv) {
+
+        super(titre);
+        joueur = null;
+        serv = leserv;
 
         JPanel identif = new JPanel();
         identif.setBorder(BorderFactory
@@ -45,8 +51,8 @@ public class LoginPan extends JFrame {
         identif.add(choix);
         this.add(identif);
 
-        logBut.addActionListener(new controleurLogin(this));
-        regBut.addActionListener(new controleurRegister(this));
+        logBut.addActionListener(new controleurLogin(this, serv));
+        regBut.addActionListener(new controleurRegister(this, serv));
 
 
         /* Taille du login pour placement au centre de l'écran
@@ -62,14 +68,16 @@ public class LoginPan extends JFrame {
     }
 
     public void second() {
-        FenetreRecherchePartie next = new FenetreRecherchePartie("Rejoindre une partie");
+        FenetreRecherchePartie next = new FenetreRecherchePartie("Rejoindre une partie", getJoueur(), serv);
         next.setVisible(true);
         this.dispose();
     }
     public String getPseudoLog() { return pseudoLog.getText(); }
     public String getmdpLog() { return mdpLog.getText(); }
     public String getPseudoReg() { return pseudoReg.getText(); }
-    public void setJoueur(joueur j) { this.j = j; }
+
+    public void setJoueur(joueur j) { joueur = j; }
+    public joueur getJoueur() { return joueur; }
 
     public void ouvrirMessageErreur(String msg, String titre) {
         JOptionPane.showMessageDialog(this,

@@ -9,17 +9,26 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Vector;
+import code.*;
+import swing.controleur.controleurCreerPartie;
 
 public class FenetreRecherchePartie extends JFrame {
+
+    private joueur joueur;
+    private CodeNamesClient serv;
 
     private JCheckBox nbTour;
     private JTextField nbTourText;
     private JButton creer;
 
-    public FenetreRecherchePartie(String titre) {
+    JLabel pseudo;
+    JLabel mdp;
+    JLabel pWin;
+    JLabel pLoos;
+    public FenetreRecherchePartie(String titre, joueur j, CodeNamesClient leserv) {
         super(titre);
-
-        CodeNamesClient serv = new CodeNamesClient("http://51.178.49.138:3000/api/v0");
+        joueur = j;
+        serv = leserv;
 
         JPanel main = new JPanel();
         this.setContentPane(main);
@@ -48,10 +57,10 @@ public class FenetreRecherchePartie extends JFrame {
         profil.setLayout(new BoxLayout(profil, BoxLayout.Y_AXIS));
         profil.setBorder(BorderFactory
                 .createTitledBorder("Profil"));
-        profil.add(new JLabel("Pseudo"));
-        profil.add(new JLabel("mdp"));
-        profil.add(new JLabel("PartieWin"));
-        profil.add(new JLabel("PartieLoos"));
+        profil.add(pseudo = new JLabel(j.getPseudo()));
+        profil.add(mdp =new JLabel(j.getMdp()));
+        profil.add(pWin = new JLabel("Partie gagné : " +j.getPWin()));
+        profil.add(pLoos = new JLabel("Partie perdue : " +j.getPLoos()));
 
         JPanel creerPan = new JPanel();
         creerPan.setLayout(new BoxLayout(creerPan, BoxLayout.Y_AXIS));
@@ -59,9 +68,10 @@ public class FenetreRecherchePartie extends JFrame {
                 .createTitledBorder("Créé une partie"));
         creerPan.add(new JLabel("Ajouter un nombre de tour personnalisé :"));
         JPanel tourPan = new JPanel();
-        tourPan.add(nbTour = new JCheckBox());
+        tourPan.add(nbTour = new JCheckBox("NB : "));
         nbTourText = new JTextField();
         nbTourText.setColumns(10);
+        nbTourText.setEnabled(false);
         tourPan.add(nbTourText);
         creerPan.add(tourPan);
         creerPan.add(creer = new JButton("Créer"));
@@ -72,6 +82,10 @@ public class FenetreRecherchePartie extends JFrame {
         main.add(recherchePan);
         main.add(gauche);
 
+        // Listener
+        creer.addActionListener(new controleurCreerPartie(this, serv, joueur));
+
+        // vue
         this.pack();
 
         this.setSize(new Dimension(700, 400));
@@ -83,4 +97,8 @@ public class FenetreRecherchePartie extends JFrame {
 
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
+
+    public boolean getNbTourSelect() { return nbTour.isSelected();}
+    public int getNbTour() { return Integer.parseInt(nbTourText.getText()); }
+    public joueur getJoueur() { return joueur;}
 }

@@ -8,22 +8,22 @@ import java.util.Objects;
 
 public class joueur implements iPlayer {
 
-    private String nom;
+    private String pseudo;
     private String mdp;
     private int partieWin, partieLoos;
 
     public joueur(String lenom) {
-        nom = lenom;
+        pseudo = lenom;
         mdp = null;
     }
     public joueur(String lenom, String lemdp) {
-        nom = lenom;
+        pseudo = lenom;
         mdp = lemdp;
     }
 
     @Override
     public String login() {
-        return nom;
+        return pseudo;
     }
 
     public void setMdp(String s) {
@@ -33,16 +33,19 @@ public class joueur implements iPlayer {
     public String getMdp() {
         return mdp;
     }
+    public String getPseudo() { return pseudo; }
+    public String getPWin() { return String.valueOf(partieWin);}
+    public String getPLoos() { return String.valueOf(partieLoos);}
 
     public void enregistrement() throws IOException {
         if (joueur.listEnregistrement().contains(this)){
-            System.out.println(this.nom + "est déjà enregistré");
+            System.out.println(this.pseudo + "est déjà enregistré");
             return;
         }
         try {
             FileWriter fileWriter = new FileWriter("joueurs.txt", true);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-            bufferedWriter.write(nom + "," + mdp+","+partieWin+","+partieLoos+"\n");
+            bufferedWriter.write(pseudo + "," + mdp+","+partieWin+","+partieLoos+"\n");
             bufferedWriter.close();
         } catch (IOException err) {
             System.out.println("erreur de recopie dans le fichier.");
@@ -54,7 +57,7 @@ public class joueur implements iPlayer {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         joueur joueur = (joueur) o;
-        return Objects.equals(nom, joueur.nom) &&
+        return Objects.equals(pseudo, joueur.pseudo) &&
                 Objects.equals(mdp, joueur.mdp);
     }
 

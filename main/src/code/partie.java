@@ -9,7 +9,8 @@ import java.util.List;
 
 public class partie {
 
-    private CodeNamesClient serveur;
+    private CodeNamesClient serveur = new CodeNamesClient("http://51.178.49.138:3000/api/v0");
+    private int idPartie;
     private int nbTour;
     private State etat;
     private joueur joueur;
@@ -18,13 +19,18 @@ public class partie {
     private List<CARD_ROLE> keyCard;
 
 
-    public partie(CodeNamesClient c, int lid, int leNbTour, State letat, joueur j1) throws CnBadIdException, CnNetworkException, CnBadLoginException, CnBadPwdException {
+    public partie(int lenbTour, joueur lej1, int lidPartie) {
+        nbTour = lenbTour;
+        joueur = lej1;
+        idPartie = lidPartie;
+    }
+
+    public partie(int lid, int leNbTour, State letat, joueur j1) throws CnBadIdException, CnNetworkException, CnBadLoginException, CnBadPwdException {
         nbTour = leNbTour;
         etat = letat;
         joueur = j1;
-        serveur = c;
         id = lid;
-        plateau = c.consultGame(id).words();
-        keyCard = c.keyCards(id,joueur,joueur.getMdp());
+        plateau = serveur.consultGame(id).words();
+        keyCard = serveur.keyCards(id,joueur,joueur.getMdp());
     }
 }
