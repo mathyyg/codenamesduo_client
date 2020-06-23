@@ -4,30 +4,29 @@ import codenames.CodeNamesClient;
 import codenames.exceptions.CnNetworkException;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Vector;
 import code.*;
 import swing.controleur.controleurCreerPartie;
-import swing.controleur.controleurRejoindrePartie;
-import swing.controleur.controleurRechercheTours;
+import swing.controleur.rechercheToursControleur;
 
 public class FenetreRecherchePartie extends JFrame {
 
-    private Joueur joueur;
+    private joueur joueur;
     private CodeNamesClient serv;
 
     private JCheckBox nbTour;
     private JTextField nbTourText;
     private JButton creer;
-    private JButton rejoindre;
-    private JList partiesAttente;
 
     JLabel pseudo;
     JLabel mdp;
     JLabel pWin;
     JLabel pLoos;
-
-    public FenetreRecherchePartie(String titre, Joueur j, CodeNamesClient leserv) {
+    public FenetreRecherchePartie(String titre, joueur j, CodeNamesClient leserv) {
         super(titre);
         joueur = j;
         serv = leserv;
@@ -36,7 +35,6 @@ public class FenetreRecherchePartie extends JFrame {
         this.setContentPane(main);
 
         JPanel recherchePan = new JPanel();
-        recherchePan.setPreferredSize(new Dimension(170,350));
         recherchePan.setBorder(BorderFactory
                 .createTitledBorder("Recherche une partie"));
         recherchePan.setLayout(new BoxLayout(recherchePan, BoxLayout.Y_AXIS));
@@ -47,11 +45,11 @@ public class FenetreRecherchePartie extends JFrame {
             System.out.println("erreur de chargement de la liste des parties en attente.");
             e.printStackTrace();
         }
-        partiesAttente = new JList(parties);
+        JList partiesAttente = new JList(parties);
         JScrollPane scroll = new JScrollPane(partiesAttente, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-
+        scroll.setPreferredSize(new Dimension(0,250));
         recherchePan.add(scroll);
-        recherchePan.add(rejoindre = new JButton("Rejoindre"));
+        recherchePan.add(new JButton("Rejoindre"));
         recherchePan.add(new JButton("Quitter"));
 
         //Partie droite
@@ -72,6 +70,7 @@ public class FenetreRecherchePartie extends JFrame {
         creerPan.add(new JLabel("Ajouter un nombre de tour personnalisé :"));
         JPanel tourPan = new JPanel();
         tourPan.add(nbTour = new JCheckBox("NB : "));
+        nbTour.addItemListener(new rechercheToursControleur(this));
         nbTourText = new JTextField();
         nbTourText.setColumns(10);
         nbTourText.setEditable(false);
@@ -86,9 +85,7 @@ public class FenetreRecherchePartie extends JFrame {
         main.add(gauche);
 
         // Listener
-        nbTour.addItemListener(new controleurRechercheTours(this));
         creer.addActionListener(new controleurCreerPartie(this, serv, joueur));
-        rejoindre.addActionListener(new controleurRejoindrePartie(this, serv, joueur));
 
         // vue
         this.pack();
@@ -105,19 +102,8 @@ public class FenetreRecherchePartie extends JFrame {
 
     public boolean getNbTourSelect() { return nbTour.isSelected();}
     public int getNbTour() { return Integer.parseInt(nbTourText.getText()); }
-    public Joueur getJoueur() { return joueur;}
-    public void toursEtat(boolean b) { nbTourText.setEditable(b); }
-    public int getIDPartieSelected() { return (int) partiesAttente.getSelectedValue();}
-    public void ouvrirMessageErreur(String msg, String titre) {
-        JOptionPane.showMessageDialog(this,
-                msg,
-                titre,
-                JOptionPane.ERROR_MESSAGE);
-    }
-
-    public void second(Partie partie) {
-        FenetrePartie next = new FenetrePartie("Bureau des légendes", getJoueur(), serv, partie);
-        next.setVisible(true);
-        this.dispose();
+    public joueur getJoueur() { return joueur;}
+    public void toursEtat(boolean b) {
+        nbTourText.setEditable(b);
     }
 }
