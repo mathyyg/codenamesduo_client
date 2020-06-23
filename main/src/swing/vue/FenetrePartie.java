@@ -71,8 +71,7 @@ public class FenetrePartie extends JFrame {
         main.setLayout( new GridLayout(2,1));
 
         JPanel BureauDesLegendes = new JPanel();
-        BureauDesLegendes.setAlignmentX(Component.CENTER_ALIGNMENT);
-        BureauDesLegendes.setAlignmentY(Component.CENTER_ALIGNMENT);
+        BureauDesLegendes.setLayout(new GridLayout(1,1));
         BureauDesLegendes.setBorder(BorderFactory.createLineBorder(Color.black));
         BureauDesLegendes.setBackground(new Color((255),(255),(255)));
 
@@ -181,6 +180,7 @@ public class FenetrePartie extends JFrame {
     public void stopAttenteJ2() { timerAttenteJ2.stop();}
 
     public void initGame() {
+        partie.getPlateau();
 
     }
 
