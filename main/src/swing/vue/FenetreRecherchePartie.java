@@ -1,5 +1,8 @@
 package swing.vue;
 
+import codenames.CodeNamesClient;
+import codenames.exceptions.CnNetworkException;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -12,18 +15,12 @@ public class FenetreRecherchePartie extends JFrame {
     public FenetreRecherchePartie(String titre) {
         super(titre);
 
+        CodeNamesClient serv = new CodeNamesClient("http://51.178.49.138:3000/api/v0");
+
         JPanel main = new JPanel();
         this.setContentPane(main);
 
         main.setLayout(new GridLayout(1,2));
-
-        JPanel rejoindrePan = new JPanel();
-        rejoindrePan.setBorder(BorderFactory.createLineBorder(Color.black));
-        rejoindrePan.setBackground(new Color((255),(255),(255)));
-
-        JPanel creerPan = new JPanel();
-        creerPan.setBorder(BorderFactory.createLineBorder(Color.black));
-        creerPan.setBackground(new Color((255),(255),(255)));
 
 
 
@@ -31,26 +28,32 @@ public class FenetreRecherchePartie extends JFrame {
         JPanel gauche = new JPanel(new GridLayout(2,1));
         gauche.setBorder(BorderFactory.createRaisedBevelBorder());
 
-        Vector parties= new Vector<String>();
-        parties.add("Aucune partie trouvé");
-        JList partiesAttente = new JList();
-        partiesAttente.setListData(parties);
+        Vector parties= null;
+        try {
+            parties = new Vector<>(serv.waitingGames());
+        } catch (CnNetworkException e) {
+            e.printStackTrace();
+        }
+        JList partiesAttente = new JList(parties);
+        JScrollPane scroll = new JScrollPane(partiesAttente, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+
         JTextField pseudoInput = new JTextField("Pseudo");
+        pseudoInput.setColumns(10);
         JButton rejoindreButton = new JButton("Rejoindre la partie");
         JButton retourButton = new JButton("Retour");
 
-        JPanel g = new JPanel();
-        g.setLayout(new BoxLayout(g, BoxLayout.Y_AXIS));
+        JPanel g = new JPanel(new GridLayout(1,2));
         g.setBorder(BorderFactory
                 .createTitledBorder("Rejoindre une partie"));
-        g.add(partiesAttente);
-        g.add(pseudoInput);
-        g.add(rejoindreButton);
-        g.add(retourButton);
+        JPanel gBas = new JPanel(new GridLayout(3,1));
+        gBas.add(pseudoInput);
+        gBas.add(rejoindreButton);
+        gBas.add(retourButton);
 
+        g.add(scroll);
+        g.add(gBas);
         gauche.add(g);
 
-        rejoindrePan.add(gauche);
         /* --- */
 
         /* DROITE - CREER */
@@ -72,7 +75,6 @@ public class FenetreRecherchePartie extends JFrame {
         profil.add(nbWin);
         profil.add(nbloos);
 
-        JLabel titreDroite = new JLabel("Créer une partie");
         JCheckBox personnalise = new JCheckBox("Nombre de tours personnalisé");
         JLabel textTours = new JLabel("Nombre de tours");
         JSlider toursSlider = new JSlider();
@@ -80,8 +82,8 @@ public class FenetreRecherchePartie extends JFrame {
 
         JPanel d = new JPanel();
         d.setLayout(new BoxLayout(d, BoxLayout.Y_AXIS));
-
-        d.add(titreDroite);
+        d.setBorder(BorderFactory
+                .createTitledBorder("Créer une partie"));
         d.add(personnalise);
         d.add(textTours);
         d.add(toursSlider);
@@ -90,13 +92,12 @@ public class FenetreRecherchePartie extends JFrame {
         droite.add(profil);
         droite.add(d);
 
-        creerPan.add(droite);
 
 
         /* --- */
 
-        main.add(rejoindrePan);
-        main.add(creerPan);
+        main.add(gauche);
+        main.add(droite);
 
 
 

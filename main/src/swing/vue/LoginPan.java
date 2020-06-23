@@ -44,6 +44,7 @@ public class LoginPan extends JPanel {
         choix.addTab("Register", register);
         identif.add(choix);
         this.add(identif);
+
         logBut.addActionListener(new controleurLogin(this));
         regBut.addActionListener(new controleurRegister(this));
 
