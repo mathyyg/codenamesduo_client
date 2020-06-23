@@ -44,11 +44,11 @@ public class FenetrePartie extends JFrame {
     private JButton nc24 = new JButton("Button");
     private JButton nc25 = new JButton("Button");
     private JButton send = new JButton("Send");
-    private JButton keycard = new JButton("keycard");
-    private JTextField indice = new JTextField("indice");
+    private JButton keycard = new JButton("Display keycard");
+    private JTextField indice = new JTextField("Enter a hint");
     private JComboBox indicechiffre;
     protected List cardkey = new List();
-    private JTextField ncreponse = new JTextField("ncreponse");
+    private JTextField ncreponse = new JTextField("Enter an answer");
     private JButton sendreponse = new JButton("Send");
 
     public FenetrePartie(String titre, Joueur lejoueur, CodeNamesClient leserv, Partie lapartie) {
@@ -61,7 +61,7 @@ public class FenetrePartie extends JFrame {
         this.setContentPane(main);
 
         main.setLayout( new GridLayout(2,1));
-        
+
 
         JPanel BureauDesLegendes = new JPanel();
         BureauDesLegendes.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -112,7 +112,7 @@ public class FenetrePartie extends JFrame {
 
         JPanel hint = new JPanel();
         hint.setBorder(BorderFactory
-                .createTitledBorder("Indice2"));
+                .createTitledBorder("Indice"));
         hint.setLayout(new BoxLayout(hint, BoxLayout.Y_AXIS));
 
         Object [] elements = new Object [] {"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15"};
@@ -124,10 +124,10 @@ public class FenetrePartie extends JFrame {
         hint.add(keycard);
         hint.add(send);
         tips.add(hint);
-        main.add(tips);
 
 
-      
+
+
 
 
         JPanel profil = new JPanel();
@@ -135,18 +135,16 @@ public class FenetrePartie extends JFrame {
         profil.setBorder(BorderFactory
                 .createTitledBorder("Profil"));
 
-        profil.add(pseudo = new JLabel(joueur.getPseudo()));
-        profil.add(mdp = new JLabel(joueur.getMdp()));
+        profil.add(pseudo = new JLabel("Pseudo : " + joueur.getPseudo()));
+        profil.add(mdp = new JLabel("Mdp : " + joueur.getMdp()));
         profil.add(pWin = new JLabel("Partie gagné : " +joueur.getPWin()));
         profil.add(pLoos = new JLabel("Partie perdue : " +joueur.getPLoos()));
-
-
 
         JTabbedPane choix = new JTabbedPane();
 
         JPanel reponse = new JPanel();
         reponse.setBorder(BorderFactory
-                .createTitledBorder("Réponse1"));
+                .createTitledBorder("Réponse"));
         reponse.setLayout(new BoxLayout(reponse, BoxLayout.Y_AXIS));
 
         ncreponse.setColumns(10);
@@ -154,8 +152,11 @@ public class FenetrePartie extends JFrame {
         reponse.add(sendreponse);
 
 
-        choix.addTab("indice", hint);
+        choix.addTab("Indice", hint);
         choix.addTab("Réponse", reponse);
+        choix.addTab("Profil", profil);
+
+        main.add(choix);
 
         // vue
         this.pack();
