@@ -1,28 +1,27 @@
 package swing.controleur;
 
-import code.joueur;
+import code.Joueur;
 import codenames.CodeNamesClient;
 import codenames.exceptions.CnBadLoginException;
 import codenames.exceptions.CnNetworkException;
-import swing.vue.LoginPan;
+import swing.vue.FenetreLogin;
 
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
 public class controleurRegister implements ActionListener {
-    private LoginPan pan;
+    private FenetreLogin pan;
     private CodeNamesClient serv;
 
-    public controleurRegister(LoginPan pan, CodeNamesClient leserv) {
+    public controleurRegister(FenetreLogin pan, CodeNamesClient leserv) {
         this.pan = pan;
         this.serv = leserv;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        joueur j = new joueur(pan.getPseudoReg());
+        Joueur j = new Joueur(pan.getPseudoReg());
 
         if (pan.getPseudoReg().isBlank())
             pan.ouvrirMessageErreur("zone de texte vide", "Erreur d'input");

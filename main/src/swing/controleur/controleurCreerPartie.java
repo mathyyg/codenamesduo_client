@@ -5,7 +5,6 @@ import codenames.CodeNamesClient;
 import codenames.exceptions.CnBadLoginException;
 import codenames.exceptions.CnNetworkException;
 import swing.vue.FenetreRecherchePartie;
-import swing.vue.LoginPan;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,9 +12,9 @@ import java.awt.event.ActionListener;
 public class controleurCreerPartie implements ActionListener{
     private FenetreRecherchePartie fn;
     private CodeNamesClient serv;
-    private joueur joueur;
+    private Joueur joueur;
 
-    public controleurCreerPartie(FenetreRecherchePartie lafn, CodeNamesClient leserv, joueur lejoueur) {
+    public controleurCreerPartie(FenetreRecherchePartie lafn, CodeNamesClient leserv, Joueur lejoueur) {
         fn = lafn;
         serv = leserv;
         joueur = lejoueur;
@@ -23,24 +22,27 @@ public class controleurCreerPartie implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        int idPartie = 0;
-        partie partie;
+        int idPartie;
+        Partie partie;
         if (fn.getNbTourSelect()) {
             try {
                 idPartie = serv.createGame(fn.getJoueur(), fn.getNbTour());
+                System.out.println("Créé une partie de X tours du joueur " +joueur +" avec comme ID : " + idPartie);
+                partie = new Partie(fn.getNbTour(), joueur, idPartie);
             } catch (CnNetworkException ex) {
-                ex.printStackTrace();
+                fn.ouvrirMessageErreur(ex.getMessage(),"Erreur serveur");
             } catch (CnBadLoginException ex) {
-                ex.printStackTrace();
+                fn.ouvrirMessageErreur(ex.getMessage(),"Erreur de login");
             }
-            partie = new partie(fn.getNbTour(), joueur, idPartie);
         } else {
             try {
                 idPartie = serv.createGame(fn.getJoueur());
+                System.out.println("Créé une partie de 9 tours du joueur " +joueur +" avec comme ID : " + idPartie);
+                partie = new Partie(9, joueur, idPartie);
             } catch (CnNetworkException ex) {
-                ex.printStackTrace();
+                fn.ouvrirMessageErreur(ex.getMessage(),"Erreur serveur");
             } catch (CnBadLoginException ex) {
-                ex.printStackTrace();
+                fn.ouvrirMessageErreur(ex.getMessage(),"Erreur de login");
             }
         }
     }

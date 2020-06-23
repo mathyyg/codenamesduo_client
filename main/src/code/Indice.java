@@ -1,10 +1,10 @@
 package code;
 
-public class indice {
+public class Indice {
     private String indice;
     private int nbMotPourIndice;
 
-    public indice(String s, int nb){
+    public Indice(String s, int nb){
         indice = s;
         nbMotPourIndice = nb;
     }

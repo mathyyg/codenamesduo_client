@@ -1,16 +1,15 @@
 package swing.vue;
 
-import code.joueur;
+import code.Joueur;
 import codenames.CodeNamesClient;
 import swing.controleur.controleurLogin;
 import swing.controleur.controleurRegister;
 
 import javax.swing.*;
-import java.awt.*;
 
-public class LoginPan extends JFrame {
+public class FenetreLogin extends JFrame {
 
-    private joueur joueur;
+    private Joueur joueur;
     private CodeNamesClient serv;
 
     private JTextField pseudoReg;
@@ -20,7 +19,7 @@ public class LoginPan extends JFrame {
     private JButton logBut;
     private JButton regBut;
 
-    public LoginPan(String titre, CodeNamesClient leserv) {
+    public FenetreLogin(String titre, CodeNamesClient leserv) {
 
         super(titre);
         joueur = null;
@@ -36,7 +35,7 @@ public class LoginPan extends JFrame {
         login.add(new JLabel("Pseudo : "));
         login.add(pseudoLog = new JTextField());
         login.add(new JLabel("mot de passe : "));
-        login.add(mdpLog = new JTextField());
+        login.add(mdpLog = new JPasswordField());
         login.add(logBut = new JButton("login"));
 
         JPanel register = new JPanel();
@@ -76,8 +75,8 @@ public class LoginPan extends JFrame {
     public String getmdpLog() { return mdpLog.getText(); }
     public String getPseudoReg() { return pseudoReg.getText(); }
 
-    public void setJoueur(joueur j) { joueur = j; }
-    public joueur getJoueur() { return joueur; }
+    public void setJoueur(Joueur j) { joueur = j; }
+    public Joueur getJoueur() { return joueur; }
 
     public void ouvrirMessageErreur(String msg, String titre) {
         JOptionPane.showMessageDialog(this,

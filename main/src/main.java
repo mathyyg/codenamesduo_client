@@ -1,6 +1,5 @@
-import code.joueur;
+import code.Joueur;
 import codenames.*;
-import codenames.states.*;
 import codenames.exceptions.*;
 
 import java.io.IOException;
@@ -54,11 +53,11 @@ public class main {
         System.out.println(etat.state() + "\n" + etat.creator());
 
 */
-        joueur j1 = new joueur("Paul", "mdp1");
+        Joueur j1 = new Joueur("Paul", "mdp1");
         j1.enregistrement();
-        joueur j2 = j1;
+        Joueur j2 = j1;
         j2.enregistrement();
-        joueur j3 = new joueur("Paul", "mdp2");
+        Joueur j3 = new Joueur("Paul", "mdp2");
         j3.enregistrement();
     }
 }

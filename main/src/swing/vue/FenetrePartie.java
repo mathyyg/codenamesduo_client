@@ -1,13 +1,17 @@
 package swing.vue;
 
-import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Vector;
+import codenames.CodeNamesClient;
 
-public class PartiePan extends JFrame {
+import javax.swing.*;
+import java.awt.*;
+
+import code.*;
+
+public class FenetrePartie extends JFrame {
+
+    private Joueur joueur;
+    private CodeNamesClient serv;
+    private Partie partie;
 
     JPanel BureauDesLegendes ;
     private JButton nc1 = new JButton("Button");
@@ -41,8 +45,12 @@ public class PartiePan extends JFrame {
     private JComboBox indicechiffre = new JComboBox();
     protected List cardkey = new List();
 
-    public PartiePan(String titre) {
+    public FenetrePartie(String titre, Joueur lejoueur, CodeNamesClient leserv, Partie lapartie) {
         super(titre);
+        partie = lapartie;
+        joueur = lejoueur;
+        serv = leserv;
+
         JPanel main = new JPanel();
         this.setContentPane(main);
 

@@ -1,33 +1,33 @@
 package swing.controleur;
 
-import code.joueur;
+import code.Joueur;
 import codenames.CodeNamesClient;
 import codenames.exceptions.CnBadLoginException;
 import codenames.exceptions.CnNetworkException;
-import swing.vue.LoginPan;
+import swing.vue.FenetreLogin;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
 public class controleurLogin implements ActionListener {
-    private LoginPan pan;
+    private FenetreLogin pan;
     private CodeNamesClient serv;
 
-    public controleurLogin(LoginPan pan, CodeNamesClient leserv) {
+    public controleurLogin(FenetreLogin pan, CodeNamesClient leserv) {
         this.pan = pan;
         this.serv = leserv;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        joueur j = new joueur(pan.getPseudoLog(), pan.getmdpLog());
+        Joueur j = new Joueur(pan.getPseudoLog(), pan.getmdpLog());
 
         if (pan.getPseudoLog().isBlank() || pan.getmdpLog().isBlank())
             pan.ouvrirMessageErreur("zone de texte vide", "Erreur d'input");
 
         try {
-            if (joueur.listEnregistrement().contains(j)
+            if (Joueur.listEnregistrement().contains(j)
                 && serv.isRegisteredPlayer(pan.getPseudoLog())){
                 // On se co avec le bon login
                 System.out.println("authentification réussite.");
@@ -35,7 +35,7 @@ public class controleurLogin implements ActionListener {
                 pan.second();
             }
             // pas sur de cette partie.
-            if (joueur.listEnregistrement().contains(j) && !serv.isRegisteredPlayer(pan.getPseudoLog())){
+            if (Joueur.listEnregistrement().contains(j) && !serv.isRegisteredPlayer(pan.getPseudoLog())){
 
                 j.setMdp(serv.addPlayer(j));
                 j.enregistrement();
