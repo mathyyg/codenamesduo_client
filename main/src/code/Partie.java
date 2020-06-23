@@ -38,6 +38,7 @@ public class Partie {
         }
     }
 
+
     public List<String> getPlateau() {
         return plateau;
     }

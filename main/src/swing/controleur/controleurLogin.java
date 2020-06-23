@@ -29,26 +29,16 @@ public class controleurLogin implements ActionListener {
         try {
             if (Joueur.listEnregistrement().contains(j)
                 && serv.isRegisteredPlayer(pan.getPseudoLog())){
-                // On se co avec le bon login
                 System.out.println("authentification réussite.");
                 pan.setJoueur(j);
                 pan.second();
-            }
-            // pas sur de cette partie.
-            if (Joueur.listEnregistrement().contains(j) && !serv.isRegisteredPlayer(pan.getPseudoLog())){
-
-                j.setMdp(serv.addPlayer(j));
-                j.enregistrement();
+            } else if (serv.isRegisteredPlayer(pan.getPseudoLog())){
+                pan.ouvrirMessageErreur("le mot de passe ne correspond pas à l'identifiant","Erreur login");
+            } else {
+                pan.ouvrirMessageErreur("Il n'existe pas de login ayant ce nom sur le serveur","Erreur login");
             }
         } catch (CnNetworkException ex) {
             pan.ouvrirMessageErreur(ex.getMessage(), "Erreur serveur");
-        } catch (IOException ex) {
-            pan.ouvrirMessageErreur("Erreur d'enregistrement du joueur (partie interne)", "Erreur Enregistrement");
-        } catch (CnBadLoginException ex) {
-            pan.ouvrirMessageErreur(ex.getMessage(), "Erreur de login");
-
         }
-
-
     }
 }
