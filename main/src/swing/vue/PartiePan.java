@@ -10,36 +10,36 @@ import java.util.Vector;
 public class PartiePan extends JFrame {
 
     JPanel BureauDesLegendes ;
-    private JButton nc1 ;
-    private JButton nc2 ;
-    private JButton nc3 ;
-    private JButton nc4 ;
-    private JButton nc5 ;
-    private JButton nc6 ;
-    private JButton nc7 ;
-    private JButton nc8 ;
-    private JButton nc9 ;
-    private JButton nc10 ;
-    private JButton nc11 ; 
-    private JButton nc12 ;
-    private JButton nc13 ; 
-    private JButton nc14 ;
-    private JButton nc15 ;
-    private JButton nc16 ;
-    private JButton nc17 ; 
-    private JButton nc18 ; 
-    private JButton nc19 ; 
-    private JButton nc20 ;
-    private JButton nc21 ;
-    private JButton nc22 ;
-    private JButton nc23 ;
-    private JButton nc24 ;
-    private JButton nc25 ;
-    private JButton send ;
-    private JButton keycard ;
-    private JTextField indice ;
-    private JComboBox indicechiffre ;
-    protected List cardkey ;
+    private JButton nc1 = new JButton("Button");
+    private JButton nc2 = new JButton("Button");
+    private JButton nc3 = new JButton("Button");
+    private JButton nc4 = new JButton("Button");
+    private JButton nc5 = new JButton("Button");
+    private JButton nc6 = new JButton("Button");
+    private JButton nc7 = new JButton("Button");
+    private JButton nc8 = new JButton("Button");
+    private JButton nc9 = new JButton("Button");
+    private JButton nc10 = new JButton("Button");
+    private JButton nc11 = new JButton("Button");
+    private JButton nc12 = new JButton("Button");
+    private JButton nc13 = new JButton("Button");
+    private JButton nc14 = new JButton("Button");
+    private JButton nc15 = new JButton("Button");
+    private JButton nc16 = new JButton("Button");
+    private JButton nc17 = new JButton("Button");
+    private JButton nc18 = new JButton("Button");
+    private JButton nc19 = new JButton("Button");
+    private JButton nc20 = new JButton("Button");
+    private JButton nc21 = new JButton("Button");
+    private JButton nc22 = new JButton("Button");
+    private JButton nc23 = new JButton("Button");
+    private JButton nc24 = new JButton("Button");
+    private JButton nc25 = new JButton("Button");
+    private JButton send = new JButton("Send");
+    private JButton keycard = new JButton("keycard");
+    private JTextField indice = new JTextField("indice");
+    private JComboBox indicechiffre = new JComboBox();
+    protected List cardkey = new List();
 
     public PartiePan(String titre) {
         super(titre);
@@ -57,13 +57,11 @@ public class PartiePan extends JFrame {
 
 
         JPanel plateau = new JPanel();
-        plateau.setBorder(BorderFactory.createRaisedBevelBorder());
+        plateau.setBorder(BorderFactory
+                .createTitledBorder("Plateau"));
 
-        plateau.setLayout(new BoxLayout(plateau, BoxLayout.Y_AXIS));
-        plateau.setBorder(new EmptyBorder(10, 10, 10, 10));
-        JLabel titreplateau = new JLabel("Plateau");
+        plateau.setLayout(new GridLayout(5,5));
 
-        plateau.add(titreplateau);
         plateau.add(nc1);
         plateau.add(nc2);
         plateau.add(nc3);
@@ -94,19 +92,18 @@ public class PartiePan extends JFrame {
         main.add(BureauDesLegendes);
 
         JPanel tips = new JPanel();
-        tips.setBorder(BorderFactory.createRaisedBevelBorder());
-        JLabel titreIndice = new JLabel("Indice");
+        tips.setBorder(BorderFactory
+                .createTitledBorder("Indice"));
 
         JPanel hint = new JPanel();
+        hint.setBorder(BorderFactory
+                .createTitledBorder("Indice2"));
         hint.setLayout(new BoxLayout(hint, BoxLayout.Y_AXIS));
-        hint.setBorder(new EmptyBorder(10, 10, 10, 10));
 
-        hint.add(titreIndice);
-        hint.add(send);
-        hint.add(indicechiffre);
         hint.add(indice);
+        hint.add(indicechiffre);
         hint.add(keycard);
-
+        hint.add(send);
         tips.add(hint);
         main.add(tips);
 
