@@ -41,8 +41,7 @@ public class FenetreRecherchePartie extends JFrame {
         recherchePan.setBorder(BorderFactory
                 .createTitledBorder("Recherche une partie"));
         recherchePan.setLayout(new BoxLayout(recherchePan, BoxLayout.Y_AXIS));
-        parties= null;
-
+        parties = null;
         try {
             parties = new Vector<>(serv.waitingGames());
         } catch (CnNetworkException e) {
@@ -54,12 +53,12 @@ public class FenetreRecherchePartie extends JFrame {
         partiesAttente = new JList(model);
         JScrollPane scroll = new JScrollPane(partiesAttente, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
+
         recherchePan.add(scroll);
         recherchePan.add(rejoindre = new JButton("Rejoindre"));
         recherchePan.add(quitter = new JButton("Quitter"));
         recherchePan.add(refresh = new JButton("\uD83D\uDDD8"));
-        quitter.addActionListener(new controleurQuitterPartie(this,serv));
-        refresh.addActionListener(new controleurRefreshPartie(this,serv));
+
 
         //Partie droite
         JPanel gauche = new JPanel(new GridLayout(2,1));
@@ -69,8 +68,8 @@ public class FenetreRecherchePartie extends JFrame {
                 .createTitledBorder("Profil"));
         profil.add(pseudo = new JLabel(j.getPseudo()));
         profil.add(mdp =new JLabel(j.getMdp()));
-        profil.add(pWin = new JLabel("Parties gagnées : " +j.getPWin()));
-        profil.add(pLoos = new JLabel("Parties perdues : " +j.getPLoos()));
+        profil.add(pWin = new JLabel("Partie gagné : " +j.getPWin()));
+        profil.add(pLoos = new JLabel("Partie perdue : " +j.getPLoos()));
 
         JPanel creerPan = new JPanel();
         creerPan.setLayout(new BoxLayout(creerPan, BoxLayout.Y_AXIS));
@@ -96,7 +95,9 @@ public class FenetreRecherchePartie extends JFrame {
         nbTour.addItemListener(new controleurRechercheTours(this));
         creer.addActionListener(new controleurCreerPartie(this, serv, joueur));
         rejoindre.addActionListener(new controleurRejoindrePartie(this, serv, joueur));
-        refresh.addActionListener(new controleurRefreshPartie(this,serv));
+        quitter.addActionListener(new controleurQuitter(this));
+        refresh.addActionListener(new controleurRefreshPAttente(this));
+
 
         // vue
         this.pack();
@@ -126,7 +127,7 @@ public class FenetreRecherchePartie extends JFrame {
     }
 
     public void second(Partie partie) {
-        FenetrePartie next = new FenetrePartie("Rejoindre une partie", getJoueur(), serv, partie);
+        FenetrePartie next = new FenetrePartie("Bureau des légendes", getJoueur(), serv, partie);
         next.setVisible(true);
         this.dispose();
     }
@@ -140,4 +141,5 @@ public class FenetreRecherchePartie extends JFrame {
             e.printStackTrace();
         }
     }
+
 }

@@ -17,6 +17,10 @@ public class FenetrePartie extends JFrame {
     private Joueur joueur;
     private CodeNamesClient serv;
     private Partie partie;
+    private JLabel pseudo;
+    private JLabel mdp;
+    private JLabel pWin;
+    private JLabel pLoos;
     JPanel BureauDesLegendes ;
 
     Timer timerAttenteJ2;
@@ -47,10 +51,13 @@ public class FenetrePartie extends JFrame {
     private JButton nc24 = new JButton("Button");
     private JButton nc25 = new JButton("Button");
     private JButton send = new JButton("Send");
-    private JButton keycard = new JButton("keycard");
+    private JButton keycard = new JButton("Display keycard");
     private JTextField indice = new JTextField("indice");
     private JComboBox indicechiffre = new JComboBox();
-    protected List cardkey = new List();
+    private List cardkey = new List();
+    private JTextField ncreponse = new JTextField("Enter an answer");
+    private JButton sendreponse = new JButton("Send");
+
 
     public FenetrePartie(String titre, Joueur lejoueur, CodeNamesClient leserv, Partie lapartie) {
         super(titre);
@@ -112,16 +119,47 @@ public class FenetrePartie extends JFrame {
 
         JPanel hint = new JPanel();
         hint.setBorder(BorderFactory
-                .createTitledBorder("Indice2"));
+                .createTitledBorder("Indice"));
         hint.setLayout(new BoxLayout(hint, BoxLayout.Y_AXIS));
+
+        Object [] elements = new Object [] {"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15"};
+        indicechiffre = new JComboBox(elements);
 
         hint.add(indice);
         hint.add(indicechiffre);
         hint.add(keycard);
         hint.add(send);
         tips.add(hint);
-        main.add(tips);
 
+        JPanel profil = new JPanel();
+        profil.setLayout(new BoxLayout(profil, BoxLayout.Y_AXIS));
+        profil.setBorder(BorderFactory
+                .createTitledBorder("Profil"));
+
+        profil.add(pseudo = new JLabel("Pseudo : " + joueur.getPseudo()));
+        profil.add(mdp = new JLabel("Mdp : " + joueur.getMdp()));
+        profil.add(pWin = new JLabel("Partie gagné : " +joueur.getPWin()));
+        profil.add(pLoos = new JLabel("Partie perdue : " +joueur.getPLoos()));
+
+        JTabbedPane choix = new JTabbedPane();
+
+        JPanel reponse = new JPanel();
+        reponse.setBorder(BorderFactory
+                .createTitledBorder("Réponse"));
+        reponse.setLayout(new BoxLayout(reponse, BoxLayout.Y_AXIS));
+
+        ncreponse.setColumns(10);
+        reponse.add(ncreponse);
+        reponse.add(sendreponse);
+
+
+        choix.addTab("Indice", hint);
+        choix.addTab("Réponse", reponse);
+        choix.addTab("Profil", profil);
+
+        main.add(choix);
+
+        // timer
         timerAttenteJ2 = new Timer(5000, new AttenteDeJ2Listener(this, partie, serv));
         if (partie.getEtat().state().equals(STATE_STEP.GAME_INIT))
             timerAttenteJ2.start();
