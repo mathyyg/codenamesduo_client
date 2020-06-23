@@ -12,6 +12,10 @@ import java.util.Vector;
 
 public class FenetreRecherchePartie extends JFrame {
 
+    private JCheckBox nbTour;
+    private JTextField nbTourText;
+    private JButton creer;
+
     public FenetreRecherchePartie(String titre) {
         super(titre);
 
@@ -20,91 +24,63 @@ public class FenetreRecherchePartie extends JFrame {
         JPanel main = new JPanel();
         this.setContentPane(main);
 
-        main.setLayout(new GridLayout(1,2));
-
-
-
-        /* GAUCHE - REJOINDRE */
-        JPanel gauche = new JPanel(new GridLayout(2,1));
-        gauche.setBorder(BorderFactory.createRaisedBevelBorder());
-
+        JPanel recherchePan = new JPanel();
+        recherchePan.setBorder(BorderFactory
+                .createTitledBorder("Recherche une partie"));
+        recherchePan.setLayout(new BoxLayout(recherchePan, BoxLayout.Y_AXIS));
         Vector parties= null;
         try {
             parties = new Vector<>(serv.waitingGames());
         } catch (CnNetworkException e) {
+            System.out.println("erreur de chargement de la liste des parties en attente.");
             e.printStackTrace();
         }
         JList partiesAttente = new JList(parties);
         JScrollPane scroll = new JScrollPane(partiesAttente, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scroll.setPreferredSize(new Dimension(0,250));
+        recherchePan.add(scroll);
+        recherchePan.add(new JButton("Rejoindre"));
+        recherchePan.add(new JButton("Quitter"));
 
-        JTextField pseudoInput = new JTextField("Pseudo");
-        pseudoInput.setColumns(10);
-        JButton rejoindreButton = new JButton("Rejoindre la partie");
-        JButton retourButton = new JButton("Retour");
-
-        JPanel g = new JPanel(new GridLayout(1,2));
-        g.setBorder(BorderFactory
-                .createTitledBorder("Rejoindre une partie"));
-        JPanel gBas = new JPanel(new GridLayout(3,1));
-        gBas.add(pseudoInput);
-        gBas.add(rejoindreButton);
-        gBas.add(retourButton);
-
-        g.add(scroll);
-        g.add(gBas);
-        gauche.add(g);
-
-        /* --- */
-
-        /* DROITE - CREER */
-        JPanel droite = new JPanel();
-        droite.setLayout(new BoxLayout(droite, BoxLayout.Y_AXIS));
-        droite.setBorder(BorderFactory.createRaisedBevelBorder());
-
+        //Partie droite
+        JPanel gauche = new JPanel(new GridLayout(2,1));
         JPanel profil = new JPanel();
         profil.setLayout(new BoxLayout(profil, BoxLayout.Y_AXIS));
         profil.setBorder(BorderFactory
-                .createTitledBorder("Profil du joueur"));
-        JLabel pseudo = new JLabel("pseudo");
-        JLabel mdp = new JLabel("mdp");
-        JLabel nbWin = new JLabel("Nombre de partie gagné :");
-        JLabel nbloos = new JLabel("Nombre de partie perdue :");
-        profil.add(pseudo);
-        profil.add(mdp);
-        profil.add(mdp);
-        profil.add(nbWin);
-        profil.add(nbloos);
+                .createTitledBorder("Profil"));
+        profil.add(new JLabel("Pseudo"));
+        profil.add(new JLabel("mdp"));
+        profil.add(new JLabel("PartieWin"));
+        profil.add(new JLabel("PartieLoos"));
 
-        JCheckBox personnalise = new JCheckBox("Nombre de tours personnalisé");
-        JLabel textTours = new JLabel("Nombre de tours");
-        JSlider toursSlider = new JSlider();
-        JButton creerButton = new JButton("Créer la partie");
+        JPanel creerPan = new JPanel();
+        creerPan.setLayout(new BoxLayout(creerPan, BoxLayout.Y_AXIS));
+        creerPan.setBorder(BorderFactory
+                .createTitledBorder("Créé une partie"));
+        creerPan.add(new JLabel("Ajouter un nombre de tour personnalisé :"));
+        JPanel tourPan = new JPanel();
+        tourPan.add(nbTour = new JCheckBox());
+        nbTourText = new JTextField();
+        nbTourText.setColumns(10);
+        tourPan.add(nbTourText);
+        creerPan.add(tourPan);
+        creerPan.add(creer = new JButton("Créer"));
 
-        JPanel d = new JPanel();
-        d.setLayout(new BoxLayout(d, BoxLayout.Y_AXIS));
-        d.setBorder(BorderFactory
-                .createTitledBorder("Créer une partie"));
-        d.add(personnalise);
-        d.add(textTours);
-        d.add(toursSlider);
-        d.add(creerButton);
+        gauche.add(profil);
+        gauche.add(creerPan);
 
-        droite.add(profil);
-        droite.add(d);
-
-
-
-        /* --- */
-
+        main.add(recherchePan);
         main.add(gauche);
-        main.add(droite);
 
+        this.pack();
 
+        this.setSize(new Dimension(700, 400));
 
+        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (int) ((dimension.getWidth() - this.getWidth()) /2 -350);
+        int y = (int) ((dimension.getHeight() - this.getHeight()) / 2 -200);
+        this.setLocation(x, y);
 
-
-
-
-
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 }

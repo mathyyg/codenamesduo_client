@@ -7,7 +7,7 @@ import swing.controleur.controleurRegister;
 import javax.swing.*;
 import java.awt.*;
 
-public class LoginPan extends JPanel {
+public class LoginPan extends JFrame {
 
     private joueur j;
 
@@ -61,6 +61,11 @@ public class LoginPan extends JPanel {
 
     }
 
+    public void second() {
+        FenetreRecherchePartie next = new FenetreRecherchePartie("Rejoindre une partie");
+        next.setVisible(true);
+        this.dispose();
+    }
     public String getPseudoLog() { return pseudoLog.getText(); }
     public String getmdpLog() { return mdpLog.getText(); }
     public String getPseudoReg() { return pseudoReg.getText(); }

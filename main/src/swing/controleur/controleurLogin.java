@@ -34,6 +34,7 @@ public class controleurLogin implements ActionListener {
                 // On se co avec le bon login
                 System.out.println("authentification réussite.");
                 pan.setJoueur(j);
+                pan.second();
             }
             // pas sur de cette partie.
             if (joueur.listEnregistrement().contains(j) && !serv.isRegisteredPlayer(pan.getPseudoLog())){
@@ -49,6 +50,7 @@ public class controleurLogin implements ActionListener {
             pan.ouvrirMessageErreur(ex.getMessage(), "Erreur de login");
 
         }
+
 
     }
 }

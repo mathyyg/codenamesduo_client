@@ -13,8 +13,8 @@ public class Fenetre extends JFrame {
     public Fenetre(String titre) {
         super(titre);
 
-        JPanel panelPrincipal = new LoginPan();
-        this.setContentPane(panelPrincipal);
+//        JPanel panelPrincipal = new LoginPan();
+  //      this.setContentPane(panelPrincipal);
         //JPanel log = new LoginPan();
         //JPanel search = new RecherchePan();
         //JPanel game = new PartiePan();
