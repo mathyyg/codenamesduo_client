@@ -116,7 +116,7 @@ public class FenetreRecherchePartie extends JFrame {
     }
 
     public void second(Partie partie) {
-        FenetrePartie next = new FenetrePartie("Rejoindre une partie", getJoueur(), serv, partie);
+        FenetrePartie next = new FenetrePartie("Bureau des légendes", getJoueur(), serv, partie);
         next.setVisible(true);
         this.dispose();
     }

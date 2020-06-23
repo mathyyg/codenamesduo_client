@@ -67,7 +67,7 @@ public class FenetreLogin extends JFrame {
     }
 
     public void second() {
-        FenetreRecherchePartie next = new FenetreRecherchePartie("Rejoindre une partie", getJoueur(), serv);
+        FenetreRecherchePartie next = new FenetreRecherchePartie("Menu", getJoueur(), serv);
         next.setVisible(true);
         this.dispose();
     }

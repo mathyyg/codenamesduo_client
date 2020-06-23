@@ -110,12 +110,22 @@ public class FenetrePartie extends JFrame {
 
         hint.add(indice);
         hint.add(indicechiffre);
-        hint.add(keycard);
+        tips.add(keycard);
         hint.add(send);
         tips.add(hint);
         main.add(tips);
 
 
+
+        // vue
+        this.pack();
+
+        this.setSize(new Dimension(800, 800));
+
+        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (int) ((dimension.getWidth() - this.getWidth()) /2 -400);
+        int y = (int) ((dimension.getHeight() - this.getHeight()) / 2 -400);
+        this.setLocation(x, y);
 
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
