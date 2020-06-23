@@ -46,28 +46,25 @@ public class FenetreLogin extends JFrame {
         register.add(new JLabel("Choisissez un pseudo : "));
         register.add(pseudoReg = new JTextField());
         register.add(regBut = new JButton("register"));
-        register.add(new JLabel("Votre mdp:"));
-        register.add(mdp = new JLabel(""));
+        register.add(mdp = new JLabel("Votre mdp : "));
 
         choix.addTab("Login", login);
         choix.addTab("Register", register);
         identif.add(choix);
         this.add(identif);
 
+
+        // Listener
         logBut.addActionListener(new controleurLogin(this, serv));
         regBut.addActionListener(new controleurRegister(this, serv));
 
 
-        /* Taille du login pour placement au centre de l'écran
-        fenetre.setPreferredSize(new Dimension(500, 300));
-
-
+        // vue
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-        int x = (int) ((dimension.getWidth() - fenetre.getWidth()) /2 -250);
-        int y = (int) ((dimension.getHeight() - fenetre.getHeight()) / 2 -150);
-        fenetre.setLocation(x, y);
-        */
-        setPreferredSize(new Dimension(215,200));
+        int x = (int) ((dimension.getWidth() - this.getWidth()) /2 -250);
+        int y = (int) ((dimension.getHeight() - this.getHeight()) / 2 -150);
+        this.setLocation(x, y);
+        setPreferredSize(new Dimension(255,250));
     }
 
     public void second() {
@@ -90,6 +87,6 @@ public class FenetreLogin extends JFrame {
     }
 
     public void setLabelMdp(String s) {
-        mdp.setText(s);
+        mdp.setText(mdp.getText() + s);
     }
 }

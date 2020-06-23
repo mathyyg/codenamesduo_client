@@ -95,7 +95,7 @@ public class FenetreRecherchePartie extends JFrame {
         nbTour.addItemListener(new controleurRechercheTours(this));
         creer.addActionListener(new controleurCreerPartie(this, serv, joueur));
         rejoindre.addActionListener(new controleurRejoindrePartie(this, serv, joueur));
-        quitter.addActionListener(new controleurQuitter(this));
+        //quitter.addActionListener(new controleurQuitter(this));
         refresh.addActionListener(new controleurRefreshPAttente(this));
 
 
