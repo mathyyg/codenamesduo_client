@@ -42,7 +42,7 @@ public class joueur implements iPlayer {
         try {
             FileWriter fileWriter = new FileWriter("joueurs.txt", true);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-            bufferedWriter.write(nom + "," + mdp+ "\n");
+            bufferedWriter.write(nom + "," + mdp+","+partieWin+","+partieLoos+"\n");
             bufferedWriter.close();
         } catch (IOException err) {
             System.out.println("erreur de recopie dans le fichier.");

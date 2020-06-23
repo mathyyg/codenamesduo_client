@@ -13,7 +13,7 @@ public class RecherchePan extends JFrame {
 
         panelPrincipal.add(suivante);
 
-        panelPrincipal.setPreferredSize(new Dimension(800, 410));
+        panelPrincipal.setPreferredSize(new Dimension(800, 200));
 
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 

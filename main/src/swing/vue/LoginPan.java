@@ -46,6 +46,18 @@ public class LoginPan extends JPanel {
         this.add(identif);
         logBut.addActionListener(new controleurLogin(this));
         regBut.addActionListener(new controleurRegister(this));
+
+
+        /* Taille du login pour placement au centre de l'écran
+        fenetre.setPreferredSize(new Dimension(500, 300));
+
+
+        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (int) ((dimension.getWidth() - fenetre.getWidth()) /2 -250);
+        int y = (int) ((dimension.getHeight() - fenetre.getHeight()) / 2 -150);
+        fenetre.setLocation(x, y);
+        */
+
     }
 
     public String getPseudoLog() { return pseudoLog.getText(); }
