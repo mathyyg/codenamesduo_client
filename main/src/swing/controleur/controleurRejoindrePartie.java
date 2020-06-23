@@ -27,7 +27,7 @@ public class controleurRejoindrePartie implements ActionListener {
         try {
             serv.joinGame(fn.getIDPartieSelected(), joueur);
             System.out.println("Join la partie " + fn.getIDPartieSelected() + "du joueur "+joueur.login());
-            partie = new Partie(serv.consultGame(fn.getIDPartieSelected()).maxTurns(), joueur, fn.getIDPartieSelected());
+            partie = new Partie(serv, serv.consultGame(fn.getIDPartieSelected()).maxTurns(), joueur, fn.getIDPartieSelected());
             fn.second(partie);
         } catch (CnNetworkException ex) {
             fn.ouvrirMessageErreur(ex.getMessage(), "Erreur serveur");

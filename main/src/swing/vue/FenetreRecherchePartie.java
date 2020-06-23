@@ -116,6 +116,8 @@ public class FenetreRecherchePartie extends JFrame {
     public Joueur getJoueur() { return joueur;}
     public void toursEtat(boolean b) { nbTourText.setEditable(b); }
     public int getIDPartieSelected() { return (int) partiesAttente.getSelectedValue();}
+
+
     public void ouvrirMessageErreur(String msg, String titre) {
         JOptionPane.showMessageDialog(this,
                 msg,

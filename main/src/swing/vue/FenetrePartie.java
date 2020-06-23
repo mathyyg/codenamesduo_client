@@ -4,20 +4,23 @@ import codenames.CodeNamesClient;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.TimerTask;
 
 import code.*;
+import codenames.states.STATE_STEP;
+import swing.timerControleur.AttenteDeJ2Listener;
 
 public class FenetrePartie extends JFrame {
 
     private Joueur joueur;
     private CodeNamesClient serv;
     private Partie partie;
-    private JLabel pseudo;
-    private JLabel mdp;
-    private JLabel pWin;
-    private JLabel pLoos;
-
     JPanel BureauDesLegendes ;
+
+    Timer timerAttenteJ2;
+
     private JButton nc1 = new JButton("Button");
     private JButton nc2 = new JButton("Button");
     private JButton nc3 = new JButton("Button");
@@ -44,12 +47,10 @@ public class FenetrePartie extends JFrame {
     private JButton nc24 = new JButton("Button");
     private JButton nc25 = new JButton("Button");
     private JButton send = new JButton("Send");
-    private JButton keycard = new JButton("Display keycard");
-    private JTextField indice = new JTextField("Enter a hint");
-    private JComboBox indicechiffre;
+    private JButton keycard = new JButton("keycard");
+    private JTextField indice = new JTextField("indice");
+    private JComboBox indicechiffre = new JComboBox();
     protected List cardkey = new List();
-    private JTextField ncreponse = new JTextField("Enter an answer");
-    private JButton sendreponse = new JButton("Send");
 
     public FenetrePartie(String titre, Joueur lejoueur, CodeNamesClient leserv, Partie lapartie) {
         super(titre);
@@ -62,13 +63,12 @@ public class FenetrePartie extends JFrame {
 
         main.setLayout( new GridLayout(2,1));
 
-
         JPanel BureauDesLegendes = new JPanel();
         BureauDesLegendes.setAlignmentX(Component.CENTER_ALIGNMENT);
         BureauDesLegendes.setAlignmentY(Component.CENTER_ALIGNMENT);
         BureauDesLegendes.setBorder(BorderFactory.createLineBorder(Color.black));
-        BureauDesLegendes.setLayout(new GridLayout(1,1));
         BureauDesLegendes.setBackground(new Color((255),(255),(255)));
+
 
 
         JPanel plateau = new JPanel();
@@ -112,51 +112,21 @@ public class FenetrePartie extends JFrame {
 
         JPanel hint = new JPanel();
         hint.setBorder(BorderFactory
-                .createTitledBorder("Indice"));
+                .createTitledBorder("Indice2"));
         hint.setLayout(new BoxLayout(hint, BoxLayout.Y_AXIS));
-
-        Object [] elements = new Object [] {"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15"};
-        indicechiffre = new JComboBox(elements);
-
 
         hint.add(indice);
         hint.add(indicechiffre);
         hint.add(keycard);
         hint.add(send);
         tips.add(hint);
+        main.add(tips);
 
-
-
-
-
-
-        JPanel profil = new JPanel();
-        profil.setLayout(new BoxLayout(profil, BoxLayout.Y_AXIS));
-        profil.setBorder(BorderFactory
-                .createTitledBorder("Profil"));
-
-        profil.add(pseudo = new JLabel("Pseudo : " + joueur.getPseudo()));
-        profil.add(mdp = new JLabel("Mdp : " + joueur.getMdp()));
-        profil.add(pWin = new JLabel("Partie gagné : " +joueur.getPWin()));
-        profil.add(pLoos = new JLabel("Partie perdue : " +joueur.getPLoos()));
-
-        JTabbedPane choix = new JTabbedPane();
-
-        JPanel reponse = new JPanel();
-        reponse.setBorder(BorderFactory
-                .createTitledBorder("Réponse"));
-        reponse.setLayout(new BoxLayout(reponse, BoxLayout.Y_AXIS));
-
-        ncreponse.setColumns(10);
-        reponse.add(ncreponse);
-        reponse.add(sendreponse);
-
-
-        choix.addTab("Indice", hint);
-        choix.addTab("Réponse", reponse);
-        choix.addTab("Profil", profil);
-
-        main.add(choix);
+        timerAttenteJ2 = new Timer(5000, new AttenteDeJ2Listener(this, partie, serv));
+        if (partie.getEtat().state().equals(STATE_STEP.GAME_INIT))
+            timerAttenteJ2.start();
+        else
+            initGame();
 
         // vue
         this.pack();
@@ -170,9 +140,11 @@ public class FenetrePartie extends JFrame {
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
+    public void stopAttenteJ2() { timerAttenteJ2.stop();}
 
+    public void initGame() {
 
-
+    }
 
 
 }
