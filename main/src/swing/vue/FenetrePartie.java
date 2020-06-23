@@ -116,7 +116,7 @@ public class FenetrePartie extends JFrame {
         main.add(tips);
 
 
-// vue
+        // vue
         this.pack();
 
         this.setSize(new Dimension(800, 800));
