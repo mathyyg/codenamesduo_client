@@ -6,6 +6,7 @@ import swing.controleur.controleurLogin;
 import swing.controleur.controleurRegister;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class FenetreLogin extends JFrame {
 
@@ -15,6 +16,7 @@ public class FenetreLogin extends JFrame {
     private JTextField pseudoReg;
     private JTextField mdpLog;
     private JTextField pseudoLog;
+    private JLabel mdp;
 
     private JButton logBut;
     private JButton regBut;
@@ -44,6 +46,8 @@ public class FenetreLogin extends JFrame {
         register.add(new JLabel("Choisissez un pseudo : "));
         register.add(pseudoReg = new JTextField());
         register.add(regBut = new JButton("register"));
+        register.add(new JLabel("Votre mdp:"));
+        register.add(mdp = new JLabel(""));
 
         choix.addTab("Login", login);
         choix.addTab("Register", register);
@@ -63,7 +67,7 @@ public class FenetreLogin extends JFrame {
         int y = (int) ((dimension.getHeight() - fenetre.getHeight()) / 2 -150);
         fenetre.setLocation(x, y);
         */
-
+        setPreferredSize(new Dimension(215,200));
     }
 
     public void second() {
@@ -83,5 +87,9 @@ public class FenetreLogin extends JFrame {
                 msg,
                 titre,
                 JOptionPane.ERROR_MESSAGE);
+    }
+
+    public void setLabelMdp(String s) {
+        mdp.setText(s);
     }
 }
