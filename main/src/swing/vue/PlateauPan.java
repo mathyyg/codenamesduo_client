@@ -67,8 +67,6 @@ public class PlateauPan extends JPanel {
     }
 
     public void init(List<String> words) {
-        System.out.println("init Plateau");
-        System.out.println(words.toString());
         Iterator<String> itWords = words.iterator();
         Iterator<JButton> itButton = listBut.iterator();
         JButton butCourant;

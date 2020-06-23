@@ -68,7 +68,6 @@ public class KeyCardPan extends JPanel {
     }
 
     public void init(List<CARD_ROLE> keyCards) {
-        System.out.println("init du KeyCard");
         Iterator<CARD_ROLE> itKeyCard = keyCards.iterator();
         Iterator<JButton> itButton = listBut.iterator();
         JButton butCourant;
