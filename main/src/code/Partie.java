@@ -9,28 +9,56 @@ import java.util.List;
 
 public class Partie {
 
-    private CodeNamesClient serveur = new CodeNamesClient("http://51.178.49.138:3000/api/v0");
+    private CodeNamesClient serveur;
     private int idPartie;
     private int nbTour;
     private State etat;
-    private Joueur joueur;
-    private int id;
+    private Joueur j;
     private List<String> plateau;
     private List<CARD_ROLE> keyCard;
 
 
-    public Partie(int lenbTour, Joueur lej1, int lidPartie) {
+    public Partie(CodeNamesClient leserv, int lenbTour, Joueur lej, int lidPartie) {
+        serveur = leserv;
         nbTour = lenbTour;
-        joueur = lej1;
+        j = lej;
         idPartie = lidPartie;
+        try {
+            etat = serveur.consultGame(idPartie);
+            plateau = etat.words();
+            keyCard = serveur.keyCards(idPartie,j,j.getMdp());
+        } catch (CnNetworkException e) {
+            e.printStackTrace();
+        } catch (CnBadIdException e) {
+            e.printStackTrace();
+        } catch (CnBadLoginException e) {
+            e.printStackTrace();
+        } catch (CnBadPwdException e) {
+            e.printStackTrace();
+        }
     }
 
-    public Partie(int lid, int leNbTour, State letat, Joueur j1) throws CnBadIdException, CnNetworkException, CnBadLoginException, CnBadPwdException {
-        nbTour = leNbTour;
-        etat = letat;
-        joueur = j1;
-        id = lid;
-        plateau = serveur.consultGame(id).words();
-        keyCard = serveur.keyCards(id,joueur,joueur.getMdp());
+    public List<String> getPlateau() {
+        return plateau;
+    }
+
+    public List<CARD_ROLE> getKeyCard() {
+        return keyCard;
+    }
+
+    public int getIdPartie() {
+        return idPartie;
+    }
+
+    public int getNbTour() {
+        return nbTour;
+    }
+
+    public State getEtat() {
+        return etat;
+    }
+
+    public Joueur getJ() {
+        return j;
     }
 }
