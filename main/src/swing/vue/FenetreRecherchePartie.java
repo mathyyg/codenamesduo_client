@@ -42,6 +42,7 @@ public class FenetreRecherchePartie extends JFrame {
                 .createTitledBorder("Recherche une partie"));
         recherchePan.setLayout(new BoxLayout(recherchePan, BoxLayout.Y_AXIS));
         parties= null;
+
         try {
             parties = new Vector<>(serv.waitingGames());
         } catch (CnNetworkException e) {
