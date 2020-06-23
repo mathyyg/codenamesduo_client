@@ -37,7 +37,8 @@ public class controleurRejoindrePartie implements ActionListener {
             fn.ouvrirMessageErreur(ex.getMessage(), "Erreur Login joueur");
         } catch (CnFullPlayersException ex) {
             fn.ouvrirMessageErreur(ex.getMessage(), "Erreur partie pleinne");
+        } catch (NullPointerException ex) {
+            fn.ouvrirMessageErreur("NullPointerException: aucune partie n'est sélectionnée", "Erreur ID partie");
         }
-
     }
 }
