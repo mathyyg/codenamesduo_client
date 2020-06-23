@@ -1,17 +1,20 @@
 package swing.vue;
-
 import codenames.CodeNamesClient;
-
-import javax.swing.*;
-import java.awt.*;
-
 import code.*;
 
-public class FenetrePartie extends JFrame {
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Vector;
 
-    private Joueur joueur;
-    private CodeNamesClient serv;
-    private Partie partie;
+public class FenetrePartie  extends JFrame {
+
+        private Joueur joueur;
+        private CodeNamesClient serv;
+        private Partie partie;
+    
 
     JPanel BureauDesLegendes ;
     private JButton nc1 = new JButton("Button");
@@ -40,6 +43,7 @@ public class FenetrePartie extends JFrame {
     private JButton nc24 = new JButton("Button");
     private JButton nc25 = new JButton("Button");
     private JButton send = new JButton("Send");
+    private JButton passer = new JButton("Passer son tour");
     private JButton keycard = new JButton("keycard");
     private JTextField indice = new JTextField("indice");
     private JComboBox indicechiffre = new JComboBox();
@@ -50,7 +54,8 @@ public class FenetrePartie extends JFrame {
         partie = lapartie;
         joueur = lejoueur;
         serv = leserv;
-
+ {
+        
         JPanel main = new JPanel();
         this.setContentPane(main);
 
@@ -110,7 +115,8 @@ public class FenetrePartie extends JFrame {
 
         hint.add(indice);
         hint.add(indicechiffre);
-        hint.add(keycard);
+        tips.add(keycard);
+        tips.add(passer);
         hint.add(send);
         tips.add(hint);
         main.add(tips);
