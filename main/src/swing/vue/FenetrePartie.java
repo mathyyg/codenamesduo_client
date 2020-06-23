@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.util.TimerTask;
 
 import code.*;
+import codenames.exceptions.*;
 import codenames.states.STATE_STEP;
 import swing.timerControleur.AttenteDeJ2Listener;
 
@@ -54,7 +55,7 @@ public class FenetrePartie extends JFrame {
     private JButton keycard = new JButton("Display keycard");
     private JTextField indice = new JTextField("indice");
     private JComboBox indicechiffre = new JComboBox();
-    private List cardkey = new List();
+    private List cardkey;
     private JTextField ncreponse = new JTextField("Enter an answer");
     private JButton sendreponse = new JButton("Send");
 
@@ -68,21 +69,20 @@ public class FenetrePartie extends JFrame {
         JPanel main = new JPanel();
         this.setContentPane(main);
 
-        main.setLayout( new GridLayout(2,1));
+        main.setLayout(new GridLayout(2, 1));
 
         JPanel BureauDesLegendes = new JPanel();
         BureauDesLegendes.setAlignmentX(Component.CENTER_ALIGNMENT);
         BureauDesLegendes.setAlignmentY(Component.CENTER_ALIGNMENT);
         BureauDesLegendes.setBorder(BorderFactory.createLineBorder(Color.black));
-        BureauDesLegendes.setBackground(new Color((255),(255),(255)));
-
+        BureauDesLegendes.setBackground(new Color((255), (255), (255)));
 
 
         JPanel plateau = new JPanel();
         plateau.setBorder(BorderFactory
                 .createTitledBorder("Plateau"));
 
-        plateau.setLayout(new GridLayout(5,5));
+        plateau.setLayout(new GridLayout(5, 5));
 
         plateau.add(nc1);
         plateau.add(nc2);
@@ -122,66 +122,90 @@ public class FenetrePartie extends JFrame {
                 .createTitledBorder("Indice"));
         hint.setLayout(new BoxLayout(hint, BoxLayout.Y_AXIS));
 
-        Object [] elements = new Object [] {"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15"};
+        Object[] elements = new Object[]{"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15"};
         indicechiffre = new JComboBox(elements);
 
-        hint.add(indice);
-        hint.add(indicechiffre);
-        hint.add(keycard);
-        hint.add(send);
-        tips.add(hint);
+        cardkey = new List();
+        try {
+            cardkey.addAll(serv.keyCards(partie.getIdPartie(), joueur, joueur.getMdp()));
+        } catch (CnNetworkException ex) {
+            fn.ouvrirMessageErreur(ex.getMessage(), "Erreur serveur");
+        } catch (CnBadIdException ex) {
+            fn.ouvrirMessageErreur(ex.getMessage(), "Erreur ID partie");
+        } catch (CnBadLoginException ex) {
+            fn.ouvrirMessageErreur(ex.getMessage(), "Erreur Login joueur");
+        } catch (CnBadPwdException ex) {
+            fn.ouvrirMessageErreur(ex.getMessage(), "Erreur MDP joueur");
 
-        JPanel profil = new JPanel();
-        profil.setLayout(new BoxLayout(profil, BoxLayout.Y_AXIS));
-        profil.setBorder(BorderFactory
-                .createTitledBorder("Profil"));
+            hint.add(indice);
+            hint.add(indicechiffre);
+            hint.add(keycard);
+            hint.add(send);
+            tips.add(hint);
 
-        profil.add(pseudo = new JLabel("Pseudo : " + joueur.getPseudo()));
-        profil.add(mdp = new JLabel("Mdp : " + joueur.getMdp()));
-        profil.add(pWin = new JLabel("Partie gagné : " +joueur.getPWin()));
-        profil.add(pLoos = new JLabel("Partie perdue : " +joueur.getPLoos()));
+            JPanel profil = new JPanel();
+            profil.setLayout(new BoxLayout(profil, BoxLayout.Y_AXIS));
+            profil.setBorder(BorderFactory
+                    .createTitledBorder("Profil"));
 
-        JTabbedPane choix = new JTabbedPane();
+            profil.add(pseudo = new JLabel("Pseudo : " + joueur.getPseudo()));
+            profil.add(mdp = new JLabel("Mdp : " + joueur.getMdp()));
+            profil.add(pWin = new JLabel("Partie gagné : " + joueur.getPWin()));
+            profil.add(pLoos = new JLabel("Partie perdue : " + joueur.getPLoos()));
 
-        JPanel reponse = new JPanel();
-        reponse.setBorder(BorderFactory
-                .createTitledBorder("Réponse"));
-        reponse.setLayout(new BoxLayout(reponse, BoxLayout.Y_AXIS));
+            JTabbedPane choix = new JTabbedPane();
 
-        ncreponse.setColumns(10);
-        reponse.add(ncreponse);
-        reponse.add(sendreponse);
+            JPanel reponse = new JPanel();
+            reponse.setBorder(BorderFactory
+                    .createTitledBorder("Réponse"));
+            reponse.setLayout(new BoxLayout(reponse, BoxLayout.Y_AXIS));
+
+            ncreponse.setColumns(10);
+            reponse.add(ncreponse);
+            reponse.add(sendreponse);
 
 
-        choix.addTab("Indice", hint);
-        choix.addTab("Réponse", reponse);
-        choix.addTab("Profil", profil);
+            choix.addTab("Indice", hint);
+            choix.addTab("Réponse", reponse);
+            choix.addTab("Profil", profil);
 
-        main.add(choix);
+            main.add(choix);
 
-        // timer
-        timerAttenteJ2 = new Timer(5000, new AttenteDeJ2Listener(this, partie, serv));
-        if (partie.getEtat().state().equals(STATE_STEP.GAME_INIT))
-            timerAttenteJ2.start();
-        else
-            initGame();
+            // timer
+            timerAttenteJ2 = new Timer(5000, new AttenteDeJ2Listener(this, partie, serv));
+            if (partie.getEtat().state().equals(STATE_STEP.GAME_INIT))
+                timerAttenteJ2.start();
+            else
+                initGame();
 
-        // vue
-        this.pack();
+            // vue
+            this.pack();
 
-        this.setSize(new Dimension(800, 800));
+            this.setSize(new Dimension(800, 800));
 
-        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-        int x = (int) ((dimension.getWidth() - this.getWidth()) /2 -400);
-        int y = (int) ((dimension.getHeight() - this.getHeight()) / 2 -400);
-        this.setLocation(x, y);
-        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+            int x = (int) ((dimension.getWidth() - this.getWidth()) / 2 - 400);
+            int y = (int) ((dimension.getHeight() - this.getHeight()) / 2 - 400);
+            this.setLocation(x, y);
+            this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        }
+    }
+
+    public void ouvrirMessageErreur(String msg, String titre) {
+        JOptionPane.showMessageDialog(this,
+                msg,
+                titre,
+                JOptionPane.ERROR_MESSAGE);
     }
 
     public void stopAttenteJ2() { timerAttenteJ2.stop();}
 
     public void initGame() {
 
+    }
+
+    public void second() {
+        new
     }
 
 
