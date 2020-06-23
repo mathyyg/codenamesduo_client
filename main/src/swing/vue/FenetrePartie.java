@@ -177,7 +177,15 @@ public class FenetrePartie extends JFrame {
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
+    public void ouvrirMessageErreur(String msg, String titre) {
+        JOptionPane.showMessageDialog(this,
+                msg,
+                titre,
+                JOptionPane.ERROR_MESSAGE);
+    }
+
     public void stopAttenteJ2() { timerAttenteJ2.stop();}
+
 
     public void initGame() {
         partie.getPlateau();
