@@ -259,7 +259,9 @@ public class FenetrePartie extends JFrame {
     }
 
     public void retour(boolean win) {
-        //TODO
+        FenetreRecherchePartie nouveau = new FenetreRecherchePartie("Menu",joueur,serv);
+        joueur.PartieWinUp();
+
         //retour sur fenetreRecherchePartie
         //update si boolean win == true pWin ++
 
