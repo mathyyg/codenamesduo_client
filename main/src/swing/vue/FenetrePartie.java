@@ -256,7 +256,12 @@ public class FenetrePartie extends JFrame {
             indiceRepTabPan.setEnabledAt(1, true);
             indiceRepTabPan.setSelectedIndex(1);
         }
+    }
 
+    public void retour(boolean win) {
+        //TODO
+        //retour sur fenetreRecherchePartie
+        //update si boolean win == true pWin ++
 
     }
 }

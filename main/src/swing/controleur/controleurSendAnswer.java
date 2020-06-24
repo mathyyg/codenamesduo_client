@@ -33,21 +33,22 @@ public class controleurSendAnswer implements ActionListener {
             cards = serv.sendAnswer(partie.getIdPartie(), partie.getJ(), listReponses);
             fn.updatePlateau(cards);
         } catch (CnNetworkException ex) {
-            ex.printStackTrace();
+            fn.ouvrirMessageErreur("Le serveur semble être inaccessible","Erreur d'envoie de réponse");
         } catch (CnBadIdException ex) {
-            ex.printStackTrace();
+            fn.ouvrirMessageErreur("L'ID de la partie est inaccessible","Erreur d'envoie de réponse");
         } catch (CnBadLoginException ex) {
-            ex.printStackTrace();
+            fn.ouvrirMessageErreur("Votre login semble être inaccessible","Erreur d'envoie de réponse");
         } catch (CnNotYourTurnException ex) {
-            ex.printStackTrace();
+            fn.ouvrirMessageErreur("Ce n'est pas votre tour","Erreur d'envoie de réponse");
         } catch (CnClosedGameException ex) {
-            ex.printStackTrace();
+            fn.ouvrirMessageErreur("La partie est déjà terminé","Erreur d'envoie de réponse");
         } catch (CnEmptyAnswerException ex) {
-            ex.printStackTrace();
+            fn.ouvrirMessageErreur("Votre réponse est vide","Erreur d'envoie de réponse");
         } catch (CnUnknownAnswerException ex) {
-            ex.printStackTrace();
+            fn.ouvrirMessageErreur("Un des mots de votre réponse n'appartient " +
+                    "pas aux 25 mots de la partie","Erreur d'envoie de réponse");
         } catch (CnWaitClueException ex) {
-            ex.printStackTrace();
+            fn.ouvrirMessageErreur("Un indice est attendu à la place d'une réponse","Erreur d'envoie de réponse");
         }
     }
 }

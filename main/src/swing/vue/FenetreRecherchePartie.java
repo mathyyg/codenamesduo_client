@@ -88,6 +88,9 @@ public class FenetreRecherchePartie extends JFrame {
         gauche.add(profil);
         gauche.add(creerPan);
 
+
+        //TODO ajouter un bouton pour visualiser le profil
+
         main.add(recherchePan);
         main.add(gauche);
 
@@ -97,7 +100,8 @@ public class FenetreRecherchePartie extends JFrame {
         rejoindre.addActionListener(new controleurRejoindrePartie(this, serv, joueur));
         quitter.addActionListener(new controleurQuitterRecherche(this));
         refresh.addActionListener(new controleurRefreshPAttente(this));
-
+        //TODO ajouter un listener sur le bouton pour visualiser profil
+        //(ajouter une fenetre profil)
 
         // vue
         this.pack();
@@ -141,5 +145,6 @@ public class FenetreRecherchePartie extends JFrame {
             e.printStackTrace();
         }
     }
+
 
 }
