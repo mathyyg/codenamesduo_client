@@ -162,7 +162,7 @@ public class FenetrePartie extends JFrame {
 
         // Listener
         sendIndice.addActionListener(new controleurSendClue(this, serv, partie));
-
+        sendReponse.addActionListener(new controleurSendAnswer(this, serv, partie));
 
         // vue
         this.pack();

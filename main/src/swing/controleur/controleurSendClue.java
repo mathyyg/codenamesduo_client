@@ -23,9 +23,7 @@ public class controleurSendClue implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         Indice indice = new Indice(fn.getClue(), fn.getMotParClue());
-        boolean envoie = false;
         if (indice.estValide(partie)) {
-
             try {
                 serv.sendClue(partie.getIdPartie(), partie.getJ(), indice.getIndice(), indice.getNbMotPourIndice());
                 System.out.println("Envoie clue réussi, state : " + serv.consultGame(partie.getIdPartie()).state());
