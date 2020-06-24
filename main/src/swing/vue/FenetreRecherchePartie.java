@@ -5,6 +5,8 @@ import codenames.exceptions.CnNetworkException;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Vector;
 import code.*;
 import swing.controleur.*;
@@ -20,6 +22,7 @@ public class FenetreRecherchePartie extends JFrame {
     private JButton rejoindre;
     private JButton refresh;
     private JButton quitter;
+    private JButton regle;
     private JList partiesAttente;
     private Vector parties;
 
@@ -33,7 +36,7 @@ public class FenetreRecherchePartie extends JFrame {
         joueur = j;
         serv = leserv;
 
-        JPanel main = new JPanel();
+        JPanel main = new JPanel(new BorderLayout());
         this.setContentPane(main);
 
         JPanel recherchePan = new JPanel();
@@ -53,15 +56,16 @@ public class FenetreRecherchePartie extends JFrame {
         partiesAttente = new JList(model);
         JScrollPane scroll = new JScrollPane(partiesAttente, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
-
         recherchePan.add(scroll);
-        recherchePan.add(rejoindre = new JButton("Rejoindre"));
-        recherchePan.add(quitter = new JButton("Quitter"));
-        recherchePan.add(refresh = new JButton("Refresh"));
+        JPanel butPan = new JPanel(new GridLayout(2,1));
+        butPan.add(rejoindre = new JButton("Rejoindre"));
+        butPan.add(refresh = new JButton("Refresh"));
+        recherchePan.add(butPan);
 
-
+        main.add(recherchePan, BorderLayout.WEST);
         //Partie droite
-        JPanel gauche = new JPanel(new GridLayout(2,1));
+
+        JPanel gauche = new JPanel(new GridLayout(4,1));
         JPanel profil = new JPanel();
         profil.setLayout(new BoxLayout(profil, BoxLayout.Y_AXIS));
         profil.setBorder(BorderFactory
@@ -84,15 +88,16 @@ public class FenetreRecherchePartie extends JFrame {
         tourPan.add(nbTourText);
         creerPan.add(tourPan);
         creerPan.add(creer = new JButton("Créer"));
-
+        regle = new JButton("règle");
         gauche.add(profil);
         gauche.add(creerPan);
+        gauche.add(regle);
+        gauche.add(quitter = new JButton("Quitter"));
 
 
         //TODO ajouter un bouton pour visualiser le profil
 
-        main.add(recherchePan);
-        main.add(gauche);
+        main.add(gauche, BorderLayout.CENTER);
 
         // Listener
         nbTour.addItemListener(new controleurRechercheTours(this));
@@ -100,6 +105,13 @@ public class FenetreRecherchePartie extends JFrame {
         rejoindre.addActionListener(new controleurRejoindrePartie(this, serv, joueur));
         quitter.addActionListener(new controleurQuitterRecherche(this));
         refresh.addActionListener(new controleurRefreshPAttente(this));
+        regle.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                FenetreRegle fnregle = new FenetreRegle("Règle");
+                fnregle.setVisible(true);
+            }
+        });
         //TODO ajouter un listener sur le bouton pour visualiser profil
         //(ajouter une fenetre profil)
 
