@@ -17,7 +17,7 @@ public class StateListener implements ActionListener {
     private CodeNamesClient serv;
     private Partie partie;
     private State EtatActuel;
-    boolean majListIndice;
+    int i;
     private String j1; // Correspond toujours à nous
     private String j2; // Correspond toujours à notre adversaire
 
@@ -25,7 +25,6 @@ public class StateListener implements ActionListener {
         fn = lafn;
         partie = lapartie;
         serv = leserv;
-        majListIndice = true;
         try {
             EtatActuel = serv.consultGame(partie.getIdPartie());
             if (serv.consultGame(partie.getIdPartie()).creator().equals(partie.getJ().getPseudo())){
@@ -60,14 +59,16 @@ public class StateListener implements ActionListener {
             EtatActuel = partie.getEtat();
 
             if (partie.getEtat().state().equals(STATE_STEP.CLUE_SENT)) {
-                fn.disableTabbedPan(1);
-                fn.enableTabbedPan(0);
                 try {
                     if (partie.getEtat().clueSender().equals(partie.getJ().getPseudo())) {
+                        i = 0;
+                        fn.modeDeJeuTab(i);
                         System.out.println(partie.getEtat().clueSender() + "==" + j1);
                         System.out.println("vous avez envoyé un indice, ce n'est plus votre tour\nOn attend sa réponse");
                         //On vient d'envoyer l'indice, ce n'est plus notre tour.
                     } else {
+                        i = 1;
+                        fn.modeDeJeuTab(i);
                         System.out.println(partie.getEtat().clueSender() + "=/=" + j1);
                         System.out.println("Le joueur adverse a envoyé un indice, c'est à notre tour.\nIl faut choisir une réponse");
                         // récupère la currentClue et currentClueNumber
@@ -76,7 +77,6 @@ public class StateListener implements ActionListener {
                         fn.majPreviousAnswer();
                         //ajoute le nouvel indice à la list des indices
                         fn.majListIndice();
-                        majListIndice = false;
 
                     }
                 } catch (IllegalAccessException ex) {
@@ -84,9 +84,12 @@ public class StateListener implements ActionListener {
                 }
             }
             if (partie.getEtat().state().equals(STATE_STEP.ANSWER_SENT)) {
-                majListIndice = true;
-                fn.disableTabbedPan(0);
-                fn.enableTabbedPan(1);
+                if (i == 0){
+                    fn.modeDeJeuTab(1);
+                } else {
+                    fn.modeDeJeuTab(0);
+                }
+
             }
 
             if (partie.getEtat().state().equals(STATE_STEP.GAME_WON)) {

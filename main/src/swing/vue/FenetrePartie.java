@@ -231,11 +231,17 @@ public class FenetrePartie extends JFrame {
             e.printStackTrace();
         }
     }
+    public void modeDeJeuTab(int i ) {
+        if (i == 0){
+            indiceRepTabPan.setEnabledAt(1, false);
+            indiceRepTabPan.setEnabledAt(0, true);
+            indiceRepTabPan.setSelectedIndex(0);
+        } else if (i == 1) {
+            indiceRepTabPan.setEnabledAt(0, false);
+            indiceRepTabPan.setEnabledAt(1, true);
+            indiceRepTabPan.setSelectedIndex(1);
+        }
 
-    public void disableTabbedPan(int i) {
-        indiceRepTabPan.setEnabledAt(i, false);
-    }
-    public void enableTabbedPan(int i) {
-        indiceRepTabPan.setEnabledAt(i, true);
+
     }
 }
