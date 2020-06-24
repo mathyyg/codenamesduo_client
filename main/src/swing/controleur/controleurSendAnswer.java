@@ -31,6 +31,7 @@ public class controleurSendAnswer implements ActionListener {
 
         try {
             cards = serv.sendAnswer(partie.getIdPartie(), partie.getJ(), listReponses);
+            fn.updatePlateau(cards);
         } catch (CnNetworkException ex) {
             ex.printStackTrace();
         } catch (CnBadIdException ex) {
@@ -48,10 +49,5 @@ public class controleurSendAnswer implements ActionListener {
         } catch (CnWaitClueException ex) {
             ex.printStackTrace();
         }
-        System.out.println("Apres sendAnswer cards : \n");
-        for (Card c : cards ){
-            System.out.println(c.word() + " " + c.cardRole() + "\n");
-        }
-
     }
 }

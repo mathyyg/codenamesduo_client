@@ -93,10 +93,12 @@ public class StateListener implements ActionListener {
 
         if (partie.getEtat().state().equals(STATE_STEP.GAME_WON)) {
             //On a gagné la partie, on ajoute +1 à joueur.setGameWin.
+            fn.stopState();
         }
 
         if (partie.getEtat().state().equals(STATE_STEP.GAME_LOST)) {
             //On a perdu la partie, on ajoute +1 à joueur.setGameLost.
+            fn.stopState();
         }
 
 

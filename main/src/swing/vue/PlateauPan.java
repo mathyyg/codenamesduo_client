@@ -78,7 +78,7 @@ public class PlateauPan extends JPanel {
             butCourant.setText(wordCourant);
         }
     }
-    public void updateCurrentAnswer(List<Card> cList){
+    public void updatePlateau(List<Card> cList){
         for (JButton b : listBut){
             for (Card c : cList){
                 if (b.getText().equals(c.word())){
@@ -91,8 +91,6 @@ public class PlateauPan extends JPanel {
             }
         }
     }
-    public void majPlateau() {
 
-    }
 
 }
