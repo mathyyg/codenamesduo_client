@@ -23,21 +23,15 @@ public class Indice {
         boolean valid = true;
 
         /* Cas où l'indice est invalide : */
-        if (indice == null) {                           // Si l'indice proposé est vide
+        if (this == null) {                           // Si l'indice proposé est vide
             return false;
         }
 
         List<String> mots = p.getPlateau();             // Si l'indice proposé comporte un mot du plateau
         for (String m : mots) {
-            if (indice.contains(m)) {
+            if (indice.equals(m)) {
                 valid = false;
             }
-        }
-
-        try {
-            Double num = Double.parseDouble(indice);    // Si l'indice proposé est un nombre
-        } catch (NumberFormatException e) {
-            valid = false;
         }
 
         /*Pattern pattern = Pattern.compile("-?\\d+(\\.\\d+)?");    // Version expression régulière
@@ -47,4 +41,7 @@ public class Indice {
 
         return valid;
     }
-}
+    public String toString() {
+        return this.getIndice() + " : " + this.getNbMotPourIndice();
+    }
+ }

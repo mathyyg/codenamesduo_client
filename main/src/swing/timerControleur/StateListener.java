@@ -23,7 +23,7 @@ public class StateListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        boolean majListIndice = true;
         try {
             partie.setEtat(serv.consultGame(partie.getIdPartie()));
             System.out.println("Etat actuel de la partie : "+partie.getEtat().state());
@@ -34,14 +34,19 @@ public class StateListener implements ActionListener {
         }
         if (partie.getEtat().state().equals(STATE_STEP.CLUE_SENT)) {
             try {
-                if (partie.getEtat().clueSender().equals(partie.getJ())){
+                if (partie.getEtat().clueSender().equals(partie.getJ().login())){
+                    System.out.println(partie.getEtat().clueSender() + "==" + partie.getJ().login());
                     System.out.println("vous avez envoyé un indice, ce n'est plus votre tour\nOn attend sa réponse");
                     //On vient d'envoyer l'indice, ce n'est plus notre tour.
                 } else {
+                    System.out.println(partie.getEtat().clueSender() + "=/=" + partie.getJ().login());
                     System.out.println("Le joueur adverse a envoyé un indice, c'est à notre tour.\nIl faut choisir une réponse");
                     // récupère la currentClue et currentClueNumber
                     // on doit envoyer une réponse
-                    fn.majListIndice();
+                    if (majListIndice){
+                        fn.majListIndice();
+                        majListIndice = false;
+                    }
                 }
             } catch (IllegalAccessException ex) {
                 ex.printStackTrace();
@@ -49,7 +54,7 @@ public class StateListener implements ActionListener {
         }
         if (partie.getEtat().state().equals(STATE_STEP.ANSWER_SENT)) {
             try {
-                if (partie.getEtat().clueSender().equals(partie.getJ())){
+                if (partie.getEtat().clueSender().equals(partie.getJ().login())){
                     //on récupe currentAnswer (list des réponses validées par le serv
                     //on update notre plateau en montrant ce qu'on a trouvé ou non
                     // ex : 1er mot CODE, 2eme mot : NEUTRAL, 3eme mot : non vérifié du coup
