@@ -99,7 +99,7 @@ public class FenetrePartie extends JFrame {
         JPanel pan1 = new JPanel();
         pan1.setLayout(new BoxLayout(pan1, BoxLayout.Y_AXIS));
         pan1.add(new JLabel("Entre l'indice ci-dessous : "));
-        pan1.add(new JLabel("le nombre de mot correspondant à l'indice : "));
+        pan1.add(new JLabel("Nombre de mot pour l'indice : "));
         JPanel pan2 = new JPanel();
         pan2.setLayout(new BoxLayout(pan2, BoxLayout.Y_AXIS));
         pan2.add(indiceInput = new JTextField());
@@ -108,26 +108,32 @@ public class FenetrePartie extends JFrame {
         pan2.add(indicechiffre = new JComboBox<>(chiffres));
         indicePan.add(pan1);
         indicePan.add(pan2);
-        indicePan.add(sendIndice = new JButton("Envoyer l'indice"));
+        indicePan.add(sendIndice = new JButton("Envoyer"));
 
         indiceRepTabPan.addTab("Indice", indicePan);
 
         JPanel reponsePan = new JPanel();
         reponsePan.setLayout(new BoxLayout(reponsePan, BoxLayout.Y_AXIS));
-
-        reponsePan.add(new JLabel("Listez vos réponses dans le cadre en les séparant avec une ',' : "));
+        JPanel gLab = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        gLab.add(new JLabel("Listez vos réponses dans le cadre en les séparant avec une ',' : "));
+        reponsePan.add(gLab);
         reponsePan.add(reponseInput = new JTextField());
         reponseInput.setColumns(10);
+        JPanel centerButPan = new JPanel(new FlowLayout(FlowLayout.CENTER));
         sendReponse = new JButton("Envoyer la réponse");
-        reponsePan.add(sendReponse);
+        centerButPan.add(sendReponse);
+        reponsePan.add(centerButPan);
         indiceRepTabPan.addTab("Réponse", reponsePan);
         hautCenterPan.add(indiceRepTabPan);
 
-        console = new JTextArea();
-        console.setEditable(false);
-        console.setPreferredSize(new Dimension(150,100));
-        JScrollPane scroll = new JScrollPane(console, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        hautCenterPan.add(scroll);
+        JPanel listIndPan = new JPanel();
+        listIndPan.setBorder(BorderFactory
+                .createTitledBorder("Liste des indices donnés : "));
+        JListIndice = new JList();
+        JListIndice.setPreferredSize(new Dimension(150,120));
+        listIndPan.add(JListIndice);
+
+        hautCenterPan.add(listIndPan);
 
         centerPan.add(hautCenterPan, BorderLayout.NORTH);
 
@@ -139,18 +145,24 @@ public class FenetrePartie extends JFrame {
         centerPan.add(keyCardPan, BorderLayout.CENTER);
 
         bas.add(centerPan, BorderLayout.CENTER);
-        JPanel listIndPan = new JPanel();
-        listIndPan.setBorder(BorderFactory
-                .createTitledBorder("Liste des indices donnés : "));
-        JListIndice = new JList();
-        JListIndice.setPreferredSize(new Dimension(300,300));
-        listIndPan.add(JListIndice);
-        bas.add(listIndPan, BorderLayout.EAST);
+
+        console = new JTextArea();
+        Font f = console.getFont();
+        console.setFont(new Font(f.getName(), f.getStyle(), f.getSize()-1));
+        console.setEditable(false);
+        JScrollPane scroll = new JScrollPane(console, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        Dimension d = new Dimension();
+        d.width = 300;
+        scroll.setPreferredSize(d);
+        scroll.setBorder(BorderFactory
+                .createTitledBorder("Console : "));
+        bas.add(scroll, BorderLayout.EAST);
 
         main.add(bas);
 
 
         // timer
+        /*
         timerAttenteJ2 = new Timer(5000, new AttenteDeJ2Listener(this, partie, serv));
         if (partie.getEtat().state().equals(STATE_STEP.GAME_INIT))
             timerAttenteJ2.start();
@@ -162,15 +174,15 @@ public class FenetrePartie extends JFrame {
 
         }
 
-
         // Listener
         sendIndice.addActionListener(new controleurSendClue(this, serv, partie));
         sendReponse.addActionListener(new controleurSendAnswer(this, serv, partie));
 
+        */
         // vue
         this.pack();
 
-        this.setSize(new Dimension(1200, 800));
+        this.setSize(new Dimension(1100, 800));
 
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
         int x = (int) ((dimension.getWidth() - this.getWidth()) /2 -400);
@@ -184,6 +196,9 @@ public class FenetrePartie extends JFrame {
                 titre,
                 JOptionPane.ERROR_MESSAGE);
     }
+
+    public void updateConsole(String s) {console.append(s+"\n");}
+
     public String getAnswer() { return reponseInput.getText();}
     public String getClue() { return indiceInput.getText(); }
     public int getMotParClue() { return (int) indicechiffre.getSelectedItem(); }
@@ -241,7 +256,12 @@ public class FenetrePartie extends JFrame {
             indiceRepTabPan.setEnabledAt(1, true);
             indiceRepTabPan.setSelectedIndex(1);
         }
+    }
 
+    public void retour(boolean win) {
+        //TODO
+        //retour sur fenetreRecherchePartie
+        //update si boolean win == true pWin ++
 
     }
 }

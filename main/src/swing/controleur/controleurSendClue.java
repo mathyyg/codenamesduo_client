@@ -28,19 +28,19 @@ public class controleurSendClue implements ActionListener {
                 serv.sendClue(partie.getIdPartie(), partie.getJ(), indice.getIndice(), indice.getNbMotPourIndice());
                 System.out.println("Envoie clue réussi, state : " + serv.consultGame(partie.getIdPartie()).state());
                 } catch (CnNetworkException ex) {
-                    ex.printStackTrace();
+                    fn.ouvrirMessageErreur("Le serveur semble être inaccessible","Erreur d'envoie d'indice");
                 } catch (CnBadIdException ex) {
-                    ex.printStackTrace();
+                  fn.ouvrirMessageErreur("L'ID de la partie est inaccessible","Erreur d'envoie d'indice");
                 } catch (CnBadLoginException ex) {
-                    ex.printStackTrace();
+                fn.ouvrirMessageErreur("Votre login semble être inaccessible","Erreur d'envoie d'indice");
                 } catch (CnWaitPlayerException ex) {
-                    fn.ouvrirMessageErreur(ex.getMessage(), "Error WaitPlayerException");
+                    fn.ouvrirMessageErreur("Aucun autre joueur n'a rejoint votre partie", "Error WaitPlayerException");
                 } catch (CnNotYourTurnException ex) {
-                    fn.ouvrirMessageErreur(ex.getMessage(), "Error NotYourTurn");
+                    fn.ouvrirMessageErreur("Ce n'est pas votre tour", "Error NotYourTurn");
                 } catch (CnWaitAnswerException ex) {
-                    fn.ouvrirMessageErreur(ex.getMessage(), "Error WaitAnswerException");
+                    fn.ouvrirMessageErreur("Une réponse est attendu et pas un indice", "Error WaitAnswerException");
                 } catch (CnClosedGameException ex) {
-                    fn.ouvrirMessageErreur(ex.getMessage(), "Error partie gagné/perdu");
+                    fn.ouvrirMessageErreur("La partie est terminé", "Error partie gagné/perdu");
                 }
 
         }
