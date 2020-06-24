@@ -148,12 +148,12 @@ public class FenetrePartie extends JFrame {
 
 
         // timer
-        timerState = new Timer(2000, new StateListener(this,partie,serv));
         timerAttenteJ2 = new Timer(5000, new AttenteDeJ2Listener(this, partie, serv));
         if (partie.getEtat().state().equals(STATE_STEP.GAME_INIT))
             timerAttenteJ2.start();
         else {
             initGame();
+            timerState = new Timer(2000, new StateListener(this,partie,serv));
             System.out.println("Le 2eme joueur est arrivé la partie va commencer.");
             timerState.start();
 
@@ -184,7 +184,10 @@ public class FenetrePartie extends JFrame {
     public String getAnswer() { return reponseInput.getText();}
     public String getClue() { return indiceInput.getText(); }
     public int getMotParClue() { return (int) indicechiffre.getSelectedItem(); }
-    public void startState() { timerState.start(); }
+    public void startState() {
+        timerState = new Timer(2000, new StateListener(this,partie,serv));
+        timerState.start();
+    }
     public void stopState() { timerState.stop(); }
     public void stopAttenteJ2() { timerAttenteJ2.stop();}
 
