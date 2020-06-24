@@ -26,6 +26,7 @@ public class FenetrePartie extends JFrame {
     private Timer timerState;
     private Vector<Indice> ListIndice;
 
+    JTabbedPane indiceRepTabPan;
     private JTextArea console;
     private JLabel pseudo;
     private JLabel mdp;
@@ -92,7 +93,7 @@ public class FenetrePartie extends JFrame {
 
         hautCenterPan.add(profil);
 
-        JTabbedPane indiceRepTabPan = new JTabbedPane();
+        indiceRepTabPan = new JTabbedPane();
 
         JPanel indicePan = new JPanel();
         JPanel pan1 = new JPanel();
@@ -231,4 +232,10 @@ public class FenetrePartie extends JFrame {
         }
     }
 
+    public void disableTabbedPan(int i) {
+        indiceRepTabPan.setEnabledAt(i, false);
+    }
+    public void enableTabbedPan(int i) {
+        indiceRepTabPan.setEnabledAt(i, true);
+    }
 }
