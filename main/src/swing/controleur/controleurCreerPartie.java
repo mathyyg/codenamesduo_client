@@ -28,7 +28,7 @@ public class controleurCreerPartie implements ActionListener{
             try {
                 idPartie = serv.createGame(fn.getJoueur(), fn.getNbTour());
                 System.out.println("Créé une partie de X tours du joueur " +joueur +" avec comme ID : " + idPartie);
-                partie = new Partie(serv, fn.getNbTour(), joueur, idPartie);
+                partie = new Partie(serv, fn.getNbTour(), joueur, idPartie, true);
                 fn.second(partie);
             } catch (CnNetworkException ex) {
                 fn.ouvrirMessageErreur(ex.getMessage(),"Erreur serveur");
@@ -39,7 +39,7 @@ public class controleurCreerPartie implements ActionListener{
             try {
                 idPartie = serv.createGame(fn.getJoueur());
                 System.out.println("Créé une partie de 9 tours du joueur " +joueur +" avec comme ID : " + idPartie);
-                partie = new Partie(serv, 9, joueur, idPartie);
+                partie = new Partie(serv, 9, joueur, idPartie, true);
                 fn.second(partie);
             } catch (CnNetworkException ex) {
                 fn.ouvrirMessageErreur(ex.getMessage(),"Erreur serveur");

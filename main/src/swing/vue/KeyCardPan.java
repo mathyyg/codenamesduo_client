@@ -12,7 +12,7 @@ public class KeyCardPan extends JPanel {
     private List<JButton> listBut;
 
     private JButton nc1 = new JButton();
-    public JButton nc2 = new JButton();
+    private JButton nc2 = new JButton();
     private JButton nc3 = new JButton();
     private JButton nc4 = new JButton();
     private JButton nc5 = new JButton();

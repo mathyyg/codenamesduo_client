@@ -5,6 +5,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import codenames.cards.*;
 
 public class PlateauPan extends JPanel {
     private List<JButton> listBut;
@@ -77,5 +78,19 @@ public class PlateauPan extends JPanel {
             butCourant.setText(wordCourant);
         }
     }
+    public void updatePlateau(List<Card> cList){
+        for (JButton b : listBut){
+            for (Card c : cList){
+                if (b.getText().equals(c.word())){
+                    if (c.cardRole().equals(CARD_ROLE.CODE))
+                        b.setBackground(Color.GREEN);
+                    if (c.cardRole().equals(CARD_ROLE.NEUTRAL))
+                        b.setBackground(Color.GRAY);
+                    b.setOpaque(true);
+                }
+            }
+        }
+    }
+
 
 }

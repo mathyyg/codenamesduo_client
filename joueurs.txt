@@ -1,13 +1,4 @@
-Paul,mdp1,0,0
-Paul,mdp2,0,0
-Paul,p151233,0,0
-mathys,p334214,0,0
-true,p340630,0,0
-MATHYSLEBOSS,p343291,0,0
-MATHYSLEBOSS2,p343712,0,0
-foeqkjgjholiuqjéa,p346062,0,0
-MATEOLEMEMO,p348123,0,0
-ALTIKGJEQd,p349134,0,0
-Paulbis,p350744,0,0
-aaaaa,p352399,0,0
-mathys,p180370,0,0
+Paul,p102976,0,0
+Thomas,p122617,0,0
+Paul,p126961,0,0
+Paul,p181680,0,0
