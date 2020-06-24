@@ -55,7 +55,6 @@ public class FenetrePartie extends JFrame {
     private JButton keycard = new JButton("Display keycard");
     private JTextField indice = new JTextField("indice");
     private JComboBox indicechiffre = new JComboBox();
-    private List cardkey;
     private JTextField ncreponse = new JTextField("Enter an answer");
     private JButton sendreponse = new JButton("Send");
 
@@ -124,18 +123,6 @@ public class FenetrePartie extends JFrame {
         Object[] elements = new Object[]{"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15"};
         indicechiffre = new JComboBox(elements);
 
-        cardkey = new List();
-        try {
-            cardkey.addAll(serv.keyCards(partie.getIdPartie(), joueur, joueur.getMdp()));
-        } catch (CnNetworkException ex) {
-            fn.ouvrirMessageErreur(ex.getMessage(), "Erreur serveur");
-        } catch (CnBadIdException ex) {
-            fn.ouvrirMessageErreur(ex.getMessage(), "Erreur ID partie");
-        } catch (CnBadLoginException ex) {
-            fn.ouvrirMessageErreur(ex.getMessage(), "Erreur Login joueur");
-        } catch (CnBadPwdException ex) {
-            fn.ouvrirMessageErreur(ex.getMessage(), "Erreur MDP joueur");
-
             hint.add(indice);
             hint.add(indicechiffre);
             hint.add(keycard);
@@ -188,14 +175,7 @@ public class FenetrePartie extends JFrame {
             this.setLocation(x, y);
             this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         }
-    }
 
-    public void ouvrirMessageErreur(String msg, String titre) {
-        JOptionPane.showMessageDialog(this,
-                msg,
-                titre,
-                JOptionPane.ERROR_MESSAGE);
-    }
 
     public void ouvrirMessageErreur(String msg, String titre) {
         JOptionPane.showMessageDialog(this,
@@ -211,10 +191,4 @@ public class FenetrePartie extends JFrame {
         partie.getPlateau();
 
     }
-
-    public void second() {
-        new
-    }
-
-
 }
