@@ -109,15 +109,15 @@ public class FenetreRecherchePartie extends JFrame {
         this.setSize(new Dimension(700, 400));
 
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-        int x = (int) ((dimension.getWidth() - this.getWidth()) /2 -350);
-        int y = (int) ((dimension.getHeight() - this.getHeight()) / 2 -200);
+        int x = (int) ((dimension.getWidth() - this.getWidth()) /2);
+        int y = (int) ((dimension.getHeight() - this.getHeight()) / 2);
         this.setLocation(x, y);
 
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
     public boolean getNbTourSelect() { return nbTour.isSelected();}
-    public int getNbTour() { return Integer.parseInt(nbTourText.getText()); }
+    public String getNbTour() { return nbTourText.getText(); }
     public Joueur getJoueur() { return joueur;}
     public void toursEtat(boolean b) { nbTourText.setEditable(b); }
     public int getIDPartieSelected() { return (int) partiesAttente.getSelectedValue();}

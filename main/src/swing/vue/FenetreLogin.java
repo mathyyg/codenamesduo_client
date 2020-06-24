@@ -5,8 +5,11 @@ import codenames.CodeNamesClient;
 import swing.controleur.controleurLogin;
 import swing.controleur.controleurRegister;
 
+import javax.imageio.ImageIO;
+import java.io.File;
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 
 public class FenetreLogin extends JFrame {
 
@@ -34,23 +37,54 @@ public class FenetreLogin extends JFrame {
 
         JPanel login = new JPanel();
         login.setLayout(new BoxLayout(login, BoxLayout.Y_AXIS));
-        login.add(new JLabel("Pseudo : "));
+        JPanel log1 = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        log1.add(new JLabel("Pseudo : "));
+        login.add(log1);
         login.add(pseudoLog = new JTextField());
-        login.add(new JLabel("mot de passe : "));
+        JPanel log2 = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        log2.add(new JLabel("mot de passe : "));
+        login.add(log2);
         login.add(mdpLog = new JPasswordField());
-        login.add(logBut = new JButton("login"));
+        JPanel log3 = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        log3.add(logBut = new JButton("login"));
+        login.add(log3);
 
         JPanel register = new JPanel();
         register.setLayout(new BoxLayout(register, BoxLayout.Y_AXIS));
 
-        register.add(new JLabel("Choisissez un pseudo : "));
+        JPanel reg0 = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        reg0.add(new JLabel("Choisissez un pseudo : "));
+        register.add(reg0);
         register.add(pseudoReg = new JTextField());
-        register.add(regBut = new JButton("register"));
-        register.add(mdp = new JLabel("Votre mdp : "));
+        JPanel reg1 = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        reg1.add(regBut = new JButton("register"));
+        register.add(reg1);
+        JPanel reg2 = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        reg2.add(mdp = new JLabel("Votre mdp : "));
+        register.add(reg2);
 
         choix.addTab("Login", login);
         choix.addTab("Register", register);
+
+        Image img;
+        Image imgSized = null;
+        try {
+            img = ImageIO.read(new File("ressource"+File.separator+"logo_dut.png"));
+            imgSized = img.getScaledInstance(150, 150, Image.SCALE_DEFAULT);
+
+        } catch (IOException e) { e.printStackTrace(); }
+        JLabel logoLab1 = new JLabel(new ImageIcon(imgSized));
+
+        identif.add(logoLab1);
         identif.add(choix);
+
+        try {
+            img = ImageIO.read(new File("ressource"+File.separator+"infopotes.png"));
+            imgSized = img.getScaledInstance(150, 150, Image.SCALE_DEFAULT);
+
+        } catch (IOException e) { e.printStackTrace(); }
+        JLabel logoLab2 = new JLabel(new ImageIcon(imgSized));
+        identif.add(logoLab2);
         this.add(identif);
 
 
@@ -64,7 +98,7 @@ public class FenetreLogin extends JFrame {
         int x = (int) ((dimension.getWidth() - this.getWidth()) /2 -250);
         int y = (int) ((dimension.getHeight() - this.getHeight()) / 2 -150);
         this.setLocation(x, y);
-        setPreferredSize(new Dimension(255,250));
+        setPreferredSize(new Dimension(520,250));
     }
 
     public void second() {
@@ -87,6 +121,6 @@ public class FenetreLogin extends JFrame {
     }
 
     public void setLabelMdp(String s) {
-        mdp.setText(mdp.getText() + s);
+        mdp.setText("Votre mdp : " + s);
     }
 }

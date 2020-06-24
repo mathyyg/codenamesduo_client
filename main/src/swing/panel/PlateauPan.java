@@ -1,4 +1,4 @@
-package swing.vue;
+package swing.panel;
 
 import javax.swing.*;
 import java.awt.*;

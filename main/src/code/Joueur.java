@@ -16,6 +16,7 @@ public class Joueur implements iPlayer {
         pseudo = lenom;
         mdp = null;
     }
+
     public Joueur(String lenom, String lemdp) {
         pseudo = lenom;
         mdp = lemdp;
@@ -45,12 +46,12 @@ public class Joueur implements iPlayer {
             return;
         }
         try {
-            FileWriter fileWriter = new FileWriter("joueurs.txt", true);
+            FileWriter fileWriter = new FileWriter("ressource"+File.separator+"joueurs.txt", true);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             bufferedWriter.write(pseudo + "," + mdp+","+partieWin+","+partieLoos+"\n");
             bufferedWriter.close();
         } catch (IOException err) {
-            System.out.println("erreur de recopie dans le fichier.");
+            System.out.println("erreur de recopie dans le fichier.\n" + err.getMessage());
         }
     }
 
@@ -68,7 +69,7 @@ public class Joueur implements iPlayer {
         String line = null;
         List<Joueur> lesjoueurs = new ArrayList<>();
         try {
-            FileReader fileReader = new FileReader("joueurs.txt");
+            FileReader fileReader = new FileReader("ressource"+File.separator+"joueurs.txt");
             BufferedReader bufferedReader = new BufferedReader(fileReader);
 
             String[] parts;

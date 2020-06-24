@@ -25,15 +25,18 @@ public class controleurCreerPartie implements ActionListener{
         int idPartie;
         Partie partie;
         if (fn.getNbTourSelect()) {
+
             try {
-                idPartie = serv.createGame(fn.getJoueur(), fn.getNbTour());
+                idPartie = serv.createGame(fn.getJoueur(), Integer.parseInt(fn.getNbTour()));
                 System.out.println("Créé une partie de X tours du joueur " +joueur +" avec comme ID : " + idPartie);
-                partie = new Partie(serv, fn.getNbTour(), joueur, idPartie, true);
+                partie = new Partie(serv, Integer.parseInt(fn.getNbTour()), joueur, idPartie, true);
                 fn.second(partie);
             } catch (CnNetworkException ex) {
                 fn.ouvrirMessageErreur(ex.getMessage(),"Erreur serveur");
             } catch (CnBadLoginException ex) {
                 fn.ouvrirMessageErreur(ex.getMessage(),"Erreur de login");
+            } catch (NumberFormatException ex){
+                fn.ouvrirMessageErreur("la valeur spécifié n'est pas un nombre.", "Erreur création partie");
             }
         } else {
             try {

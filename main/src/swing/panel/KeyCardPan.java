@@ -1,4 +1,4 @@
-package swing.vue;
+package swing.panel;
 
 import codenames.cards.CARD_ROLE;
 

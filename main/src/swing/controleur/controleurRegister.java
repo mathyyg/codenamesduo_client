@@ -29,7 +29,8 @@ public class controleurRegister implements ActionListener {
 
         try {
             if (serv.isRegisteredPlayer(pan.getPseudoReg())){
-                System.out.println("Il existe déjà un compte avec ce login.");
+                pan.ouvrirMessageErreur("Il existe déjà un compte avec ce login.\n " +
+                        "Repartez sur l'onglet login pour vous connecter", "Erreur de register");
                 return;
             }
         } catch (CnNetworkException ex) {

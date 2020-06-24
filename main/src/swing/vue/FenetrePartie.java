@@ -8,14 +8,13 @@ import java.awt.*;
 import codenames.cards.Card;
 import codenames.exceptions.CnBadIdException;
 import codenames.exceptions.CnNetworkException;
-import swing.controleur.*;
+import swing.panel.KeyCardPan;
+import swing.panel.PlateauPan;
 import swing.timerControleur.*;
-import codenames.states.*;
 import code.*;
 import codenames.cards.CARD_ROLE;
 import java.util.List;
 import java.util.Vector;
-import java.util.zip.ZipEntry;
 
 public class FenetrePartie extends JFrame {
 
@@ -185,8 +184,8 @@ public class FenetrePartie extends JFrame {
         this.setSize(new Dimension(1100, 800));
 
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-        int x = (int) ((dimension.getWidth() - this.getWidth()) /2 -400);
-        int y = (int) ((dimension.getHeight() - this.getHeight()) / 2 -400);
+        int x = (int) ((dimension.getWidth() - this.getWidth()) /2 );
+        int y = (int) ((dimension.getHeight() - this.getHeight()) / 2 );
         this.setLocation(x, y);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
