@@ -78,4 +78,8 @@ public class PlateauPan extends JPanel {
         }
     }
 
+    public void majPlateau() {
+
+    }
+
 }

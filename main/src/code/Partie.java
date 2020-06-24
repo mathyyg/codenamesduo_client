@@ -16,9 +16,11 @@ public class Partie {
     private Joueur j;
     private List<String> plateau;
     private List<CARD_ROLE> keyCard;
+    private boolean estFirst;
 
 
-    public Partie(CodeNamesClient leserv, int lenbTour, Joueur lej, int lidPartie) {
+    public Partie(CodeNamesClient leserv, int lenbTour, Joueur lej, int lidPartie, boolean lestFirst) {
+        estFirst = lestFirst;
         serveur = leserv;
         nbTour = lenbTour;
         j = lej;
@@ -38,7 +40,7 @@ public class Partie {
         }
     }
 
-
+    public boolean getEstFirst() { return estFirst; }
     public List<String> getPlateau() {
         return plateau;
     }
@@ -58,6 +60,7 @@ public class Partie {
     public State getEtat() {
         return etat;
     }
+    public void setEtat(State e) { etat = e; }
 
     public Joueur getJ() {
         return j;

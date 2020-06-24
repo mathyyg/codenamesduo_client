@@ -5,10 +5,15 @@ import codenames.CodeNamesClient;
 import javax.swing.*;
 import java.awt.*;
 
+import codenames.exceptions.CnBadIdException;
+import codenames.exceptions.CnNetworkException;
+import swing.controleur.*;
 import swing.timerControleur.*;
 import codenames.states.*;
 import code.*;
 import codenames.cards.CARD_ROLE;
+import java.util.Vector;
+import java.util.zip.ZipEntry;
 
 public class FenetrePartie extends JFrame {
 
@@ -16,9 +21,10 @@ public class FenetrePartie extends JFrame {
     private CodeNamesClient serv;
     private Partie partie;
     private Timer timerAttenteJ2;
-    private List ListIndice;
+    private Timer timerState;
+    private Vector<Indice> ListIndice;
 
-
+    private JTextArea console;
     private JLabel pseudo;
     private JLabel mdp;
     private JLabel pWin;
@@ -43,6 +49,8 @@ public class FenetrePartie extends JFrame {
         partie = lapartie;
         joueur = lejoueur;
         serv = leserv;
+
+        ListIndice = new Vector<>();
 
         JPanel main = new JPanel();
         this.setContentPane(main);
@@ -109,11 +117,14 @@ public class FenetrePartie extends JFrame {
         reponseInput.setColumns(10);
         sendReponse = new JButton("Envoyer la réponse");
         reponsePan.add(sendReponse);
-
-
         indiceRepTabPan.addTab("Réponse", reponsePan);
-
         hautCenterPan.add(indiceRepTabPan);
+
+        console = new JTextArea();
+        console.setEditable(false);
+        console.setPreferredSize(new Dimension(150,100));
+        JScrollPane scroll = new JScrollPane(console, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        hautCenterPan.add(scroll);
 
         centerPan.add(hautCenterPan, BorderLayout.NORTH);
 
@@ -137,11 +148,21 @@ public class FenetrePartie extends JFrame {
 
 
         // timer
+        timerState = new Timer(2000, new StateListener(this,partie,serv));
         timerAttenteJ2 = new Timer(5000, new AttenteDeJ2Listener(this, partie, serv));
         if (partie.getEtat().state().equals(STATE_STEP.GAME_INIT))
             timerAttenteJ2.start();
-        else
+        else {
             initGame();
+            System.out.println("Le 2eme joueur est arrivé la partie va commencer.");
+            timerState.start();
+
+        }
+
+
+        // Listener
+        sendIndice.addActionListener(new controleurSendClue(this, serv, partie));
+
 
         // vue
         this.pack();
@@ -154,7 +175,6 @@ public class FenetrePartie extends JFrame {
         this.setLocation(x, y);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
-
     public void ouvrirMessageErreur(String msg, String titre) {
         JOptionPane.showMessageDialog(this,
                 msg,
@@ -162,6 +182,10 @@ public class FenetrePartie extends JFrame {
                 JOptionPane.ERROR_MESSAGE);
     }
 
+    public String getClue() { return indiceInput.getText(); }
+    public int getMotParClue() { return (int) indicechiffre.getSelectedItem(); }
+    public void startState() { timerState.start(); }
+    public void stopState() { timerState.stop(); }
     public void stopAttenteJ2() { timerAttenteJ2.stop();}
 
 
@@ -170,5 +194,28 @@ public class FenetrePartie extends JFrame {
         keyCardPan.init(partie.getKeyCard());
     }
 
+
+
+
+
+    public void majPlateau() {
+        plateau.majPlateau();
+    }
+
+    public void majListIndice() {
+        try {
+            Indice i = new Indice(
+                    serv.consultGame(partie.getIdPartie()).currentClue(),
+                    serv.consultGame(partie.getIdPartie()).currentClueNumber());
+            ListIndice.add(i);
+            JListIndice.setListData(ListIndice);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (CnNetworkException e) {
+            e.printStackTrace();
+        } catch (CnBadIdException e) {
+            e.printStackTrace();
+        }
+    }
 
 }

@@ -23,11 +23,11 @@ public class AttenteDeJ2Listener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         try {
-            System.out.println("En attente d'un autre joueur" +
-                    "\n état de la partie id : " + partie.getIdPartie() +" serv : "+serv.consultGame(partie.getIdPartie()).state());
+            System.out.println("En attente d'un autre joueur");
             if (serv.consultGame(partie.getIdPartie()).state().equals(STATE_STEP.GAME_JOIN)){
                 System.out.println(partie.getEtat().state() + "\nFin de l'attente");
                 fn.stopAttenteJ2();
+                fn.startState();
             }
         } catch (CnNetworkException ex) {
             ex.printStackTrace();

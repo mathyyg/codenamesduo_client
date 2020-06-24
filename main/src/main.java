@@ -53,12 +53,6 @@ public class main {
         System.out.println(etat.state() + "\n" + etat.creator());
 
 */
-        Joueur j1 = new Joueur("Paul", "mdp1");
-        j1.enregistrement();
-        Joueur j2 = j1;
-        j2.enregistrement();
-        Joueur j3 = new Joueur("Paul", "mdp2");
-        j3.enregistrement();
     }
 }
 
