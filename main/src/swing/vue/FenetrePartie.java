@@ -184,6 +184,7 @@ public class FenetrePartie extends JFrame {
                 titre,
                 JOptionPane.ERROR_MESSAGE);
     }
+    public void updateConsole(String s) {console.append(s+"\n");}
     public String getAnswer() { return reponseInput.getText();}
     public String getClue() { return indiceInput.getText(); }
     public int getMotParClue() { return (int) indicechiffre.getSelectedItem(); }

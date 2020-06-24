@@ -59,46 +59,51 @@ public class StateListener implements ActionListener {
             EtatActuel = partie.getEtat();
 
             if (partie.getEtat().state().equals(STATE_STEP.CLUE_SENT)) {
+                fn.updateConsole("Tour restant : " + partie.getEtat().finishedTurns());
                 try {
                     if (partie.getEtat().clueSender().equals(partie.getJ().getPseudo())) {
                         i = 0;
                         fn.modeDeJeuTab(i);
                         System.out.println(partie.getEtat().clueSender() + "==" + j1);
                         System.out.println("vous avez envoyé un indice, ce n'est plus votre tour\nOn attend sa réponse");
+
+                        fn.updateConsole("Indice envoyé, veuillez attendre la réponse de votre coéquipier");
                         //On vient d'envoyer l'indice, ce n'est plus notre tour.
                     } else {
                         i = 1;
                         fn.modeDeJeuTab(i);
                         System.out.println(partie.getEtat().clueSender() + "=/=" + j1);
                         System.out.println("Le joueur adverse a envoyé un indice, c'est à notre tour.\nIl faut choisir une réponse");
-                        // récupère la currentClue et currentClueNumber
-                        // on doit envoyer une réponse
-                        //correspond aux réponses trouvés par l'autre user qu'il faut mettre sur notre plateau.
+
+                        fn.updateConsole("L'indice est " + partie.getEtat().currentClue() + "pour "+
+                                partie.getEtat().currentClueNumber() + " mots");
+                        fn.updateConsole("Choisissez une ou des réponses");
+                        //met à jour le plateau avec les previousAnswer.
                         fn.majPreviousAnswer();
                         //ajoute le nouvel indice à la list des indices
                         fn.majListIndice();
-
                     }
                 } catch (IllegalAccessException ex) {
                     ex.printStackTrace();
                 }
             }
             if (partie.getEtat().state().equals(STATE_STEP.ANSWER_SENT)) {
-                if (i == 0){
-                    fn.modeDeJeuTab(1);
-                } else {
+                if (i == 1){
                     fn.modeDeJeuTab(0);
                 }
-
             }
 
             if (partie.getEtat().state().equals(STATE_STEP.GAME_WON)) {
+
+                fn.updateConsole("Vous avez gagné la partie");
                 //On a gagné la partie, on ajoute +1 à joueur.setGameWin.
                 fn.stopState();
             }
 
             if (partie.getEtat().state().equals(STATE_STEP.GAME_LOST)) {
                 //On a perdu la partie, on ajoute +1 à joueur.setGameLost.
+
+                fn.updateConsole("Vous avez perdu la partie");
                 fn.stopState();
             }
 
