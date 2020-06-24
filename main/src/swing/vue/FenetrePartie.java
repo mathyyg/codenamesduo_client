@@ -181,7 +181,7 @@ public class FenetrePartie extends JFrame {
                 titre,
                 JOptionPane.ERROR_MESSAGE);
     }
-
+    public String getAnswer() { return reponseInput.getText();}
     public String getClue() { return indiceInput.getText(); }
     public int getMotParClue() { return (int) indicechiffre.getSelectedItem(); }
     public void startState() { timerState.start(); }
@@ -202,6 +202,13 @@ public class FenetrePartie extends JFrame {
         plateau.majPlateau();
     }
 
+    public void majPreviousAnswer() {
+        try {
+            System.out.println(partie.getEtat().previousAnswer());
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+    }
     public void majListIndice() {
         try {
             Indice i = new Indice(

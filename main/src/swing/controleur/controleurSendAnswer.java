@@ -6,6 +6,11 @@ import swing.vue.FenetrePartie;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import codenames.cards.*;
+
 import code.*;
 
 public class controleurSendAnswer implements ActionListener {
@@ -21,6 +26,32 @@ public class controleurSendAnswer implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        List<String> listReponses = Arrays.asList(fn.getAnswer().split(","));
+        List<Card> cards = null;
+
+        try {
+            cards = serv.sendAnswer(partie.getIdPartie(), partie.getJ(), listReponses);
+        } catch (CnNetworkException ex) {
+            ex.printStackTrace();
+        } catch (CnBadIdException ex) {
+            ex.printStackTrace();
+        } catch (CnBadLoginException ex) {
+            ex.printStackTrace();
+        } catch (CnNotYourTurnException ex) {
+            ex.printStackTrace();
+        } catch (CnClosedGameException ex) {
+            ex.printStackTrace();
+        } catch (CnEmptyAnswerException ex) {
+            ex.printStackTrace();
+        } catch (CnUnknownAnswerException ex) {
+            ex.printStackTrace();
+        } catch (CnWaitClueException ex) {
+            ex.printStackTrace();
+        }
+        System.out.println("Apres sendAnswer cards : \n");
+        for (Card c : cards ){
+            System.out.println(c.word() + " " + c.cardRole() + "\n");
+        }
 
     }
 }

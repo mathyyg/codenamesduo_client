@@ -44,6 +44,9 @@ public class StateListener implements ActionListener {
                     // récupère la currentClue et currentClueNumber
                     // on doit envoyer une réponse
                     if (majListIndice){
+                        //correspond aux réponses trouvés par l'autre user qu'il faut mettre sur notre plateau.
+                        fn.majPreviousAnswer();
+                        //ajoute le nouvel indice à la list des indices
                         fn.majListIndice();
                         majListIndice = false;
                     }
