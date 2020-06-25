@@ -1,6 +1,6 @@
 package swing.vue;
 
-import code.Joueur;
+import modele.Joueur;
 import codenames.CodeNamesClient;
 import swing.controleur.controleurLogin;
 import swing.controleur.controleurRegister;

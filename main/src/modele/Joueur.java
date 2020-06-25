@@ -3,12 +3,11 @@
  * @version 2.14.1
  */
 
-package code;
+package modele;
 
 import codenames.iPlayer;
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
@@ -81,12 +80,12 @@ public class Joueur implements iPlayer {
     /**
      * Méthode qui permet de mettre à jour le nombre de partie gagné par un joueur
      */
-    public void PartieWinUp() { partieWin++;}
+    public void partieWinUp() { partieWin++;}
 
     /**
      * Méthode qui permet de mettre à jour le nombre de partie perdu par un joueur
      */
-    public void PartieLoosUp() { partieLoos++;}
+    public void partieLoosUp() { partieLoos++;}
 
 
     /**

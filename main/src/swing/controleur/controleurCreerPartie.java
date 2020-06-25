@@ -1,6 +1,6 @@
 package swing.controleur;
 
-import code.*;
+import modele.*;
 import codenames.CodeNamesClient;
 import codenames.exceptions.CnBadLoginException;
 import codenames.exceptions.CnNetworkException;

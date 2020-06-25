@@ -5,9 +5,8 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import codenames.cards.*;
 
-import code.*;
+import modele.*;
 
 public class PlateauPan extends JPanel {
     private List<JToggleButton> listBut;

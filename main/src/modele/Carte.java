@@ -3,7 +3,7 @@
  * @version 3.1.1
  */
 
-package code;
+package modele;
 
 import codenames.cards.*;
 public class Carte {

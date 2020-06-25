@@ -8,7 +8,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Vector;
-import code.*;
+import modele.*;
 import swing.controleur.*;
 
 public class FenetreRecherchePartie extends JFrame {
@@ -74,7 +74,8 @@ public class FenetreRecherchePartie extends JFrame {
         profil.add(mdp =new JLabel(joueur.getMdp()));
         profil.add(pWin = new JLabel("Partie gagné : " +joueur.getPWin()));
         profil.add(pLoos = new JLabel("Partie perdue : " +joueur.getPLoos()));
-        profil.add(new JLabel("Classement : " + joueur.getClassement()));
+        profil.add(new JLabel("Classement interne : " + joueur.getClassement()));
+        profil.add(new JLabel("Classement serveur : " + JoueurOnline.getClassementOnline(new JoueurOnline(joueur), serv)));
 
         JPanel creerPan = new JPanel();
         creerPan.setLayout(new BoxLayout(creerPan, BoxLayout.Y_AXIS));
@@ -95,10 +96,12 @@ public class FenetreRecherchePartie extends JFrame {
         creerPan.add(creerbutPan);
         regle = new JButton("règle");
         gauche.add(creerPan);
-        JPanel pan3 = new JPanel(new GridLayout(1,3));
+        JPanel pan3 = new JPanel(new GridLayout(1,2));
         pan3.add(profil);
-        pan3.add(regle);
-        pan3.add(quitter = new JButton("Quitter"));
+        JPanel panRegleQuit = new JPanel(new GridLayout(2,1));
+        panRegleQuit.add(regle);
+        panRegleQuit.add(quitter = new JButton("Quitter"));
+        pan3.add(panRegleQuit);
         gauche.add(pan3);
 
         //TODO ajouter un bouton pour visualiser le profil
