@@ -210,8 +210,10 @@ public class Joueur implements iPlayer {
     }
 
 
-
-    
+    /**
+     * Méthode qui renvoie la liste des joueurs enregistrés dans joueurs.txt
+     * @return
+     */
     public static List<Joueur> listEnregistrement() {
         String line = null;
         List<Joueur> lesjoueurs = new ArrayList<>();

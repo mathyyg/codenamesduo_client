@@ -14,11 +14,21 @@ public class controleurRegister implements ActionListener {
     private FenetreLogin pan;
     private CodeNamesClient serv;
 
+    /**
+     * Constructeur du contrôleur pour enregistrer un nouveau login
+     * @param pan
+     * @param leserv
+     */
     public controleurRegister(FenetreLogin pan, CodeNamesClient leserv) {
         this.pan = pan;
         this.serv = leserv;
     }
 
+    /**
+     * Vérifie si le nouveau login n'est pas déjà enregistré: enregistre le login, renvoie le mdp généré;
+     * affiche une erreur sinon
+     * @param e
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         Joueur j = new Joueur(pan.getPseudoReg());

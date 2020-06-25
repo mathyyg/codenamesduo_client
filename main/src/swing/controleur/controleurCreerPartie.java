@@ -14,12 +14,22 @@ public class controleurCreerPartie implements ActionListener{
     private CodeNamesClient serv;
     private Joueur joueur;
 
+    /**
+     * Constructeur du contrôleur pour créer une partie
+     * @param lafn fenêtre associée
+     * @param leserv serveur associé
+     * @param lejoueur joueur créateur
+     */
     public controleurCreerPartie(FenetreRecherchePartie lafn, CodeNamesClient leserv, Joueur lejoueur) {
         fn = lafn;
         serv = leserv;
         joueur = lejoueur;
     }
 
+    /**
+     * Crée une partie si possible après clic du composant abonné au contrôleur
+     * @param e
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         int idPartie;

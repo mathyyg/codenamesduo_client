@@ -13,11 +13,20 @@ public class controleurLogin implements ActionListener {
     private FenetreLogin pan;
     private CodeNamesClient serv;
 
+    /**
+     * Constructeur du contrôleur pour la validité et l'enregistrement du login
+     * @param pan la fenêtre associée
+     * @param leserv le serveur associé
+     */
     public controleurLogin(FenetreLogin pan, CodeNamesClient leserv) {
         this.pan = pan;
         this.serv = leserv;
     }
 
+    /**
+     * vérifie si le login est existant dans joueurs.txt et ouvre la fenêtre de recherche si oui
+     * @param e
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         Joueur j = new Joueur(pan.getPseudoLog(), pan.getmdpLog());
