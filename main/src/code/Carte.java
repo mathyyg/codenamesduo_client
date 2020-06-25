@@ -73,5 +73,6 @@ public class Carte {
      */
     public TYPE_CARTE getType() { return type; }
 
-
+    @Override
+    public String toString() { return mot + " " + type;}
 }
