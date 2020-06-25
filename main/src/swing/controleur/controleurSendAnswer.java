@@ -26,7 +26,9 @@ public class controleurSendAnswer implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        List<String> listReponses = Arrays.asList(fn.getAnswer().split(","));
+
+        //List<String> listReponses = Arrays.asList(fn.getAnswer().split(","));
+        List<String> listReponses = fn.getAnswerFromPlateau();
         List<Card> cards = null;
 
         try {

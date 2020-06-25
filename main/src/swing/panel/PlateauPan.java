@@ -10,33 +10,34 @@ import codenames.cards.*;
 import code.*;
 
 public class PlateauPan extends JPanel {
-    private List<JButton> listBut;
+    private List<JToggleButton> listBut;
 
-    private JButton nc1 = new JButton("Button");
-    private JButton nc2 = new JButton("Button");
-    private JButton nc3 = new JButton("Button");
-    private JButton nc4 = new JButton("Button");
-    private JButton nc5 = new JButton("Button");
-    private JButton nc6 = new JButton("Button");
-    private JButton nc7 = new JButton("Button");
-    private JButton nc8 = new JButton("Button");
-    private JButton nc9 = new JButton("Button");
-    private JButton nc10 = new JButton("Button");
-    private JButton nc11 = new JButton("Button");
-    private JButton nc12 = new JButton("Button");
-    private JButton nc13 = new JButton("Button");
-    private JButton nc14 = new JButton("Button");
-    private JButton nc15 = new JButton("Button");
-    private JButton nc16 = new JButton("Button");
-    private JButton nc17 = new JButton("Button");
-    private JButton nc18 = new JButton("Button");
-    private JButton nc19 = new JButton("Button");
-    private JButton nc20 = new JButton("Button");
-    private JButton nc21 = new JButton("Button");
-    private JButton nc22 = new JButton("Button");
-    private JButton nc23 = new JButton("Button");
-    private JButton nc24 = new JButton("Button");
-    private JButton nc25 = new JButton("Button");
+
+    private JToggleButton nc1 = new JToggleButton("Button");
+    private JToggleButton nc2 = new JToggleButton("Button");
+    private JToggleButton nc3 = new JToggleButton("Button");
+    private JToggleButton nc4 = new JToggleButton("Button");
+    private JToggleButton nc5 = new JToggleButton("Button");
+    private JToggleButton nc6 = new JToggleButton("Button");
+    private JToggleButton nc7 = new JToggleButton("Button");
+    private JToggleButton nc8 = new JToggleButton("Button");
+    private JToggleButton nc9 = new JToggleButton("Button");
+    private JToggleButton nc10 = new JToggleButton("Button");
+    private JToggleButton nc11 = new JToggleButton("Button");
+    private JToggleButton nc12 = new JToggleButton("Button");
+    private JToggleButton nc13 = new JToggleButton("Button");
+    private JToggleButton nc14 = new JToggleButton("Button");
+    private JToggleButton nc15 = new JToggleButton("Button");
+    private JToggleButton nc16 = new JToggleButton("Button");
+    private JToggleButton nc17 = new JToggleButton("Button");
+    private JToggleButton nc18 = new JToggleButton("Button");
+    private JToggleButton nc19 = new JToggleButton("Button");
+    private JToggleButton nc20 = new JToggleButton("Button");
+    private JToggleButton nc21 = new JToggleButton("Button");
+    private JToggleButton nc22 = new JToggleButton("Button");
+    private JToggleButton nc23 = new JToggleButton("Button");
+    private JToggleButton nc24 = new JToggleButton("Button");
+    private JToggleButton nc25 = new JToggleButton("Button");
 
     public PlateauPan() {
         this.setLayout(new GridLayout(5,5));
@@ -71,8 +72,8 @@ public class PlateauPan extends JPanel {
 
     public void init(List<String> words) {
         Iterator<String> itWords = words.iterator();
-        Iterator<JButton> itButton = listBut.iterator();
-        JButton butCourant;
+        Iterator<JToggleButton> itButton = listBut.iterator();
+        JToggleButton butCourant;
         String wordCourant;
         while (itWords.hasNext() && itButton.hasNext()){
             wordCourant = itWords.next();
@@ -81,7 +82,7 @@ public class PlateauPan extends JPanel {
         }
     }
     public void updatePlateau(List<Carte> cList){
-        for (JButton b : listBut){
+        for (JToggleButton b : listBut){
             for (Carte c : cList){
                 if (b.getText().equals(c.getMot())){
                     if (c.getType().equals(TYPE_CARTE.CODE))
@@ -89,10 +90,23 @@ public class PlateauPan extends JPanel {
                     if (c.getType().equals(TYPE_CARTE.NEUTRAL))
                         b.setBackground(Color.GRAY);
                     b.setOpaque(true);
+                    b.setSelected(false);
+                    b.setEnabled(false);
                 }
             }
         }
     }
 
+    public List<String> getMotSelected() {
+        List<String> mots = new ArrayList<>();
+        for (JToggleButton b : listBut){
+            if (b.isSelected() &&
+                    !b.getBackground().equals(Color.GRAY) &&
+                    !b.getBackground().equals(Color.GREEN)
+            )
+                mots.add(b.getText());
+        }
+        return mots;
+    }
 
 }

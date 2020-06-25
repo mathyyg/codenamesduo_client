@@ -25,13 +25,17 @@ public class AttenteDeJ2Listener implements ActionListener {
         try {
             System.out.println("En attente d'un autre joueur");
             if (serv.consultGame(partie.getIdPartie()).state().equals(STATE_STEP.GAME_JOIN)){
+                fn.resetConsole();
                 fn.updateConsole("Un joueur a été trouvé.\nFin de l'attente.");
                 fn.initGame();
+                fn.modeDeJeuTab(0);
                 fn.startState();
                 fn.stopAttenteJ2();
             } else {
-                if (!fn.getConsoleText().equals("En attente d'un autre joueur.\n"))
+                if (!fn.getConsoleText().equals("En attente d'un autre joueur.\n")){
                     fn.updateConsole("En attente d'un autre joueur.");
+                    fn.modeDeJeuTab(-1);
+                }
             }
         } catch (CnNetworkException ex) {
             fn.ouvrirMessageErreur(ex.getMessage(),"Erreur serveur");

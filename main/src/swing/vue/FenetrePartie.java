@@ -6,6 +6,8 @@ import javax.swing.*;
 import java.awt.*;
 
 import codenames.cards.Card;
+import codenames.exceptions.CnBadLoginException;
+import codenames.exceptions.CnBadPwdException;
 import codenames.states.*;
 import codenames.exceptions.CnBadIdException;
 import codenames.exceptions.CnNetworkException;
@@ -98,9 +100,9 @@ public class FenetrePartie extends JFrame {
                 .createTitledBorder("Profil"));
         profil.add(pseudo = new JLabel("Pseudo : " + joueur.getPseudo()));
         profil.add(mdp = new JLabel("Mdp : " + joueur.getMdp()));
-        profil.add(pWin = new JLabel("Partie gagné : " +joueur.getPWin()));
-        profil.add(pLoos = new JLabel("Partie perdue : " +joueur.getPLoos()));
-
+        profil.add(pWin = new JLabel("Partie gagné : " + joueur.getPWin()));
+        profil.add(pLoos = new JLabel("Partie perdue : " + joueur.getPLoos()));
+        profil.add(new JLabel("Classement : " + joueur.getClassement()));
         boutonQuitter = new JButton("Quitter");
 
         JPanel profilMain = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -196,6 +198,7 @@ public class FenetrePartie extends JFrame {
 
         }
 
+
         // Listener
         sendIndice.addActionListener(new controleurSendClue(this, serv, partie));
         sendReponse.addActionListener(new controleurSendAnswer(this, serv, partie));
@@ -220,9 +223,11 @@ public class FenetrePartie extends JFrame {
                 JOptionPane.ERROR_MESSAGE);
     }
 
+    public String getAnswer() {return reponseInput.getText(); }
+    public List<String> getAnswerFromPlateau() { return plateau.getMotSelected(); }
     public void updateConsole(String s) { console.append(s+"\n");}
     public String getConsoleText() { return console.getText(); }
-    public String getAnswer() { return reponseInput.getText();}
+    public void resetConsole() { console.setText("");}
     public String getClue() { return indiceInput.getText(); }
     public void resetAnswer() { reponseInput.setText(""); }
     public void resetClue() { indiceInput.setText(""); }
@@ -281,17 +286,49 @@ public class FenetrePartie extends JFrame {
             indiceRepTabPan.setEnabledAt(0, false);
             indiceRepTabPan.setEnabledAt(1, true);
             indiceRepTabPan.setSelectedIndex(1);
+        } else if (i == -1){
+            indiceRepTabPan.setEnabledAt(0, false);
+            indiceRepTabPan.setEnabledAt(1, false);
         }
     }
 
     public void retour(int i) {
+        JOptionPane d = new JOptionPane();
+        if (i == -1){
+            try {
+                if (serv.abortGame(partie.getIdPartie(), joueur, joueur.getMdp()))
+                    System.out.println("la partie a bien été abandonné");
+            } catch (CnNetworkException e) {
+                this.ouvrirMessageErreur("Le serveur semble être inaccessible","Erreur abortGame");
+            } catch (CnBadIdException e) {
+                this.ouvrirMessageErreur("L'ID de la partie ne correspond pas","Erreur abortGame");
+            } catch (CnBadLoginException e) {
+                this.ouvrirMessageErreur("Le login ne correspond pas","Erreur abortGame");
+            } catch (CnBadPwdException e) {
+                this.ouvrirMessageErreur("Le mot de passe ne correspond pas","Erreur abortGame");
+            }
+        }
         if (i == 1){
             joueur.PartieWinUp();
             joueur.updateWin(true);
+
+            d.showMessageDialog(this,
+                    "Félicitation vous avez gagné la partie !",
+                    "",
+                    JOptionPane.INFORMATION_MESSAGE);
         }
         if (i == 0){
             joueur.PartieLoosUp();
             joueur.updateWin(false);
+            d.showMessageDialog(this,
+                    "Pas de chance vous avez perdu...",
+                    "",
+                    JOptionPane.INFORMATION_MESSAGE);
+        }
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            System.err.println("Intéruption du sleep() (erreur non compromettante)");
         }
         FenetreRecherchePartie nouveau = new FenetreRecherchePartie("Menu",joueur,serv);
         nouveau.setVisible(true);

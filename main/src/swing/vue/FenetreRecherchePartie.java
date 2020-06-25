@@ -40,7 +40,7 @@ public class FenetreRecherchePartie extends JFrame {
         this.setContentPane(main);
 
         JPanel recherchePan = new JPanel();
-        recherchePan.setPreferredSize(new Dimension(170,350));
+        recherchePan.setPreferredSize(new Dimension(130,250));
         recherchePan.setBorder(BorderFactory
                 .createTitledBorder("Recherche une partie"));
         recherchePan.setLayout(new BoxLayout(recherchePan, BoxLayout.Y_AXIS));
@@ -65,7 +65,7 @@ public class FenetreRecherchePartie extends JFrame {
         main.add(recherchePan, BorderLayout.WEST);
         //Partie droite
 
-        JPanel gauche = new JPanel(new GridLayout(4,1));
+        JPanel gauche = new JPanel(new GridLayout(2,1));
         JPanel profil = new JPanel();
         profil.setLayout(new BoxLayout(profil, BoxLayout.Y_AXIS));
         profil.setBorder(BorderFactory
@@ -74,6 +74,7 @@ public class FenetreRecherchePartie extends JFrame {
         profil.add(mdp =new JLabel(joueur.getMdp()));
         profil.add(pWin = new JLabel("Partie gagné : " +joueur.getPWin()));
         profil.add(pLoos = new JLabel("Partie perdue : " +joueur.getPLoos()));
+        profil.add(new JLabel("Classement : " + joueur.getClassement()));
 
         JPanel creerPan = new JPanel();
         creerPan.setLayout(new BoxLayout(creerPan, BoxLayout.Y_AXIS));
@@ -87,13 +88,18 @@ public class FenetreRecherchePartie extends JFrame {
         nbTourText.setEditable(false);
         tourPan.add(nbTourText);
         creerPan.add(tourPan);
-        creerPan.add(creer = new JButton("Créer"));
+        JPanel creerbutPan = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        creer = new JButton("Créer");
+        creer.setPreferredSize(new Dimension(150,30));
+        creerbutPan.add(creer);
+        creerPan.add(creerbutPan);
         regle = new JButton("règle");
-        gauche.add(profil);
         gauche.add(creerPan);
-        gauche.add(regle);
-        gauche.add(quitter = new JButton("Quitter"));
-
+        JPanel pan3 = new JPanel(new GridLayout(1,3));
+        pan3.add(profil);
+        pan3.add(regle);
+        pan3.add(quitter = new JButton("Quitter"));
+        gauche.add(pan3);
 
         //TODO ajouter un bouton pour visualiser le profil
 
@@ -118,7 +124,7 @@ public class FenetreRecherchePartie extends JFrame {
         // vue
         this.pack();
 
-        this.setSize(new Dimension(700, 400));
+        this.setSize(new Dimension(550, 270));
 
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
         int x = (int) ((dimension.getWidth() - this.getWidth()) /2);

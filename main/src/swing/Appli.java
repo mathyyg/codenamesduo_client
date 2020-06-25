@@ -7,6 +7,8 @@ import code.Partie;
 import codenames.CodeNamesClient;
 import swing.vue.*;
 
+import javax.swing.*;
+
 public class Appli {
 
     public static void main(String[] args) {

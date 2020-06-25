@@ -12,6 +12,8 @@ import codenames.states.STATE_STEP;
 import codenames.states.State;
 import swing.vue.*;
 
+import javax.swing.*;
+
 public class StateListener implements ActionListener {
     private FenetrePartie fn;
     private CodeNamesClient serv;
@@ -49,19 +51,18 @@ public class StateListener implements ActionListener {
 
             if (partie.getEtat().state().equals(STATE_STEP.CLUE_SENT)) {
                 int tour = partie.getNbTour() - partie.getEtat().finishedTurns();
-                fn.updateConsole("Tour restant : " + String.valueOf(tour));
+                fn.updateConsole("Tours restant : " + String.valueOf(tour));
                 try {
                     if (partie.getEtat().clueSender().equals(partie.getJ().getPseudo())) {
                         i = 0;
                         fn.modeDeJeuTab(i);
-                        fn.updateConsole("Indice envoyé, veuillez attendre la réponse de \nvotre coéquipier");
+                        fn.updateConsole("Indice envoyé, veuillez attendre la réponse de \nvotre coéquipier.");
                         //On vient d'envoyer l'indice, ce n'est plus notre tour.
                     } else {
                         i = 1;
                         fn.modeDeJeuTab(i);
                         fn.updateConsole("L'indice est " + partie.getEtat().currentClue() + " pour "+
-                                partie.getEtat().currentClueNumber() + " mots");
-                        fn.updateConsole("Choisissez une ou des réponses");
+                                partie.getEtat().currentClueNumber() + " mots.\nChoisissez une ou des réponses");
                         //met à jour le plateau avec les previousAnswer.
                         fn.majPreviousAnswer();
                         //ajoute le nouvel indice à la list des indices
@@ -72,21 +73,17 @@ public class StateListener implements ActionListener {
                 }
             }
             if (partie.getEtat().state().equals(STATE_STEP.ANSWER_SENT)) {
+                //Tout se fait dans le controleurSendAnswer pour cet état.
                 if (i == 1){
                     fn.modeDeJeuTab(0);
                 }
             }
-
             if (partie.getEtat().state().equals(STATE_STEP.GAME_WON)) {
-
                 fn.updateConsole("Vous avez gagné la partie");
-                //On a gagné la partie, on ajoute +1 à joueur.setGameWin.
                 fn.stopState();
                 fn.retour(1);
             }
-
             if (partie.getEtat().state().equals(STATE_STEP.GAME_LOST)) {
-                //On a perdu la partie, on ajoute +1 à joueur.setGameLost.
                 fn.updateConsole("Vous avez perdu la partie");
                 fn.stopState();
                 fn.retour(0);

@@ -8,6 +8,7 @@ package code;
 import codenames.iPlayer;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
@@ -198,7 +199,6 @@ public class Joueur implements iPlayer {
                 Objects.equals(mdp, joueur.mdp);
     }
 
-
     /**
      * Méthode toString
      * ELle permet de rassembler toutes les informations du joueur
@@ -220,7 +220,8 @@ public class Joueur implements iPlayer {
             BufferedReader bufferedReader = new BufferedReader(fileReader);
 
             String[] parts;
-            while((line = bufferedReader.readLine()) != null) {
+
+            while((line = bufferedReader.readLine()) != null && !line.isBlank()) {
                 parts = line.split(",");
                 lesjoueurs.add(new Joueur(parts[0], parts[1], Integer.parseInt(parts[2]), Integer.parseInt(parts[3])));
             }
@@ -244,8 +245,6 @@ public class Joueur implements iPlayer {
             return 0;
         if (partieLoos == 0)
             return 1;
-        System.out.println(partieLoos + " " +partieWin);
-
         return (float) partieWin/(partieWin+partieLoos);
     }
 
@@ -254,9 +253,10 @@ public class Joueur implements iPlayer {
      * Elle permet de renvoyer le classement du joueur 
      * @return rank   int qui correspond à la position du joueur dans le classement 
      */
-    public int getClassement() {
-        int rank=0;
-        return rank;
+    public String getClassement() {
+        List<Joueur> list = Joueur.listEnregistrement();
+        list.sort(new ComparateurWinrate());
+        return String.valueOf(list.indexOf(this)+1) +"/"+list.size();
     }
 
 }
