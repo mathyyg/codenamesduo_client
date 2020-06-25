@@ -19,6 +19,7 @@ import codenames.cards.CARD_ROLE;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
+import java.util.concurrent.Flow;
 
 public class FenetrePartie extends JFrame {
 
@@ -85,6 +86,9 @@ public class FenetrePartie extends JFrame {
 
         JPanel hautCenterPan = new JPanel();
 
+        JPanel profetquit = new JPanel();
+        profetquit.setLayout(new BoxLayout(profetquit,BoxLayout.Y_AXIS));
+
         JPanel profil = new JPanel();
         profil.setLayout(new BoxLayout(profil, BoxLayout.Y_AXIS));
         profil.setBorder(BorderFactory
@@ -94,7 +98,17 @@ public class FenetrePartie extends JFrame {
         profil.add(pWin = new JLabel("Partie gagné : " +joueur.getPWin()));
         profil.add(pLoos = new JLabel("Partie perdue : " +joueur.getPLoos()));
 
-        hautCenterPan.add(profil);
+        JButton boutonQuitter = new JButton("Quitter");
+
+        JPanel profilMain = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        profilMain.add(profil);
+        JPanel quitter = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        quitter.add(boutonQuitter);
+
+        profetquit.add(profilMain);
+        profetquit.add(quitter);
+
+        hautCenterPan.add(profetquit);
 
         indiceRepTabPan = new JTabbedPane();
 
@@ -136,11 +150,7 @@ public class FenetrePartie extends JFrame {
         JListIndice.setPreferredSize(new Dimension(150,120));
         listIndPan.add(JListIndice);
 
-        JButton quitter = new JButton("Quitter");
-
-
         hautCenterPan.add(listIndPan);
-        hautCenterPan.add(quitter);
 
         centerPan.add(hautCenterPan, BorderLayout.NORTH);
 
@@ -183,7 +193,7 @@ public class FenetrePartie extends JFrame {
         // Listener
         sendIndice.addActionListener(new controleurSendClue(this, serv, partie));
         sendReponse.addActionListener(new controleurSendAnswer(this, serv, partie));
-        quitter.addActionListener(new controleurQuitterPartie(this));
+        boutonQuitter.addActionListener(new controleurQuitterPartie(this));
 
 
         // vue
@@ -273,12 +283,8 @@ public class FenetrePartie extends JFrame {
     public void retour(boolean win) {
         FenetreRecherchePartie nouveau = new FenetreRecherchePartie("Menu",joueur,serv);
         joueur.PartieWinUp();
-        try {
-            Thread.sleep(3000);
-            nouveau.setVisible(true);
-            dispose();
-        } catch (InterruptedException e) {
-        }
+        nouveau.setVisible(true);
+        dispose();
 
         //retour sur fenetreRecherchePartie
         //update si boolean win == true pWin ++
