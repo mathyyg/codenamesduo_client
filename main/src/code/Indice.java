@@ -7,6 +7,7 @@
 package code;
 
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class Indice {
     private String indice;
@@ -47,15 +48,6 @@ public class Indice {
     }
 
     /**
-     * 
-     * @since 2.1
-     */
-    public void MotTrouve() {
-        if (nbMotPourIndice > 0)
-            nbMotPourIndice--;
-    }
-
-    /**
      * Méthode estValide
      * Cette méthode permet de vérifier la validité de l'indice envoyer par le joueur :
      * -En vérifiant qu'il n'est pas vide
@@ -72,22 +64,19 @@ public class Indice {
             return false;
         }
 
-
-        /**
-         * 
-         */
         List<String> mots = p.getWords();             // Si l'indice proposé comporte un mot du plateau
         for (String m : mots) {
-            if (indice.equals(m)) {
-                valid = false;
+            if (indice.toLowerCase().equals(m.toLowerCase())) {
+                return false;
             }
         }
+        System.out.println("Utilise pattern");
+        Pattern patternMin = Pattern.compile("^[a-zÀ-ÿ]*-?[a-zÀ-ÿ]*$");
+        Pattern patternMaj = Pattern.compile("^[A-ZÀ-ÿ]*-?[A-ZÀ-ÿ]*$");
 
-        /*Pattern pattern = Pattern.compile("-?\\d+(\\.\\d+)?");    // Version expression régulière
-        if (pattern.matcher(indice).matches()) {
-            valid = false;
-        }*/
-
+        if (!patternMin.matcher(this.indice).matches() && !patternMaj.matcher(this.indice).matches()) {
+            valid=false;
+        }
         return valid;
     }
 
