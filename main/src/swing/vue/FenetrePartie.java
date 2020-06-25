@@ -16,6 +16,8 @@ import swing.timerControleur.*;
 import code.*;
 import codenames.cards.CARD_ROLE;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
@@ -47,6 +49,7 @@ public class FenetrePartie extends JFrame {
     private JComboBox<Integer> indicechiffre;
     private JTextField reponseInput;
     private JButton sendReponse;
+    private JButton boutonQuitter;
 
     private PlateauPan plateau;
     private KeyCardPan keyCardPan;
@@ -98,7 +101,7 @@ public class FenetrePartie extends JFrame {
         profil.add(pWin = new JLabel("Partie gagné : " +joueur.getPWin()));
         profil.add(pLoos = new JLabel("Partie perdue : " +joueur.getPLoos()));
 
-        JButton boutonQuitter = new JButton("Quitter");
+        boutonQuitter = new JButton("Quitter");
 
         JPanel profilMain = new JPanel(new FlowLayout(FlowLayout.CENTER));
         profilMain.add(profil);
@@ -194,7 +197,12 @@ public class FenetrePartie extends JFrame {
         // Listener
         sendIndice.addActionListener(new controleurSendClue(this, serv, partie));
         sendReponse.addActionListener(new controleurSendAnswer(this, serv, partie));
-        boutonQuitter.addActionListener(new controleurQuitterPartie(this));
+        boutonQuitter.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                retour(-1);
+            }
+        });
 
 
         // vue
@@ -232,9 +240,6 @@ public class FenetrePartie extends JFrame {
         plateau.init(partie.getWords());
         keyCardPan.init(partie.getKeyCard());
     }
-
-
-
 
 
     public void updatePlateau(List<Carte> cList) {
@@ -281,14 +286,20 @@ public class FenetrePartie extends JFrame {
         }
     }
 
-    public void retour(boolean win) {
+    public void retour(int i) {
         FenetreRecherchePartie nouveau = new FenetreRecherchePartie("Menu",joueur,serv);
-        joueur.PartieWinUp();
-        nouveau.setVisible(true);
+        if (i == 1){
+            joueur.PartieWinUp();
+            joueur.updateWin(true);
+        }
+        if (i == 0){
+            joueur.PartieLoosUp();
+            joueur.updateWin(false);
+        }
+            nouveau.setVisible(true);
+        this.stopState();
+        this.stopAttenteJ2();
         dispose();
-
-        //retour sur fenetreRecherchePartie
-        //update si boolean win == true pWin ++
 
     }
 }

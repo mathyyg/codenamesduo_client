@@ -80,7 +80,7 @@ public class Partie {
 
     /**
      * Méthode getIdPartie
-     * Elle permet de récupérer le numéro de la partie du serveur et de l'afficher via l'interface
+     * retourne l'identifiant de la partie
      * @return un int
      */
     public int getIdPartie() {
@@ -107,8 +107,8 @@ public class Partie {
 
     /**
      * Méthode setEtat
-     * Elle permet de prendre l'état actuel et de le communiquer au serveur
-     * @param e sate état actuel de la partie
+     * Modifie l'état de la classe partie.
+     * @param e état à transférer à l'état de partie.
      */
     public void setEtat(State e) { etat = e; }
 
@@ -124,15 +124,14 @@ public class Partie {
     /**
      * Méthode getPlateau 
      * Elle permet de récupérer le plateau de jeu (les 25 mots)
-     * @return
+     * @return une liste de Carte
      */
     public List<Carte> getPlateau() { return plateau;}
 
 
     /**
-     * Méthode CardList
-     * Elle permet de récupérer le mot et le type de chaque carte pour mettre à jour le plateau après chaque action
-     * @param CardList toutes les cartes du plateau
+     * Méthode plateauMAJ, met à jour le type des cartes qui ont été trouvé par les joueurs
+     * @param CardList , liste des cartes dont on a découvert le TYPE.
      */
     public void plateauMAJ(List<Carte> CardList) {
         for (Carte cPlat : plateau)

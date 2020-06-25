@@ -91,19 +91,17 @@ public class StateListener implements ActionListener {
             if (partie.getEtat().state().equals(STATE_STEP.GAME_WON)) {
 
                 fn.updateConsole("Vous avez gagné la partie");
-                fn.retour(true);
-                partie.getJ().updateWin(true);
+                fn.retour(1);
                 //On a gagné la partie, on ajoute +1 à joueur.setGameWin.
                 fn.stopState();
-                fn.retour(true);
+                fn.retour(1);
             }
 
             if (partie.getEtat().state().equals(STATE_STEP.GAME_LOST)) {
                 //On a perdu la partie, on ajoute +1 à joueur.setGameLost.
-                partie.getJ().updateWin(false);
                 fn.updateConsole("Vous avez perdu la partie");
                 fn.stopState();
-                fn.retour(true);
+                fn.retour(0);
             }
 
         }

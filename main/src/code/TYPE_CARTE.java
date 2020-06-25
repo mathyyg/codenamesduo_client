@@ -5,6 +5,9 @@
  
 package code;
 
+/**
+ * enumération des différents types que peut prendre une carte de la classe Carte
+ */
 public enum TYPE_CARTE {
     CODE,
     NEUTRAL,
