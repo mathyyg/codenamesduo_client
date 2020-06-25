@@ -100,9 +100,9 @@ public class FenetrePartie extends JFrame {
                 .createTitledBorder("Profil"));
         profil.add(pseudo = new JLabel("Pseudo : " + joueur.getPseudo()));
         profil.add(mdp = new JLabel("Mdp : " + joueur.getMdp()));
-        profil.add(pWin = new JLabel("Partie gagné : " + joueur.getPWin()));
-        profil.add(pLoos = new JLabel("Partie perdue : " + joueur.getPLoos()));
-        profil.add(new JLabel("Classement : " + joueur.getClassement()));
+        profil.add(pWin = new JLabel("Parties gagnées : " + joueur.getPWin()));
+        profil.add(pLoos = new JLabel("Parties perdues : " + joueur.getPLoos()));
+        profil.add(new JLabel("Classement local : " + joueur.getClassement()));
         boutonQuitter = new JButton("Quitter");
 
         JPanel profilMain = new JPanel(new FlowLayout(FlowLayout.CENTER));
