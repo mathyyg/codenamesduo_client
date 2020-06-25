@@ -168,6 +168,8 @@ public class FenetrePartie extends JFrame {
         bas.add(centerPan, BorderLayout.CENTER);
 
         console = new JTextArea();
+        console.setLineWrap(true);
+        console.setWrapStyleWord(true);
         Font f = console.getFont();
         console.setFont(new Font(f.getName(), f.getStyle(), f.getSize()-1));
         console.setEditable(false);
@@ -184,11 +186,11 @@ public class FenetrePartie extends JFrame {
 
         // timer
         timerAttenteJ2 = new Timer(5000, new AttenteDeJ2Listener(this, partie, serv));
+        timerState = new Timer(2000, new StateListener(this,partie,serv));
         if (partie.getEtat().state().equals(STATE_STEP.GAME_INIT))
             timerAttenteJ2.start();
         else {
             initGame();
-            timerState = new Timer(2000, new StateListener(this,partie,serv));
             System.out.println("Le 2eme joueur est arrivé la partie va commencer.");
             timerState.start();
 
@@ -218,13 +220,12 @@ public class FenetrePartie extends JFrame {
                 JOptionPane.ERROR_MESSAGE);
     }
 
-    public void updateConsole(String s) {console.append(s+"\n");}
+    public void updateConsole(String s) { console.append(s+"\n");}
     public String getConsoleText() { return console.getText(); }
     public String getAnswer() { return reponseInput.getText();}
     public String getClue() { return indiceInput.getText(); }
     public int getMotParClue() { return (int) indicechiffre.getSelectedItem(); }
     public void startState() {
-        timerState = new Timer(2000, new StateListener(this,partie,serv));
         timerState.start();
     }
     public void stopState() { timerState.stop(); }
@@ -282,7 +283,6 @@ public class FenetrePartie extends JFrame {
     }
 
     public void retour(int i) {
-        FenetreRecherchePartie nouveau = new FenetreRecherchePartie("Menu",joueur,serv);
         if (i == 1){
             joueur.PartieWinUp();
             joueur.updateWin(true);
@@ -291,9 +291,12 @@ public class FenetrePartie extends JFrame {
             joueur.PartieLoosUp();
             joueur.updateWin(false);
         }
-            nouveau.setVisible(true);
-        this.stopState();
-        this.stopAttenteJ2();
+        FenetreRecherchePartie nouveau = new FenetreRecherchePartie("Menu",joueur,serv);
+        nouveau.setVisible(true);
+        if (timerAttenteJ2.isRunning())
+            this.stopAttenteJ2();
+        if (timerState.isRunning())
+            this.stopState();
         dispose();
 
     }

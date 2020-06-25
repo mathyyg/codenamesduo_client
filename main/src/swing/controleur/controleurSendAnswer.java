@@ -31,10 +31,15 @@ public class controleurSendAnswer implements ActionListener {
 
         try {
             cards = serv.sendAnswer(partie.getIdPartie(), partie.getJ(), listReponses);
+            if (cards.get(cards.size()-1).cardRole().equals(CARD_ROLE.NO_MORE_CODE)){
+                fn.updateConsole("Vous avez fini de trouver vos CODE. Vous ne pourrez que soumettre des indices à votre coéquipier à" +
+                        "partir de maintenant.");
+                cards.remove(cards.size()-1);
+            }
+
             List<Carte> cList = new ArrayList<>();
             for (Card c : cards)
                 cList.add(new Carte(c));
-            System.out.println(cList.toString());
             fn.updatePlateau(cList);
         } catch (CnNetworkException ex) {
             fn.ouvrirMessageErreur("Le serveur semble être inaccessible","Erreur d'envoie de réponse");

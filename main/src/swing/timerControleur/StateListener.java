@@ -18,8 +18,6 @@ public class StateListener implements ActionListener {
     private Partie partie;
     private State EtatActuel;
     int i;
-    private String j1; // Correspond toujours à nous
-    private String j2; // Correspond toujours à notre adversaire
 
     public StateListener(FenetrePartie lafn, Partie lapartie, CodeNamesClient leserv) {
         fn = lafn;
@@ -27,19 +25,10 @@ public class StateListener implements ActionListener {
         serv = leserv;
         try {
             EtatActuel = serv.consultGame(partie.getIdPartie());
-            if (serv.consultGame(partie.getIdPartie()).creator().equals(partie.getJ().getPseudo())){
-                j1 = serv.consultGame(partie.getIdPartie()).creator();
-                j2 = serv.consultGame(partie.getIdPartie()).secondPlayer();
-            } else {
-                j2 = serv.consultGame(partie.getIdPartie()).creator();
-                j1 = serv.consultGame(partie.getIdPartie()).secondPlayer();
-            }
         } catch (CnNetworkException e) {
             fn.ouvrirMessageErreur(e.getMessage(),"Erreur serveur");
         } catch (CnBadIdException e) {
             fn.ouvrirMessageErreur(e.getMessage(), "Erreur ID partie");
-        } catch (IllegalAccessException e) {
-            fn.ouvrirMessageErreur(e.getMessage(),"Erreur : action interdite/impossible");
         }
     }
 

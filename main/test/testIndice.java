@@ -70,6 +70,9 @@ public class testIndice {
         assertEquals(false, indiceTest.estValide(p));
     }
 
+    /**
+     * Pas plusieurs mots à la fois
+     */
     @Test
     public void estValide6() {
         indiceTest = new Indice("plusieurs mots",3);

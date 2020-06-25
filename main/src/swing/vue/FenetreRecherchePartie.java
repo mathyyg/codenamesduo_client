@@ -70,10 +70,10 @@ public class FenetreRecherchePartie extends JFrame {
         profil.setLayout(new BoxLayout(profil, BoxLayout.Y_AXIS));
         profil.setBorder(BorderFactory
                 .createTitledBorder("Profil"));
-        profil.add(pseudo = new JLabel(j.getPseudo()));
-        profil.add(mdp =new JLabel(j.getMdp()));
-        profil.add(pWin = new JLabel("Partie gagné : " +j.getPWin()));
-        profil.add(pLoos = new JLabel("Partie perdue : " +j.getPLoos()));
+        profil.add(pseudo = new JLabel(joueur.getPseudo()));
+        profil.add(mdp =new JLabel(joueur.getMdp()));
+        profil.add(pWin = new JLabel("Partie gagné : " +joueur.getPWin()));
+        profil.add(pLoos = new JLabel("Partie perdue : " +joueur.getPLoos()));
 
         JPanel creerPan = new JPanel();
         creerPan.setLayout(new BoxLayout(creerPan, BoxLayout.Y_AXIS));
