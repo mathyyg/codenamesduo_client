@@ -80,7 +80,6 @@ public class StateListener implements ActionListener {
             if (partie.getEtat().state().equals(STATE_STEP.GAME_WON)) {
 
                 fn.updateConsole("Vous avez gagné la partie");
-                fn.retour(1);
                 //On a gagné la partie, on ajoute +1 à joueur.setGameWin.
                 fn.stopState();
                 fn.retour(1);

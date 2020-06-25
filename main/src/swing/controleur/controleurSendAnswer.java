@@ -59,5 +59,6 @@ public class controleurSendAnswer implements ActionListener {
         } catch (CnWaitClueException ex) {
             fn.ouvrirMessageErreur("Un indice est attendu à la place d'une réponse","Erreur d'envoie de réponse");
         }
+        fn.resetAnswer();
     }
 }

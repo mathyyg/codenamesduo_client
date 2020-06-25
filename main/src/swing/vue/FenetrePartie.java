@@ -224,6 +224,8 @@ public class FenetrePartie extends JFrame {
     public String getConsoleText() { return console.getText(); }
     public String getAnswer() { return reponseInput.getText();}
     public String getClue() { return indiceInput.getText(); }
+    public void resetAnswer() { reponseInput.setText(""); }
+    public void resetClue() { indiceInput.setText(""); }
     public int getMotParClue() { return (int) indicechiffre.getSelectedItem(); }
     public void startState() {
         timerState.start();

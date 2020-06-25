@@ -42,7 +42,7 @@ public class controleurSendClue implements ActionListener {
                 } catch (CnClosedGameException ex) {
                     fn.ouvrirMessageErreur("La partie est terminé", "Error partie gagné/perdu");
                 }
-
+            fn.resetClue();
         }
     }
 }
