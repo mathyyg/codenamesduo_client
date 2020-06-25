@@ -1,8 +1,7 @@
 package swing.controleur;
 
-import code.Joueur;
+import modele.Joueur;
 import codenames.CodeNamesClient;
-import codenames.exceptions.CnBadLoginException;
 import codenames.exceptions.CnNetworkException;
 import swing.vue.FenetreLogin;
 

@@ -3,7 +3,7 @@ package swing.timerControleur;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import code.Partie;
+import modele.Partie;
 import codenames.CodeNamesClient;
 import codenames.exceptions.CnBadIdException;
 import codenames.exceptions.CnNetworkException;

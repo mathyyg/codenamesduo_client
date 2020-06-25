@@ -1,6 +1,6 @@
 package swing.controleur;
 
-import code.Joueur;
+import modele.Joueur;
 import codenames.CodeNamesClient;
 import codenames.exceptions.CnBadLoginException;
 import codenames.exceptions.CnNetworkException;
@@ -8,7 +8,6 @@ import swing.vue.FenetreLogin;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 
 public class controleurRegister implements ActionListener {
     private FenetreLogin pan;

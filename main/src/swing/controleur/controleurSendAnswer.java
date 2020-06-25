@@ -7,11 +7,10 @@ import swing.vue.FenetrePartie;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import codenames.cards.*;
 
-import code.*;
+import modele.*;
 
 public class controleurSendAnswer implements ActionListener {
     private Partie partie;

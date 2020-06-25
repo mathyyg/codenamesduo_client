@@ -8,7 +8,7 @@ import codenames.CodeNamesClient;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import code.*;
+import modele.*;
 
 public class TestPartie {
 

@@ -1,13 +1,7 @@
 package swing;
 
-import java.awt.*;
-
-import code.Joueur;
-import code.Partie;
 import codenames.CodeNamesClient;
 import swing.vue.*;
-
-import javax.swing.*;
 
 public class Appli {
 

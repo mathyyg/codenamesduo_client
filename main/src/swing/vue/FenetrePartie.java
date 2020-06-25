@@ -15,15 +15,12 @@ import swing.panel.KeyCardPan;
 import swing.panel.PlateauPan;
 import swing.controleur.*;
 import swing.timerControleur.*;
-import code.*;
+import modele.*;
 import codenames.cards.CARD_ROLE;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
-import java.util.concurrent.Flow;
 
 public class FenetrePartie extends JFrame {
 
@@ -208,7 +205,7 @@ public class FenetrePartie extends JFrame {
         // vue
         this.pack();
 
-        this.setSize(new Dimension(1100, 800));
+        this.setSize(new Dimension(1150, 800));
 
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
         int x = (int) ((dimension.getWidth() - this.getWidth()) /2 );
@@ -309,7 +306,7 @@ public class FenetrePartie extends JFrame {
             }
         }
         if (i == 1){
-            joueur.PartieWinUp();
+            joueur.partieWinUp();
             joueur.updateWin(true);
 
             d.showMessageDialog(this,
@@ -318,7 +315,7 @@ public class FenetrePartie extends JFrame {
                     JOptionPane.INFORMATION_MESSAGE);
         }
         if (i == 0){
-            joueur.PartieLoosUp();
+            joueur.partieLoosUp();
             joueur.updateWin(false);
             d.showMessageDialog(this,
                     "Pas de chance vous avez perdu...",

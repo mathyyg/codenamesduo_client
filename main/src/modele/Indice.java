@@ -4,7 +4,7 @@
  */
 
 
-package code;
+package modele;
 
 import java.util.List;
 import java.util.regex.Pattern;

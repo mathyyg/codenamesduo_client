@@ -6,7 +6,7 @@ import swing.vue.FenetrePartie;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import code.*;
+import modele.*;
 
 public class controleurSendClue implements ActionListener {
     private Partie partie;

@@ -1,8 +1,8 @@
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import code.Indice;
-import code.Partie;
+import modele.Indice;
+import modele.Partie;
 import codenames.CodeNamesClient;
 import codenames.exceptions.CnBadLoginException;
 import codenames.exceptions.CnNetworkException;
@@ -10,7 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 
-import code.Joueur;
+import modele.Joueur;
 
 public class testIndice {
 

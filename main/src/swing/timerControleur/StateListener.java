@@ -3,16 +3,13 @@ package swing.timerControleur;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import code.Joueur;
-import code.Partie;
+import modele.Partie;
 import codenames.CodeNamesClient;
 import codenames.exceptions.CnBadIdException;
 import codenames.exceptions.CnNetworkException;
 import codenames.states.STATE_STEP;
 import codenames.states.State;
 import swing.vue.*;
-
-import javax.swing.*;
 
 public class StateListener implements ActionListener {
     private FenetrePartie fn;

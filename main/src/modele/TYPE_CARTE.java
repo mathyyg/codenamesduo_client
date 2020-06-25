@@ -3,7 +3,7 @@
  * @version 3.1.1
  */
  
-package code;
+package modele;
 
 /**
  * enumération des différents types que peut prendre une carte de la classe Carte
