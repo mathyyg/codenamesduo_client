@@ -205,7 +205,7 @@ public class FenetrePartie extends JFrame {
     }
 
     public void updateConsole(String s) {console.append(s+"\n");}
-
+    public String getConsoleText() { return console.getText(); }
     public String getAnswer() { return reponseInput.getText();}
     public String getClue() { return indiceInput.getText(); }
     public int getMotParClue() { return (int) indicechiffre.getSelectedItem(); }
