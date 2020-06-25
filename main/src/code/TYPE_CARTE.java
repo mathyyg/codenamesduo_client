@@ -4,5 +4,6 @@ public enum TYPE_CARTE {
     CODE,
     NEUTRAL,
     ASSASSIN,
-    PAS_TROUVE
+    PAS_TROUVE,
+    NO_MORE_CARD
 }

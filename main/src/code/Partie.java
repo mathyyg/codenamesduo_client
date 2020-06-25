@@ -73,7 +73,5 @@ public class Partie {
             for (Carte cCardList : CardList)
                 if (cPlat.getMot().equals(cCardList.getMot()))
                     cPlat.setType(cCardList.getType());
-
-
     }
 }

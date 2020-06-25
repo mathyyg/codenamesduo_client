@@ -16,6 +16,8 @@ public class Carte {
             type = TYPE_CARTE.CODE;
         else if (c.cardRole().equals(CARD_ROLE.KILLER))
             type = TYPE_CARTE.ASSASSIN;
+        else if (c.cardRole().equals(CARD_ROLE.NO_MORE_CODE))
+            type = TYPE_CARTE.NO_MORE_CARD;
         else
             type = TYPE_CARTE.PAS_TROUVE;
     }
