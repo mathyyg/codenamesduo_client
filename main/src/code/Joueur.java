@@ -121,5 +121,13 @@ public class Joueur implements iPlayer {
         return lesjoueurs;
     }
 
-
+    public float getWinrate() {
+        if (partieWin == 0 || partieLoos == 0)
+            return 0;
+        return partieWin/partieLoos;
+    }
+    public int getClassement() {
+        int rank=0;
+        return rank;
+    }
 }

@@ -73,7 +73,7 @@ public class Partie {
         for (Card cPlat : plateau)
             for (Card cCardList : CardList)
                 if (cPlat.word().equals(cCardList.word())) {
-                    cPlat = new Card(cPlat.word(), cCardList.cardRole());
+                    cPlat = cCardList;
                 }
     }
 }
