@@ -112,6 +112,7 @@ public class FenetrePartie extends JFrame {
 
         indiceRepTabPan = new JTabbedPane();
 
+
         JPanel indicePan = new JPanel();
         JPanel pan1 = new JPanel();
         pan1.setLayout(new BoxLayout(pan1, BoxLayout.Y_AXIS));
