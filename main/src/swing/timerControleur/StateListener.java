@@ -96,6 +96,7 @@ public class StateListener implements ActionListener {
                 partie.getJ().updateWin(true);
                 //On a gagné la partie, on ajoute +1 à joueur.setGameWin.
                 fn.stopState();
+                fn.retour(true);
             }
 
             if (partie.getEtat().state().equals(STATE_STEP.GAME_LOST)) {
@@ -103,6 +104,7 @@ public class StateListener implements ActionListener {
                 partie.getJ().updateWin(false);
                 fn.updateConsole("Vous avez perdu la partie");
                 fn.stopState();
+                fn.retour(true);
             }
 
         }

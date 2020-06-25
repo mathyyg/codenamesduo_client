@@ -136,7 +136,11 @@ public class FenetrePartie extends JFrame {
         JListIndice.setPreferredSize(new Dimension(150,120));
         listIndPan.add(JListIndice);
 
+        JButton quitter = new JButton("Quitter");
+
+
         hautCenterPan.add(listIndPan);
+        hautCenterPan.add(quitter);
 
         centerPan.add(hautCenterPan, BorderLayout.NORTH);
 
@@ -179,6 +183,7 @@ public class FenetrePartie extends JFrame {
         // Listener
         sendIndice.addActionListener(new controleurSendClue(this, serv, partie));
         sendReponse.addActionListener(new controleurSendAnswer(this, serv, partie));
+        quitter.addActionListener(new controleurQuitterPartie(this));
 
 
         // vue
@@ -268,6 +273,12 @@ public class FenetrePartie extends JFrame {
     public void retour(boolean win) {
         FenetreRecherchePartie nouveau = new FenetreRecherchePartie("Menu",joueur,serv);
         joueur.PartieWinUp();
+        try {
+            Thread.sleep(3000);
+            nouveau.setVisible(true);
+            dispose();
+        } catch (InterruptedException e) {
+        }
 
         //retour sur fenetreRecherchePartie
         //update si boolean win == true pWin ++
