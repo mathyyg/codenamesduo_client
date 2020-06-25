@@ -1,3 +1,8 @@
+/**
+ * @author Les Infopotes
+ * @version 2.13
+ */
+
 package code;
 
 /**
