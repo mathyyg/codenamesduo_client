@@ -16,10 +16,15 @@ public class Joueur implements iPlayer {
         pseudo = lenom;
         mdp = null;
     }
-
     public Joueur(String lenom, String lemdp) {
         pseudo = lenom;
         mdp = lemdp;
+    }
+    public Joueur(String lenom, String lemdp, int win, int loos) {
+        pseudo = lenom;
+        mdp = lemdp;
+        partieWin = win;
+        partieLoos = loos;
     }
 
     @Override
@@ -37,13 +42,17 @@ public class Joueur implements iPlayer {
         return mdp;
     }
     public String getPseudo() { return pseudo; }
-    public String getPWin() { return String.valueOf(partieWin);}
-    public String getPLoos() { return String.valueOf(partieLoos);}
+    public int getPWin() { return partieWin;}
+    public int getPLoos() { return partieLoos;}
+    public void setPWin(int i) { partieWin = i;}
+    public void setPLoos(int i) { partieLoos = i;}
 
-    public void enregistrement() throws IOException {
-        if (Joueur.listEnregistrement().contains(this)){
-            System.out.println(this.pseudo + "est déjà enregistré");
-            return;
+    public void enregistrement() {
+        if (!Joueur.listEnregistrement().isEmpty()) {
+            if (Joueur.listEnregistrement().contains(this)) {
+                System.out.println(this.pseudo + "est déjà enregistré");
+                return;
+            }
         }
         try {
             FileWriter fileWriter = new FileWriter("ressource"+File.separator+"joueurs.txt", true);
@@ -55,6 +64,29 @@ public class Joueur implements iPlayer {
         }
     }
 
+    public void updateWin(boolean aWin) {
+        List<Joueur> listEnr = Joueur.listEnregistrement();
+
+        int i = listEnr.indexOf(this);
+        Joueur j = listEnr.get(i);
+        if (aWin)
+            j.setPWin(j.getPWin()+1);
+        else
+            j.setPLoos(j.getPLoos()+1);
+
+        listEnr.set(i,j);
+        try {
+            FileWriter fileWriter = new FileWriter("ressource"+File.separator+"joueurs.txt");
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            for (Joueur j2 : listEnr) {
+                bufferedWriter.write(j2.toString());
+            }
+            bufferedWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -62,6 +94,11 @@ public class Joueur implements iPlayer {
         Joueur joueur = (Joueur) o;
         return Objects.equals(pseudo, joueur.pseudo) &&
                 Objects.equals(mdp, joueur.mdp);
+    }
+
+    @Override
+    public String toString() {
+        return pseudo + "," + mdp + "," + partieWin + "," + partieLoos + "\n";
     }
 
 
@@ -75,7 +112,7 @@ public class Joueur implements iPlayer {
             String[] parts;
             while((line = bufferedReader.readLine()) != null) {
                 parts = line.split(",");
-                lesjoueurs.add(new Joueur(parts[0], parts[1]));
+                lesjoueurs.add(new Joueur(parts[0], parts[1], Integer.parseInt(parts[2]), Integer.parseInt(parts[3])));
             }
             bufferedReader.close();
         } catch (IOException err ) {
@@ -83,4 +120,6 @@ public class Joueur implements iPlayer {
         }
         return lesjoueurs;
     }
+
+
 }

@@ -1,22 +1,27 @@
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.IOException;
 import java.util.stream.Stream;
 
+import code.JoueurException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import code.Joueur;
+
     public class testJoueur {
 
+        Joueur joueurTest;
 
         @BeforeEach
         void setUp() throws Exception {
-            // créer les instances ici
+            joueurTest = new Joueur("Test");
         }
-
+/*
         @ParameterizedTest
         @MethodSource("constructorProvider")
         void testOperationDS(int x, int y, int oraclePGCD) {
@@ -25,7 +30,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
         /**
          *
-         */
+
         static Stream<Arguments> constructorProvider() {
             return Stream.of(
                     Arguments.of(-34,-39, 1),
@@ -43,13 +48,27 @@ import org.junit.jupiter.params.provider.MethodSource;
                     Arguments.of(108,-87, 3)
             );
         }
-
+*/
 
         /**
          * CT1((), (IllegalArgumentException))
          */
-        @Test
-        public void testDiviserException(){
+        /*@Test
+        public void testCreaJoueurLoginVide(){
+            assertThrows(JoueurException.class, ()-> {joueurTest = new Joueur("");});
             //Test unitaire
+        }
+
+        @Test
+        public void testCreaJoueurPasswordVide(){
+            assertThrows(JoueurException.class, ()-> {joueurTest = new Joueur("Test1234", "");});
+
+        }
+*/
+        @Test
+        public void testUpdateJoueur() {
+            joueurTest.enregistrement();
+            joueurTest.PartieWinUp();
+            assertEquals("1", joueurTest.getPWin());
         }
 }

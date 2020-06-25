@@ -30,6 +30,9 @@ public class controleurLogin implements ActionListener {
             if (Joueur.listEnregistrement().contains(j)
                 && serv.isRegisteredPlayer(pan.getPseudoLog())){
                 System.out.println("authentification réussite.");
+                int i = Joueur.listEnregistrement().indexOf(j);
+                j = Joueur.listEnregistrement().get(i);
+                System.out.println(j);
                 pan.setJoueur(j);
                 pan.second();
             } else if (serv.isRegisteredPlayer(pan.getPseudoLog())){

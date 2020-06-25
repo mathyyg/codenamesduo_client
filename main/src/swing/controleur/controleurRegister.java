@@ -44,9 +44,6 @@ public class controleurRegister implements ActionListener {
             ex.printStackTrace();
         } catch (CnBadLoginException ex) {
             ex.printStackTrace();
-        } catch (IOException ex) {
-            //fail enregistrement
-            ex.printStackTrace();
         }
         System.out.println("Création du nouveau joueur et authentification réussite");
         pan.setJoueur(j);
