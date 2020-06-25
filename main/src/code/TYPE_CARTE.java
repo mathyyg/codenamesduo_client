@@ -1,3 +1,8 @@
+/**
+ * @author Les Infopotes
+ * @version 3.1.1
+ */
+ 
 package code;
 
 public enum TYPE_CARTE {
