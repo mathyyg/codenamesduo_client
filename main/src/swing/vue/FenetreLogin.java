@@ -72,7 +72,7 @@ public class FenetreLogin extends JFrame {
             img = ImageIO.read(new File("ressource"+File.separator+"logo_dut.png"));
             imgSized = img.getScaledInstance(150, 150, Image.SCALE_DEFAULT);
 
-        } catch (IOException e) { e.printStackTrace(); }
+        } catch (IOException e) { ouvrirMessageErreur(e.getMessage()+"\nmauvais fichier?","Erreur entrée/sortie"); }
         JLabel logoLab1 = new JLabel(new ImageIcon(imgSized));
 
         identif.add(logoLab1);
@@ -82,7 +82,7 @@ public class FenetreLogin extends JFrame {
             img = ImageIO.read(new File("ressource"+File.separator+"infopotes.png"));
             imgSized = img.getScaledInstance(150, 150, Image.SCALE_DEFAULT);
 
-        } catch (IOException e) { e.printStackTrace(); }
+        } catch (IOException e) { ouvrirMessageErreur(e.getMessage()+"\nmauvais fichier?","Erreur entrée/sortie"); }
         JLabel logoLab2 = new JLabel(new ImageIcon(imgSized));
         identif.add(logoLab2);
         this.add(identif);

@@ -20,7 +20,6 @@ public class StateListener implements ActionListener {
     int i;
     private String j1; // Correspond toujours à nous
     private String j2; // Correspond toujours à notre adversaire
-    private int CarteTrouve;
 
     public StateListener(FenetrePartie lafn, Partie lapartie, CodeNamesClient leserv) {
         fn = lafn;
@@ -36,11 +35,11 @@ public class StateListener implements ActionListener {
                 j1 = serv.consultGame(partie.getIdPartie()).secondPlayer();
             }
         } catch (CnNetworkException e) {
-            e.printStackTrace();
+            fn.ouvrirMessageErreur(e.getMessage(),"Erreur serveur");
         } catch (CnBadIdException e) {
-            e.printStackTrace();
+            fn.ouvrirMessageErreur(e.getMessage(), "Erreur ID partie");
         } catch (IllegalAccessException e) {
-            e.printStackTrace();
+            fn.ouvrirMessageErreur(e.getMessage(),"Erreur : action interdite/impossible");
         }
     }
 
@@ -50,9 +49,9 @@ public class StateListener implements ActionListener {
             partie.setEtat(serv.consultGame(partie.getIdPartie()));
             System.out.println("Etat actuel de la partie : "+partie.getEtat().state());
         } catch (CnNetworkException ex) {
-            ex.printStackTrace();
+            fn.ouvrirMessageErreur(ex.getMessage(),"Erreur serveur");
         } catch (CnBadIdException ex) {
-            ex.printStackTrace();
+            fn.ouvrirMessageErreur(ex.getMessage(), "Erreur ID partie");
         }
 
         // On vérifie si l'état à changer, cela permet d'éviter d'appeler les modifications sur la fenêtre en boucle
@@ -80,7 +79,7 @@ public class StateListener implements ActionListener {
                         fn.majListIndice();
                     }
                 } catch (IllegalAccessException ex) {
-                    ex.printStackTrace();
+                    fn.ouvrirMessageErreur(ex.getMessage(),"Erreur : action interdite/impossible");
                 }
             }
             if (partie.getEtat().state().equals(STATE_STEP.ANSWER_SENT)) {

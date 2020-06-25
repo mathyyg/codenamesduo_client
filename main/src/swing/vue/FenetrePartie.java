@@ -251,7 +251,7 @@ public class FenetrePartie extends JFrame {
                 carteList.add(new Carte(c));
             plateau.updatePlateau(carteList);
         } catch (IllegalAccessException e) {
-            e.printStackTrace();
+            ouvrirMessageErreur(e.getMessage(),"Erreur : action interdite/impossible");
         }
     }
     public void majListIndice() {
@@ -262,11 +262,11 @@ public class FenetrePartie extends JFrame {
             ListIndice.add(i);
             JListIndice.setListData(ListIndice);
         } catch (IllegalAccessException e) {
-            e.printStackTrace();
+            ouvrirMessageErreur(e.getMessage(),"Erreur : action interdite/impossible");
         } catch (CnNetworkException e) {
-            e.printStackTrace();
+            ouvrirMessageErreur(e.getMessage(),"Erreur serveur");
         } catch (CnBadIdException e) {
-            e.printStackTrace();
+            ouvrirMessageErreur(e.getMessage(), "Erreur ID partie");
         }
     }
     public void modeDeJeuTab(int i ) {
