@@ -20,6 +20,7 @@ public class StateListener implements ActionListener {
     int i;
     private String j1; // Correspond toujours à nous
     private String j2; // Correspond toujours à notre adversaire
+    private int CarteTrouve;
 
     public StateListener(FenetrePartie lafn, Partie lapartie, CodeNamesClient leserv) {
         fn = lafn;
@@ -65,17 +66,11 @@ public class StateListener implements ActionListener {
                     if (partie.getEtat().clueSender().equals(partie.getJ().getPseudo())) {
                         i = 0;
                         fn.modeDeJeuTab(i);
-                        System.out.println(partie.getEtat().clueSender() + "==" + j1);
-                        System.out.println("vous avez envoyé un indice, ce n'est plus votre tour\nOn attend sa réponse");
-
                         fn.updateConsole("Indice envoyé, veuillez attendre la réponse de \nvotre coéquipier");
                         //On vient d'envoyer l'indice, ce n'est plus notre tour.
                     } else {
                         i = 1;
                         fn.modeDeJeuTab(i);
-                        System.out.println(partie.getEtat().clueSender() + "=/=" + j1);
-                        System.out.println("Le joueur adverse a envoyé un indice, c'est à notre tour.\nIl faut choisir une réponse");
-
                         fn.updateConsole("L'indice est " + partie.getEtat().currentClue() + " pour "+
                                 partie.getEtat().currentClueNumber() + " mots");
                         fn.updateConsole("Choisissez une ou des réponses");

@@ -30,21 +30,21 @@ public class TestPartie {
 
     @Test
     public void testUpdatePlateau() {
-        List<Card> Answer = new ArrayList<>();
-        Card c1,c2,c3;
-        Answer.add(c1 = new Card("THÉ", CARD_ROLE.KILLER));
-        Answer.add(c2 = new Card("PUCE", CARD_ROLE.NEUTRAL));
-        Answer.add(c3 = new Card("SAHARA", CARD_ROLE.NEUTRAL));
+        List<Carte> Answer = new ArrayList<>();
+        Carte c1,c2,c3;
+        Answer.add(c1 = new Carte("THÉ", TYPE_CARTE.ASSASSIN));
+        Answer.add(c2 = new Carte("PUCE", TYPE_CARTE.NEUTRAL));
+        Answer.add(c3 = new Carte("SAHARA", TYPE_CARTE.NEUTRAL));
 
         partieTest.plateauMAJ(Answer);
-        List<Card> l = partieTest.getPlateau();
+        List<Carte> l = partieTest.getPlateau();
 
-        assertEquals(c1.word(), l.get(0).word());
-        assertEquals(c1.cardRole(), l.get(0).cardRole());
-        assertEquals(c1.word(), l.get(1).word());
-        assertEquals(c1.cardRole(), l.get(1).cardRole());
-        assertEquals(c1.word(), l.get(2).word());
-        assertEquals(c1.cardRole(), l.get(2).cardRole());
+        assertEquals(c1.getMot(), l.get(0).getMot());
+        assertEquals(c1.getType(), l.get(0).getType());
+        assertEquals(c2.getMot(), l.get(1).getMot());
+        assertEquals(c2.getType(), l.get(1).getType());
+        assertEquals(c3.getMot(), l.get(2).getMot());
+        assertEquals(c3.getType(), l.get(2).getType());
     }
 
 

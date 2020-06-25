@@ -17,7 +17,7 @@ public class Partie {
     private Joueur j;
     private List<String> words;
     private List<CARD_ROLE> keyCard;
-    private List<Card> plateau;
+    private List<Carte> plateau;
 
 
     public Partie(CodeNamesClient leserv, int lenbTour, Joueur lej, int lidPartie) {
@@ -32,7 +32,7 @@ public class Partie {
 
             plateau = new ArrayList<>();
             for (String word : words) {
-                plateau.add(new Card(word, null));
+                plateau.add(new Carte(word, TYPE_CARTE.PAS_TROUVE));
             }
 
         } catch (CnNetworkException e) {
@@ -65,13 +65,15 @@ public class Partie {
     public Joueur getJ() {
         return j;
     }
-    public List<Card> getPlateau() { return plateau;}
+    public List<Carte> getPlateau() { return plateau;}
 
-    public void plateauMAJ(List<Card> CardList) {
-        for (Card cPlat : plateau)
-            for (Card cCardList : CardList)
-                if (cPlat.word().equals(cCardList.word())) {
-                    cPlat = cCardList;
-                }
+
+    public void plateauMAJ(List<Carte> CardList) {
+        for (Carte cPlat : plateau)
+            for (Carte cCardList : CardList)
+                if (cPlat.getMot().equals(cCardList.getMot()))
+                    cPlat.setType(cCardList.getType());
+
+
     }
 }

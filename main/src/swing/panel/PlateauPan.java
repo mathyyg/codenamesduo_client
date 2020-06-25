@@ -7,6 +7,8 @@ import java.util.Iterator;
 import java.util.List;
 import codenames.cards.*;
 
+import code.*;
+
 public class PlateauPan extends JPanel {
     private List<JButton> listBut;
 
@@ -78,13 +80,13 @@ public class PlateauPan extends JPanel {
             butCourant.setText(wordCourant);
         }
     }
-    public void updatePlateau(List<Card> cList){
+    public void updatePlateau(List<Carte> cList){
         for (JButton b : listBut){
-            for (Card c : cList){
-                if (b.getText().equals(c.word())){
-                    if (c.cardRole().equals(CARD_ROLE.CODE))
+            for (Carte c : cList){
+                if (b.getText().equals(c.getMot())){
+                    if (c.getType().equals(TYPE_CARTE.CODE))
                         b.setBackground(Color.GREEN);
-                    if (c.cardRole().equals(CARD_ROLE.NEUTRAL))
+                    if (c.getType().equals(TYPE_CARTE.NEUTRAL))
                         b.setBackground(Color.GRAY);
                     b.setOpaque(true);
                 }

@@ -15,6 +15,8 @@ import swing.controleur.*;
 import swing.timerControleur.*;
 import code.*;
 import codenames.cards.CARD_ROLE;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
@@ -219,7 +221,7 @@ public class FenetrePartie extends JFrame {
 
 
 
-    public void updatePlateau(List<Card> cList) {
+    public void updatePlateau(List<Carte> cList) {
         partie.plateauMAJ(cList);
         plateau.updatePlateau(cList);
     }
@@ -227,7 +229,11 @@ public class FenetrePartie extends JFrame {
     public void majPreviousAnswer() {
         try {
             System.out.println(partie.getEtat().previousAnswer());
-            plateau.updatePlateau(partie.getEtat().previousAnswer());
+            List<Card> cardList = partie.getEtat().previousAnswer();
+            List<Carte> carteList = new ArrayList<>();
+            for (Card c : cardList)
+                carteList.add(new Carte(c));
+            plateau.updatePlateau(carteList);
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
