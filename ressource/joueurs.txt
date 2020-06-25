@@ -3,3 +3,6 @@ AAAA,p100447,4,0
 joueurTest,p234058,0,0
 AAAA,p258148,5,0
 BBBB,p342919,0,0
+mathys,p454798,0,1
+mathys,p512234,0,0
+mathys,p2070,0,0
