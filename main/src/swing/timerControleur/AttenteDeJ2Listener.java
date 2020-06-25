@@ -34,9 +34,9 @@ public class AttenteDeJ2Listener implements ActionListener {
                     fn.updateConsole("En attente d'un autre joueur.");
             }
         } catch (CnNetworkException ex) {
-            ex.printStackTrace();
+            fn.ouvrirMessageErreur(ex.getMessage(),"Erreur serveur");
         } catch (CnBadIdException ex) {
-            ex.printStackTrace();
+            fn.ouvrirMessageErreur(ex.getMessage(), "Erreur ID partie");
         }
 
     }
