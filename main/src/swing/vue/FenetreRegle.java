@@ -71,7 +71,7 @@ public class FenetreRegle extends JFrame {
             reglePan.add(lab14);
             reglePan.add(lab15);
             reglePan.add(lab16);
-        } catch (IOException e) { e.printStackTrace(); }
+        } catch (IOException e) { ouvrirMessageErreur("Problème d'entrée/sortie: mauvais fichier?","Erreur entrée/sortie"); }
 
         JScrollPane scroll = new JScrollPane(reglePan, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
@@ -104,5 +104,11 @@ public class FenetreRegle extends JFrame {
 
     public void fermer() {
         dispose();
+    }
+    public void ouvrirMessageErreur(String msg, String titre) {
+        JOptionPane.showMessageDialog(this,
+                msg,
+                titre,
+                JOptionPane.ERROR_MESSAGE);
     }
 }

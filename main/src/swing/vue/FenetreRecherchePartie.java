@@ -48,8 +48,8 @@ public class FenetreRecherchePartie extends JFrame {
         try {
             parties = new Vector<>(serv.waitingGames());
         } catch (CnNetworkException e) {
-            System.out.println("erreur de chargement de la liste des parties en attente.");
-            e.printStackTrace();
+            ouvrirMessageErreur("Erreur de connexion au réseau:\n" +
+                    "Erreur de récupération des parties en attente","Erreur serveur");
         }
         DefaultListModel model = new DefaultListModel();
         model.addAll(parties);
@@ -153,8 +153,8 @@ public class FenetreRecherchePartie extends JFrame {
             parties = new Vector<>(serv.waitingGames());
             partiesAttente.setListData(parties);
         } catch (CnNetworkException e) {
-            System.out.println("erreur de chargement de la liste des parties en attente.");
-            e.printStackTrace();
+            ouvrirMessageErreur("Erreur de connexion au réseau:\n" +
+                    "Erreur de récupération des parties en attente","Erreur serveur");
         }
     }
 

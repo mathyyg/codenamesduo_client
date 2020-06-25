@@ -60,7 +60,7 @@ public class FenetreProfil extends JFrame{
             img = ImageIO.read(new File("ressource"+File.separator+"info4-min.png"));
             imgSized = img.getScaledInstance(100, 100, Image.SCALE_DEFAULT);
 
-        } catch (IOException e) { e.printStackTrace(); }
+        } catch (IOException e) { ouvrirMessageErreur("Problème d'entrée/sortie: mauvais fichier?","Erreur entrée/sortie");  }
         JLabel avatar = new JLabel(new ImageIcon(imgSized));
 
         info.add(avatar,BorderLayout.WEST);
@@ -102,5 +102,11 @@ public class FenetreProfil extends JFrame{
     }
     public void fermer() {
         dispose();
+    }
+    public void ouvrirMessageErreur(String msg, String titre) {
+        JOptionPane.showMessageDialog(this,
+                msg,
+                titre,
+                JOptionPane.ERROR_MESSAGE);
     }
 }
