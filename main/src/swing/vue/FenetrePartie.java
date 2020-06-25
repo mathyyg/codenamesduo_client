@@ -297,7 +297,7 @@ public class FenetrePartie extends JFrame {
         if (i == -1){
             try {
                 if (serv.abortGame(partie.getIdPartie(), joueur, joueur.getMdp()))
-                    System.out.println("la partie a bien été abandonné");
+                    System.out.println("la partie a bien été abandonnée");
             } catch (CnNetworkException e) {
                 this.ouvrirMessageErreur("Le serveur semble être inaccessible","Erreur abortGame");
             } catch (CnBadIdException e) {
@@ -324,11 +324,6 @@ public class FenetrePartie extends JFrame {
                     "Pas de chance vous avez perdu...",
                     "",
                     JOptionPane.INFORMATION_MESSAGE);
-        }
-        try {
-            Thread.sleep(10000);
-        } catch (InterruptedException e) {
-            System.err.println("Intéruption du sleep() (erreur non compromettante)");
         }
         FenetreRecherchePartie nouveau = new FenetreRecherchePartie("Menu",joueur,serv);
         nouveau.setVisible(true);
