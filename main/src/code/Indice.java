@@ -66,10 +66,11 @@ public class Indice {
 
         List<String> mots = p.getWords();             // Si l'indice proposé comporte un mot du plateau
         for (String m : mots) {
-            if (indice.equals(m)) {
-                valid = false;
+            if (indice.toLowerCase().equals(m.toLowerCase())) {
+                return false;
             }
         }
+        System.out.println("Utilise pattern");
         Pattern patternMin = Pattern.compile("^[a-zÀ-ÿ]*-?[a-zÀ-ÿ]*$");
         Pattern patternMaj = Pattern.compile("^[A-ZÀ-ÿ]*-?[A-ZÀ-ÿ]*$");
 
