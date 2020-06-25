@@ -34,6 +34,7 @@ public class controleurSendAnswer implements ActionListener {
             List<Carte> cList = new ArrayList<>();
             for (Card c : cards)
                 cList.add(new Carte(c));
+            System.out.println(cList);
             fn.updatePlateau(cList);
         } catch (CnNetworkException ex) {
             fn.ouvrirMessageErreur("Le serveur semble être inaccessible","Erreur d'envoie de réponse");

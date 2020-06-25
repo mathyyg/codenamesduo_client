@@ -238,9 +238,15 @@ public class Joueur implements iPlayer {
      * @return float qui correspond au pourcentage de partie gagné du joueur
      */
     public float getWinrate() {
-        if (partieWin == 0 || partieLoos == 0)
+        if (partieWin == 0 && partieLoos == 0)
             return 0;
-        return partieWin/partieLoos;
+        if (partieWin == 0)
+            return 0;
+        if (partieLoos == 0)
+            return 1;
+        System.out.println(partieLoos + " " +partieWin);
+
+        return (float) partieWin/(partieWin+partieLoos);
     }
 
     /**
@@ -252,4 +258,5 @@ public class Joueur implements iPlayer {
         int rank=0;
         return rank;
     }
+
 }
