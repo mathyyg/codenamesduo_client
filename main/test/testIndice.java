@@ -70,6 +70,36 @@ public class testIndice {
         assertEquals(false, indiceTest.estValide(p));
     }
 
+    @Test
+    public void estValide6() {
+        indiceTest = new Indice("plusieurs mots",3);
+        assertEquals(false, indiceTest.estValide(p));
+    }
+
+    @Test
+    public void estValide7() {
+        indiceTest = new Indice("mot-composé",3);
+        assertEquals(true, indiceTest.estValide(p));
+    }
+
+    @Test
+    public void estValide8() {
+        indiceTest = new Indice("mot-trop-composé",3);
+        assertEquals(false, indiceTest.estValide(p));
+    }
+
+    @Test
+    public void estValide9() {
+        indiceTest = new Indice("mot--------composé",3);
+        assertEquals(false, indiceTest.estValide(p));
+    }
+
+    @Test
+    public void estValide10() {
+        indiceTest = new Indice("",3);
+        assertEquals(false, indiceTest.estValide(p));
+    }
+
 
 }
 

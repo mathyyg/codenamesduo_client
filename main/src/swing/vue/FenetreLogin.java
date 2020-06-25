@@ -101,18 +101,43 @@ public class FenetreLogin extends JFrame {
         setPreferredSize(new Dimension(520,250));
     }
 
+    /**
+     * Méthode second qui permet de passer à la fenêtre suivante (Fenetre Menu) et de fermer cette fenêtre
+     */
     public void second() {
         FenetreRecherchePartie next = new FenetreRecherchePartie("Menu", getJoueur(), serv);
         next.setVisible(true);
         this.dispose();
     }
+
+    /**
+     * Retourne le pseudo entré dans le JTextField du Login
+     * @return pseudo (String)
+     */
     public String getPseudoLog() { return pseudoLog.getText(); }
+
+    /**
+     * Retourne le mot de passe entré dans le JTextField du Login
+     * @return mot de passe (String)
+     */
     public String getmdpLog() { return mdpLog.getText(); }
+
+
+    /**
+     * Retourne le pseudo entré dans le JTextField du Register
+     * @return pseudo (String)
+     */
     public String getPseudoReg() { return pseudoReg.getText(); }
 
     public void setJoueur(Joueur j) { joueur = j; }
     public Joueur getJoueur() { return joueur; }
 
+
+    /**
+     * Méthode qui ouvre une boîte de dialogue pour signaler une erreur
+     * @param msg message d'erreur
+     * @param titre titre de la boîte de dialogue
+     */
     public void ouvrirMessageErreur(String msg, String titre) {
         JOptionPane.showMessageDialog(this,
                 msg,
