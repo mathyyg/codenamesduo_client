@@ -27,7 +27,7 @@ public class Indice {
             return false;
         }
 
-        List<String> mots = p.getPlateau();             // Si l'indice proposé comporte un mot du plateau
+        List<String> mots = p.getWords();             // Si l'indice proposé comporte un mot du plateau
         for (String m : mots) {
             if (indice.equals(m)) {
                 valid = false;

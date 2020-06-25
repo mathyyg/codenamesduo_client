@@ -210,7 +210,7 @@ public class FenetrePartie extends JFrame {
 
 
     public void initGame() {
-        plateau.init(partie.getPlateau());
+        plateau.init(partie.getWords());
         keyCardPan.init(partie.getKeyCard());
     }
 
@@ -219,6 +219,7 @@ public class FenetrePartie extends JFrame {
 
 
     public void updatePlateau(List<Card> cList) {
+        partie.plateauMAJ(cList);
         plateau.updatePlateau(cList);
     }
 
