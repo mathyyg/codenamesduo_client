@@ -6,10 +6,12 @@ import javax.swing.*;
 import java.awt.*;
 
 import codenames.cards.Card;
+import codenames.states.*;
 import codenames.exceptions.CnBadIdException;
 import codenames.exceptions.CnNetworkException;
 import swing.panel.KeyCardPan;
 import swing.panel.PlateauPan;
+import swing.controleur.*;
 import swing.timerControleur.*;
 import code.*;
 import codenames.cards.CARD_ROLE;
@@ -161,7 +163,6 @@ public class FenetrePartie extends JFrame {
 
 
         // timer
-        /*
         timerAttenteJ2 = new Timer(5000, new AttenteDeJ2Listener(this, partie, serv));
         if (partie.getEtat().state().equals(STATE_STEP.GAME_INIT))
             timerAttenteJ2.start();
@@ -177,7 +178,7 @@ public class FenetrePartie extends JFrame {
         sendIndice.addActionListener(new controleurSendClue(this, serv, partie));
         sendReponse.addActionListener(new controleurSendAnswer(this, serv, partie));
 
-        */
+
         // vue
         this.pack();
 

@@ -82,11 +82,7 @@ public class FenetreProfil extends JFrame{
         winrate.add(pLoos = new JLabel("Partie perdue : " +joueur.getPLoos()));
         winrate.add(pourcentageWin = new JLabel("Winrate : " +joueur.getWinrate()));
 
-
-
         stats.add(winrate);
-
-
 
         JPanel classement = new JPanel();
         classement.setLayout(new BoxLayout(classement, BoxLayout.Y_AXIS));
@@ -97,17 +93,14 @@ public class FenetreProfil extends JFrame{
         stats.add(classement);
         main.add(stats);
 
+        //vue
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-        int x = (int) ((dimension.getWidth() - this.getWidth()) /2 - 250);
-        int y = (int) ((dimension.getHeight() - this.getHeight()) / 2 - 150);
+        int x = (int) ((dimension.getWidth() - this.getWidth()) /2 +300);
+        int y = (int) ((dimension.getHeight() - this.getHeight()) / 2 +150);
         this.setLocation(x, y);
 
-
-        
     }
-
-
-    
-
-    
+    public void fermer() {
+        dispose();
+    }
 }

@@ -1,7 +1,4 @@
-Paul,p370493,0,0
-Paul,p436572,0,0
-Paul,p533768,0,0
-qsdda,p783068,0,0
-Thomas,p783210,0,0
-pLp,p831597,0,0
-Thomas,p894504,0,0
+Paul,e,0,0
+AAAA,p100447,4,0
+joueurTest,p234058,0,0
+AAAA,p258148,5,0

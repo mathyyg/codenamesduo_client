@@ -27,9 +27,7 @@ public class Partie {
         idPartie = lidPartie;
         try {
             etat = serveur.consultGame(idPartie);
-            System.out.println(etat.state());
             words = etat.words();
-            System.out.println(words);
             keyCard = serveur.keyCards(idPartie,j,j.getMdp());
 
             plateau = new ArrayList<>();

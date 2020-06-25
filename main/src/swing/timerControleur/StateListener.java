@@ -59,7 +59,8 @@ public class StateListener implements ActionListener {
             EtatActuel = partie.getEtat();
 
             if (partie.getEtat().state().equals(STATE_STEP.CLUE_SENT)) {
-                fn.updateConsole("Tour restant : " + partie.getEtat().finishedTurns());
+                int tour = partie.getNbTour() - partie.getEtat().finishedTurns();
+                fn.updateConsole("Tour restant : " + String.valueOf(tour));
                 try {
                     if (partie.getEtat().clueSender().equals(partie.getJ().getPseudo())) {
                         i = 0;
@@ -67,7 +68,7 @@ public class StateListener implements ActionListener {
                         System.out.println(partie.getEtat().clueSender() + "==" + j1);
                         System.out.println("vous avez envoyé un indice, ce n'est plus votre tour\nOn attend sa réponse");
 
-                        fn.updateConsole("Indice envoyé, veuillez attendre la réponse de votre coéquipier");
+                        fn.updateConsole("Indice envoyé, veuillez attendre la réponse de \nvotre coéquipier");
                         //On vient d'envoyer l'indice, ce n'est plus notre tour.
                     } else {
                         i = 1;
@@ -75,7 +76,7 @@ public class StateListener implements ActionListener {
                         System.out.println(partie.getEtat().clueSender() + "=/=" + j1);
                         System.out.println("Le joueur adverse a envoyé un indice, c'est à notre tour.\nIl faut choisir une réponse");
 
-                        fn.updateConsole("L'indice est " + partie.getEtat().currentClue() + "pour "+
+                        fn.updateConsole("L'indice est " + partie.getEtat().currentClue() + " pour "+
                                 partie.getEtat().currentClueNumber() + " mots");
                         fn.updateConsole("Choisissez une ou des réponses");
                         //met à jour le plateau avec les previousAnswer.
