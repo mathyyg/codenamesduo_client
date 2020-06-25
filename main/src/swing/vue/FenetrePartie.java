@@ -37,10 +37,7 @@ public class FenetrePartie extends JFrame {
     private JLabel mdp;
     private JLabel pWin;
     private JLabel pLoos;
-    private JPanel BureauDesLegendes ;
 
-    private JButton keycardBut;
-    private JList<CARD_ROLE> keycardsList;
     private JList<Indice> JListIndice;
 
     private JButton sendIndice;
@@ -70,8 +67,6 @@ public class FenetrePartie extends JFrame {
         BureauDesLegendes.setLayout(new GridLayout(1,1));
         BureauDesLegendes.setBorder(BorderFactory.createLineBorder(Color.black));
         BureauDesLegendes.setBackground(new Color((255),(255),(255)));
-
-
 
         plateau = new PlateauPan();
         plateau.setBorder(BorderFactory
@@ -113,7 +108,6 @@ public class FenetrePartie extends JFrame {
         hautCenterPan.add(profetquit);
 
         indiceRepTabPan = new JTabbedPane();
-
 
         JPanel indicePan = new JPanel();
         JPanel pan1 = new JPanel();

@@ -70,11 +70,11 @@ public class FenetreRecherchePartie extends JFrame {
         profil.setLayout(new BoxLayout(profil, BoxLayout.Y_AXIS));
         profil.setBorder(BorderFactory
                 .createTitledBorder("Profil"));
-        profil.add(pseudo = new JLabel(joueur.getPseudo()));
-        profil.add(mdp =new JLabel(joueur.getMdp()));
-        profil.add(pWin = new JLabel("Partie gagné : " +joueur.getPWin()));
-        profil.add(pLoos = new JLabel("Partie perdue : " +joueur.getPLoos()));
-        profil.add(new JLabel("Classement interne : " + joueur.getClassement()));
+        profil.add(pseudo = new JLabel("Pseudo : "+joueur.getPseudo()));
+        profil.add(mdp =new JLabel("Mdp : "+joueur.getMdp()));
+        profil.add(pWin = new JLabel("Parties gagnées : " +joueur.getPWin()));
+        profil.add(pLoos = new JLabel("Parties perdues : " +joueur.getPLoos()));
+        profil.add(new JLabel("Classement local : " + joueur.getClassement()));
         profil.add(new JLabel("Classement serveur : " + JoueurOnline.getClassementOnline(new JoueurOnline(joueur), serv)));
 
         JPanel creerPan = new JPanel();
@@ -152,7 +152,7 @@ public class FenetreRecherchePartie extends JFrame {
     }
 
     public void second(Partie partie) {
-        FenetrePartie next = new FenetrePartie("Bureau des légendes", getJoueur(), serv, partie);
+        FenetrePartie next = new FenetrePartie("Bureau des légendes "+"(id: "+partie.getIdPartie()+")", getJoueur(), serv, partie);
         next.setVisible(true);
         this.dispose();
     }
@@ -166,6 +166,4 @@ public class FenetreRecherchePartie extends JFrame {
                     "Erreur de récupération des parties en attente","Erreur serveur");
         }
     }
-
-
 }

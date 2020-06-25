@@ -2,3 +2,8 @@ BBBB,p396614,1,0
 BBBB,p47446,0,0
 BBBB,p50194,0,0
 JTEST,p77231,0,0
+mathys,p40213,0,0
+mathys2,p49443,0,0
+kaaris,p61536,0,1
+booba,p68107,0,0
+lacrim,p68234,0,0
