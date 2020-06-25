@@ -34,16 +34,17 @@ public class controleurRegister implements ActionListener {
                 return;
             }
         } catch (CnNetworkException ex) {
-            ex.printStackTrace();
+            pan.ouvrirMessageErreur(ex.getMessage(),"Erreur serveur");
         }
 
         try {
             j.setMdp(serv.addPlayer(j));
             j.enregistrement();
         } catch (CnNetworkException ex) {
-            ex.printStackTrace();
+            pan.ouvrirMessageErreur(ex.getMessage(),"Erreur serveur");
         } catch (CnBadLoginException ex) {
-            ex.printStackTrace();
+            pan.ouvrirMessageErreur("Il n'existe pas de login ayant ce nom sur le serveur\n" +
+                    "OU erreur de login autre","Erreur login");
         }
         System.out.println("Création du nouveau joueur et authentification réussite");
         pan.setJoueur(j);
