@@ -1,6 +1,6 @@
 /**
  * @author Les Infopotes
- * @version 3.1.1
+ * @version 4
  */
 package swing.vue;
 

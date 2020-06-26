@@ -1,4 +1,7 @@
-
+/**
+ * @author Les Infopotes
+ * @version 4
+ */
 import static org.junit.jupiter.api.Assertions.*;
 
 import modele.Indice;

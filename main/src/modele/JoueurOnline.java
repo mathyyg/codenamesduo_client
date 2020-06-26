@@ -1,3 +1,7 @@
+/**
+ * @author Les Infopotes
+ * @version 4
+ */
 package modele;
 
 import codenames.CodeNamesClient;

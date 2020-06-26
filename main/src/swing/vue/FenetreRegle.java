@@ -1,3 +1,7 @@
+/**
+ * @author Les Infopotes
+ * @version 4
+ */
 package swing.vue;
 
 import javax.imageio.ImageIO;

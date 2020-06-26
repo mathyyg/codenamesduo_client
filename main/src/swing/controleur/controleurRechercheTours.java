@@ -1,6 +1,9 @@
+/**
+ * @author Les Infopotes
+ * @version 4
+ */
 package swing.controleur;
 
-import codenames.CodeNamesClient;
 import swing.vue.FenetreRecherchePartie;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
