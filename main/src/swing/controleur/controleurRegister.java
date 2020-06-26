@@ -61,6 +61,6 @@ public class controleurRegister implements ActionListener {
         }
         pan.setJoueur(j);
         pan.setLabelMdp(j.getMdp());
-        pan.setPseudoLog(j.getPseudo());
+        pan.preremplir(j.getPseudo(),j.getMdp());
     }
 }

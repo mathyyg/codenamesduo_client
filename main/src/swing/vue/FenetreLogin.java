@@ -27,6 +27,7 @@ public class FenetreLogin extends JFrame {
     private JTextField pseudoReg;
     private JTextField mdpLog;
     private JTextField pseudoLog;
+    JTabbedPane choix;
     private JLabel mdp;
 
     private JButton logBut;
@@ -43,7 +44,7 @@ public class FenetreLogin extends JFrame {
         JPanel identif = new JPanel();
         identif.setBorder(BorderFactory
                 .createTitledBorder("Identification"));
-        JTabbedPane choix = new JTabbedPane();
+        choix = new JTabbedPane();
 
         JPanel login = new JPanel();
         login.setLayout(new BoxLayout(login, BoxLayout.Y_AXIS));
@@ -101,8 +102,9 @@ public class FenetreLogin extends JFrame {
         credits.add(labelMadeby);
         identif.add(credits);
 
-        Color[] colorTable = new Color[]{Color.red, Color.ORANGE, Color.YELLOW, Color.GREEN, Color.blue, Color.MAGENTA, Color.black};
-        labelColor = new Timer(300,e -> setMadeBy(colorTable[ThreadLocalRandom.current().nextInt(0,7)]));
+        Color[] colorTable = new Color[]{Color.red, Color.ORANGE, Color.YELLOW, Color.GREEN, Color.blue, Color.MAGENTA, Color.black,
+        Color.gray,Color.darkGray,Color.pink,Color.cyan};
+        labelColor = new Timer(200,e -> setMadeBy(colorTable[ThreadLocalRandom.current().nextInt(0,10)]));
         labelColor.start();
         this.add(identif);
 
@@ -184,4 +186,10 @@ public class FenetreLogin extends JFrame {
      * @param color
      */
     public void setMadeBy(Color color) { labelMadeby.setForeground(color); labelColor.start();}
+
+    public void preremplir(String login, String mdp) {
+        choix.setSelectedIndex(0);
+        pseudoLog.setText(login);
+        mdpLog.setText(mdp);
+    }
 }
