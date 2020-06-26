@@ -1,14 +1,14 @@
-/**
- * @author Les Infopotes
- * @version 4
- */
-
-
 package modele;
 
 import java.util.List;
 import java.util.regex.Pattern;
 
+/**
+ * Classe Indice qui représente l'indice envoyé pendant une partie
+ *
+ * @author Paul Vernin, Thomas Peray, Matéo Esteves, Mathys Gagner
+ * @version 4.6
+ */
 public class Indice {
     private String indice;
     private int nbMotPourIndice;
@@ -17,8 +17,8 @@ public class Indice {
     /**
      * Constructeur de la classe Indice
      * Prend en parametre un String et un Int qui compose l'indice à envoyer à l'autre joueur ( un mot et un chiffre)
-     * @param s 
-     * @param nb
+     * @param s l'indice
+     * @param nb le nombre de mot à trouver avec l'indice
      * @since 1.0
      */
     public Indice(String s, int nb){
@@ -57,8 +57,6 @@ public class Indice {
      * @return un boolean qui représente la validité ou non de l'indice
      */
     public boolean estValide(Partie p) {
-        if (this == null)
-            return false;
 
         List<String> mots = p.getWords();
         for (String m : mots)
@@ -68,9 +66,7 @@ public class Indice {
         Pattern patternMin = Pattern.compile("^[a-zÀ-ÿ]*-?[a-zÀ-ÿ]*$");
         Pattern patternMaj = Pattern.compile("^[A-ZÀ-ÿ]*-?[A-ZÀ-ÿ]*$");
 
-        if (!patternMin.matcher(this.indice).matches() && !patternMaj.matcher(this.indice).matches())
-            return false;
-        return true;
+        return patternMin.matcher(this.indice).matches() || patternMaj.matcher(this.indice).matches();
     }
 
     /**

@@ -1,7 +1,3 @@
-/**
- * @author Les Infopotes
- * @version 4
- */
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
@@ -13,16 +9,17 @@ import org.junit.jupiter.api.Test;
 
 import modele.*;
 
+/**
+ * Classe de test de la classe Partie
+ */
 public class TestPartie {
 
     private Partie partieTest;
-    private CodeNamesClient serv;
-    private Joueur j;
 
     @BeforeEach
     void setUp() throws Exception {
-        serv = new CodeNamesClient("http://51.178.49.138:3000/api/v0", true);
-        j = new Joueur("joueurTest", "p234058");
+        CodeNamesClient serv = new CodeNamesClient("http://51.178.49.138:3000/api/v0", true);
+        Joueur j = new Joueur("joueurTest", "p234058");
         partieTest = new Partie(serv, 9, j, serv.createGame(j));
     }
 

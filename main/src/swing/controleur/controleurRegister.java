@@ -1,7 +1,3 @@
-/**
- * @author Les Infopotes
- * @version 4
- */
 package swing.controleur;
 
 import codenames.CodeNamesClient;
@@ -13,54 +9,60 @@ import swing.vue.FenetreLogin;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Contrôleur qui permet de créer un compte
+ *
+ * @author Paul Vernin, Thomas Peray, Matéo Esteves, Mathys Gagner
+ * @version 4.6
+ */
 public class controleurRegister implements ActionListener {
-    private FenetreLogin pan;
+    private FenetreLogin fn;
     private CodeNamesClient serv;
 
     /**
-     * Constructeur du contrôleur pour enregistrer un nouveau login
-     * @param pan
-     * @param leserv
+     * Constructeur du contrôleur Register
+     * @param lafn la fenêtre Login
+     * @param leserv le serveur
      */
-    public controleurRegister(FenetreLogin pan, CodeNamesClient leserv) {
-        this.pan = pan;
-        this.serv = leserv;
+    public controleurRegister(FenetreLogin lafn, CodeNamesClient leserv) {
+        fn = lafn;
+        serv = leserv;
     }
 
     /**
      * Vérifie si le nouveau login n'est pas déjà enregistré: enregistre le login, renvoie le mdp généré;
      * affiche une erreur sinon
-     * @param e
+     * @param e ActionEvent
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        Joueur j = new Joueur(pan.getPseudoReg());
+        Joueur j = new Joueur(fn.getPseudoReg());
 
-        if (pan.getPseudoReg().isBlank())
-            pan.ouvrirMessageErreur("zone de texte vide", "Erreur d'input");
+        if (fn.getPseudoReg().isBlank())
+            fn.ouvrirMessageErreur("zone de texte vide", "Erreur d'input");
 
 
         try {
-            if (serv.isRegisteredPlayer(pan.getPseudoReg())){
-                pan.ouvrirMessageErreur("Il existe déjà un compte avec ce login.\n " +
+            if (serv.isRegisteredPlayer(fn.getPseudoReg())){
+                fn.ouvrirMessageErreur("Il existe déjà un compte avec ce login.\n " +
                         "Repartez sur l'onglet login pour vous connecter", "Erreur de register");
                 return;
             }
         } catch (CnNetworkException ex) {
-            pan.ouvrirMessageErreur(ex.getMessage(),"Erreur serveur");
+            fn.ouvrirMessageErreur(ex.getMessage(),"Erreur serveur");
         }
 
         try {
             j.setMdp(serv.addPlayer(j));
             j.enregistrement();
         } catch (CnNetworkException ex) {
-            pan.ouvrirMessageErreur(ex.getMessage(),"Erreur serveur");
+            fn.ouvrirMessageErreur(ex.getMessage(),"Erreur serveur");
         } catch (CnBadLoginException ex) {
-            pan.ouvrirMessageErreur("Il n'existe pas de login ayant ce nom sur le serveur\n" +
+            fn.ouvrirMessageErreur("Il n'existe pas de login ayant ce nom sur le serveur\n" +
                     "OU erreur de login autre","Erreur login");
         }
-        pan.setJoueur(j);
-        pan.setLabelMdp(j.getMdp());
-        pan.preremplir(j.getPseudo(),j.getMdp());
+        fn.setJoueur(j);
+        fn.setLabelMdp(j.getMdp());
+        fn.preremplir(j.getPseudo(),j.getMdp());
     }
 }

@@ -1,14 +1,12 @@
-/**
- * @author Les Infopotes
- * @version 4
- */
-
 package modele;
 
 import codenames.cards.*;
 
 /**
  * La classe Carte est un substitue de la classe Card proposé du serveur.
+ *
+ *  @author Paul Vernin, Thomas Peray, Matéo Esteves, Mathys Gagner
+ *  @version 4.6
  */
 public class Carte {
 

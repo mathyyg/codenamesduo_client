@@ -1,7 +1,3 @@
-/**
- * @author Les Infopotes
- * @version 4
- */
 package swing.panel;
 
 import javax.swing.*;
@@ -13,6 +9,12 @@ import java.util.List;
 
 import modele.*;
 
+/**
+ * Classe Plateau qui extend JPanel, elle représente le plateau de jeu dans la fenêtre partie
+ *
+ * @author Paul Vernin, Thomas Peray, Matéo Esteves, Mathys Gagner
+ * @version 4.6
+ */
 public class PlateauPan extends JPanel {
     private List<JToggleButton> listBut;
     private List<String> mots;

@@ -1,7 +1,3 @@
-/**
- * @author Les Infopotes
- * @version 4
- */
 package swing.panel;
 
 import codenames.cards.CARD_ROLE;
@@ -12,6 +8,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * Classe KeyCard qui extend JPanel, elle représente la KeyCard dans la fenêtre partie
+ *
+ * @author Paul Vernin, Thomas Peray, Matéo Esteves, Mathys Gagner
+ * @version 4.6
+ */
 public class KeyCardPan extends JPanel {
     private List<JButton> listBut;
 

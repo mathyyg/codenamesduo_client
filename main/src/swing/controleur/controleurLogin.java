@@ -1,7 +1,3 @@
-/**
- * @author Les Infopotes
- * @version 4
- */
 package swing.controleur;
 
 import codenames.CodeNamesClient;
@@ -12,6 +8,12 @@ import swing.vue.FenetreLogin;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Contrôleur qui permet de se login et d'accèder au Menu
+ *
+ * @author Paul Vernin, Thomas Peray, Matéo Esteves, Mathys Gagner
+ * @version 4.6
+ */
 public class controleurLogin implements ActionListener {
     private FenetreLogin pan;
     private CodeNamesClient serv;
@@ -28,7 +30,7 @@ public class controleurLogin implements ActionListener {
 
     /**
      * vérifie si le login est existant dans joueurs.txt et ouvre la fenêtre de recherche si oui
-     * @param e
+     * @param e ActionEvent (inutilisé)
      */
     @Override
     public void actionPerformed(ActionEvent e) {

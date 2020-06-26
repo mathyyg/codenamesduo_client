@@ -1,8 +1,3 @@
-/**
- * @author Les Infopotes
- * @version 4
- */
-
 package modele;
 
 import codenames.iPlayer;
@@ -11,6 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Classe Joueur qui implements iPlayer
+ *
+ * @author Paul Vernin, Thomas Peray, Matéo Esteves, Mathys Gagner
+ * @version 4.6
+ */
 public class Joueur implements iPlayer {
     private String pseudo;
     private String mdp;
@@ -21,7 +22,6 @@ public class Joueur implements iPlayer {
      * Constrcuteur n°1
      * Constructeur qui permet de saisir que le pseudo
      * @param lenom String qui correspond au pseudo
-     * @deprecated Utiliser le constructeur n°2
      */
     public Joueur(String lenom) {
         pseudo = lenom;
@@ -46,7 +46,6 @@ public class Joueur implements iPlayer {
      * @param lemdp String qui correspond au mot de passe
      * @param win Int qui correspond au nombre de partie Gagner par le joueur (s'il change de compte)
      * @param loos Int qui correspond au nombre de partie Perdu par le joueur (s'il change de compte)
-     * @deprecated Utiliser le constructeur n°2
      */
     public Joueur(String lenom, String lemdp, int win, int loos) {
         pseudo = lenom;
@@ -210,10 +209,10 @@ public class Joueur implements iPlayer {
 
     /**
      * Méthode qui renvoie la liste des joueurs enregistrés dans joueurs.txt
-     * @return
+     * @return la liste des joueurs enregistrés
      */
     public static List<Joueur> listEnregistrement() {
-        String line = null;
+        String line;
         List<Joueur> lesjoueurs = new ArrayList<>();
         try {
             FileReader fileReader = new FileReader("ressource"+File.separator+"joueurs.txt");
@@ -256,7 +255,7 @@ public class Joueur implements iPlayer {
     public String getClassement() {
         List<Joueur> list = Joueur.listEnregistrement();
         list.sort(new ComparateurWinrate());
-        return String.valueOf(list.indexOf(this)+1) +"/"+list.size();
+        return list.indexOf(this)+1 + "/" + list.size();
     }
 
 }

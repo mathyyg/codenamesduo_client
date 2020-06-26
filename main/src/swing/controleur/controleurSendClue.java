@@ -1,7 +1,3 @@
-/**
- * @author Les Infopotes
- * @version 4
- */
 package swing.controleur;
 
 import codenames.CodeNamesClient;
@@ -12,16 +8,22 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import modele.*;
 
+/**
+ * Contrôleur qui permet d'envoyer au serveur un indice et un nombre de mot correspondant
+ *
+ * @author Paul Vernin, Thomas Peray, Matéo Esteves, Mathys Gagner
+ * @version 4.6
+ */
 public class controleurSendClue implements ActionListener {
     private Partie partie;
     private FenetrePartie fn;
     private CodeNamesClient serv;
 
     /**
-     * Constructeur du contrôleur pour envoyer un indice
-     * @param lafn
-     * @param leserv
-     * @param lapartie
+     * Constructeur du contrôleur SendClue
+     * @param lafn la fenêtre partie
+     * @param leserv le serveur
+     * @param lapartie la partie en cours
      */
     public controleurSendClue(FenetrePartie lafn, CodeNamesClient leserv, Partie lapartie) {
         fn = lafn;
@@ -32,7 +34,7 @@ public class controleurSendClue implements ActionListener {
     /**
      * Envoie un indice s'il est valide
      * affiche des erreurs suivant l'exception sinon
-     * @param e
+     * @param e ActionEvent
      */
     @Override
     public void actionPerformed(ActionEvent e) {

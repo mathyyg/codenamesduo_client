@@ -1,20 +1,20 @@
-/**
- * @author Les Infopotes
- * @version 4
- */
-
 import modele.Joueur;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-
+/**
+ * Classe de test de la classe Joueur
+ *
+ * @author Paul Vernin, Thomas Peray, Matéo Esteves, Mathys Gagner
+ * @version 4.6
+ */
 public class testJoueur {
 
         Joueur joueurTest;
 
         @BeforeEach
-        void setUp() throws Exception {
+        void setUp() {
             joueurTest = new Joueur("Test");
         }
 

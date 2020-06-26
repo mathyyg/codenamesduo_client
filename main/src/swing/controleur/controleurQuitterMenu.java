@@ -1,7 +1,3 @@
-/**
- * @author Les Infopotes
- * @version 4
- */
 package swing.controleur;
 
 import swing.vue.FenetreMenu;
@@ -9,20 +5,23 @@ import swing.vue.FenetreMenu;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class controleurQuitterRecherche implements ActionListener {
+/**
+ * Contrôleur qui permet de quitter l'application
+ */
+public class controleurQuitterMenu implements ActionListener {
     private FenetreMenu fn;
 
     /**
-     * constructeur du contrôleur pour quitter la partie
-     * @param lafn
+     * constructeur du contrôleur QuitterMenu
+     * @param lafn la fenêtre du menu
      */
-    public controleurQuitterRecherche(FenetreMenu lafn) {
+    public controleurQuitterMenu(FenetreMenu lafn) {
         fn = lafn;
     }
 
     /**
      * ferme la fenêtre associée
-     * @param e
+     * @param e actioevent
      */
     @Override
     public void actionPerformed(ActionEvent e) {

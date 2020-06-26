@@ -1,7 +1,3 @@
-/**
- * @author Les Infopotes
- * @version 4
- */
 package swing.vue;
 
 import codenames.CodeNamesClient;
@@ -18,6 +14,9 @@ import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Classe de la fenêtre de login
+ *
+ * @author Paul Vernin, Thomas Peray, Matéo Esteves, Mathys Gagner
+ * @version 4.6
  */
 public class FenetreLogin extends JFrame {
 
@@ -30,8 +29,6 @@ public class FenetreLogin extends JFrame {
     JTabbedPane choix;
     private JLabel mdp;
 
-    private JButton logBut;
-    private JButton regBut;
     private JLabel labelMadeby;
     private Timer labelColor;
 
@@ -57,6 +54,7 @@ public class FenetreLogin extends JFrame {
         login.add(log2);
         login.add(mdpLog = new JPasswordField());
         JPanel log3 = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JButton logBut;
         log3.add(logBut = new JButton("login"));
         login.add(log3);
 
@@ -68,6 +66,7 @@ public class FenetreLogin extends JFrame {
         register.add(reg0);
         register.add(pseudoReg = new JTextField());
         JPanel reg1 = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JButton regBut;
         reg1.add(regBut = new JButton("register"));
         register.add(reg1);
         JPanel reg2 = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -84,6 +83,7 @@ public class FenetreLogin extends JFrame {
             imgSized = img.getScaledInstance(150, 150, Image.SCALE_DEFAULT);
 
         } catch (IOException e) { ouvrirMessageErreur(e.getMessage()+"\nmauvais fichier?","Erreur entrée/sortie"); }
+        assert imgSized != null;
         JLabel logoLab1 = new JLabel(new ImageIcon(imgSized));
 
         identif.add(logoLab1);
@@ -177,13 +177,8 @@ public class FenetreLogin extends JFrame {
     }
 
     /**
-     * setter du JTextField pseudoLog
-     * @param s texte à set
-     */
-    public void setPseudoLog(String s) { pseudoLog.setText(s);}
-    /**
      * Méthode qui affiche en multicolor
-     * @param color
+     * @param color la couleur
      */
     public void setMadeBy(Color color) { labelMadeby.setForeground(color); labelColor.start();}
 

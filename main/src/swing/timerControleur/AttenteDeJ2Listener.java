@@ -1,8 +1,3 @@
-/**
- * @author Les Infopotes
- * @version 4
- */
-
 package swing.timerControleur;
 
 import java.awt.event.ActionEvent;
@@ -19,6 +14,9 @@ import swing.vue.*;
  * La classe AttenteDeJ2Listener est un listener appelé par l'instance timerAttenteJ2 de la fenêtre partie
  * Elle se lance quand on est seul dans une partie et elle sert à savoir quand un 2ème joueur nous rejoint
  * afin de lancer la partie.
+ *
+ * @author Paul Vernin, Thomas Peray, Matéo Esteves, Mathys Gagner
+ * @version 4.6
  */
 public class AttenteDeJ2Listener implements ActionListener {
     FenetrePartie fn;

@@ -1,7 +1,3 @@
-/**
- * @author Les Infopotes
- * @version 4
- */
 package swing.timerControleur;
 
 import java.awt.event.ActionEvent;
@@ -20,6 +16,9 @@ import swing.vue.*;
  * La classe StateListener est un listener appelé par l'instance timerState de la fenêtre partie
  * Après être passé en JoinState, ce listener permet de récupérer l'état de la partie et de définir
  * des actions à effectuer en fonction de l'état (il permet aussi de mettre fin à la partie).
+ *
+ * @author Paul Vernin, Thomas Peray, Matéo Esteves, Mathys Gagner
+ * @version 4.6
  */
 public class StateListener implements ActionListener {
     private FenetrePartie fn;
@@ -27,7 +26,6 @@ public class StateListener implements ActionListener {
     private Partie partie;
     private State EtatActuel;
     int i;
-    boolean modeNo_MORE_CARD;
 
     /**
      * Constructeur de StateListener
@@ -70,7 +68,7 @@ public class StateListener implements ActionListener {
 
             if (partie.getEtat().state().equals(STATE_STEP.CLUE_SENT)) {
                 int tour = partie.getNbTour() - partie.getEtat().finishedTurns();
-                fn.updateConsole("Tours restant : " + String.valueOf(tour));
+                fn.updateConsole("Tours restant : " + tour);
                 try {
                     if (partie.getEtat().clueSender().equals(partie.getJ().getPseudo())) {
                         i = 0;

@@ -1,24 +1,18 @@
-/**
- * @author Les Infopotes
- * @version 4
- */
 package swing.vue;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 
 /**
  * Classe de la fenêtre des règles
+ *
+ * @author Paul Vernin, Thomas Peray, Matéo Esteves, Mathys Gagner
+ * @version 4.6
  */
 public class FenetreRegle extends JFrame {
-
-    private Image img;
-    private JButton retour;
 
     public FenetreRegle(String name) {
         super(name);
@@ -29,7 +23,7 @@ public class FenetreRegle extends JFrame {
         JPanel reglePan = new JPanel();
         reglePan.setLayout(new BoxLayout(reglePan, BoxLayout.Y_AXIS));
         try {
-            img = ImageIO.read(new File("ressource"+File.separator+"regle"+File.separator+"regle1.png"));
+            Image img = ImageIO.read(new File("ressource" + File.separator + "regle" + File.separator + "regle1.png"));
             JLabel lab1 = new JLabel(new ImageIcon(img));
             img = ImageIO.read(new File("ressource"+File.separator+"regle"+File.separator+"regle2.png"));
             JLabel lab2 = new JLabel(new ImageIcon(img));
@@ -84,18 +78,14 @@ public class FenetreRegle extends JFrame {
 
 
         JPanel retourPan = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        JButton retour;
         retourPan.add(retour = new JButton("retour"));
 
         main.add(retourPan, BorderLayout.SOUTH);
         main.add(scroll, BorderLayout.CENTER);
 
         // listener
-        retour.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                fermer();
-            }
-        });
+        retour.addActionListener(e -> fermer());
 
         // vue
         this.pack();

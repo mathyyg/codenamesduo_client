@@ -1,7 +1,3 @@
-/**
- * @author Les Infopotes
- * @version 4
- */
 package swing.controleur;
 
 import codenames.CodeNamesClient;
@@ -13,19 +9,24 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import codenames.cards.*;
-
 import modele.*;
 
+/**
+ * Contrôleur qui permet d'envoyer au serveur une réponse à un indice
+ *
+ * @author Paul Vernin, Thomas Peray, Matéo Esteves, Mathys Gagner
+ * @version 4.6
+ */
 public class controleurSendAnswer implements ActionListener {
     private Partie partie;
     private FenetrePartie fn;
     private CodeNamesClient serv;
 
     /**
-     * Constructeur du contrôleur pour envoyer une réponse
-     * @param lafn
-     * @param leserv
-     * @param lapartie
+     * Constructeur du contrôleur SendAnswer
+     * @param lafn la fenêtre partie
+     * @param leserv le serveur
+     * @param lapartie la partie en cours
      */
     public controleurSendAnswer(FenetrePartie lafn, CodeNamesClient leserv, Partie lapartie) {
         fn = lafn;
@@ -36,13 +37,13 @@ public class controleurSendAnswer implements ActionListener {
     /**
      * Envoie une réponse de la liste des cartes sélectionée; impossible s'il n'y a plus de carte.
      * affiche des erreurs suivant l'exception sinon
-     * @param e
+     * @param e ActionEvent
      */
     @Override
     public void actionPerformed(ActionEvent e) {
 
         List<String> listReponses = fn.getAnswer();
-        List<Card> cards = null;
+        List<Card> cards;
 
         try {
             cards = serv.sendAnswer(partie.getIdPartie(), partie.getJ(), listReponses);

@@ -1,7 +1,4 @@
-/**
- * @author Les Infopotes
- * @version 4
- */
+
 package swing.controleur;
 
 import modele.*;
@@ -13,6 +10,12 @@ import swing.vue.FenetreMenu;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Contrôleur qui permet de créer une partie
+ *
+ * @author Paul Vernin, Thomas Peray, Matéo Esteves, Mathys Gagner
+ * @version 4.6
+ */
 public class controleurCreerPartie implements ActionListener{
     private FenetreMenu fn;
     private CodeNamesClient serv;
@@ -32,7 +35,7 @@ public class controleurCreerPartie implements ActionListener{
 
     /**
      * Crée une partie si possible après clic du composant abonné au contrôleur
-     * @param e
+     * @param e ActionEvent (inutilisé)
      */
     @Override
     public void actionPerformed(ActionEvent e) {

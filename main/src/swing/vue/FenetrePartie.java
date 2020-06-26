@@ -1,7 +1,3 @@
-/**
- * @author Les Infopotes
- * @version 4
- */
 package swing.vue;
 
 import codenames.CodeNamesClient;
@@ -23,6 +19,9 @@ import java.util.Vector;
 
 /**
  * Classe de la fenêtre de jeu
+ *
+ * @author Paul Vernin, Thomas Peray, Matéo Esteves, Mathys Gagner
+ * @version 4.6
  */
 public class FenetrePartie extends JFrame {
 
@@ -36,10 +35,6 @@ public class FenetrePartie extends JFrame {
 
     JTabbedPane indiceRepTabPan;
     private JTextArea console;
-    private JLabel pseudo;
-    private JLabel mdp;
-    private JLabel pWin;
-    private JLabel pLoos;
 
     private JList<Indice> JListIndice;
 
@@ -47,7 +42,6 @@ public class FenetrePartie extends JFrame {
     private JTextField indiceInput;
     private JComboBox<Integer> indicechiffre;
     private JButton sendReponse;
-    private JButton boutonQuitter;
 
     private PlateauPan plateau;
     private KeyCardPan keyCardPan;
@@ -92,11 +86,11 @@ public class FenetrePartie extends JFrame {
         profil.setLayout(new BoxLayout(profil, BoxLayout.Y_AXIS));
         profil.setBorder(BorderFactory
                 .createTitledBorder("Profil"));
-        profil.add(pseudo = new JLabel("Pseudo : " + joueur.getPseudo()));
-        profil.add(mdp = new JLabel("Mdp : " + joueur.getMdp()));
-        profil.add(pWin = new JLabel("Parties gagnées : " + joueur.getPWin()));
-        profil.add(pLoos = new JLabel("Parties perdues : " + joueur.getPLoos()));
-        boutonQuitter = new JButton("Quitter");
+        profil.add(new JLabel("Pseudo : " + joueur.getPseudo()));
+        profil.add(new JLabel("Mdp : " + joueur.getMdp()));
+        profil.add(new JLabel("Parties gagnées : " + joueur.getPWin()));
+        profil.add(new JLabel("Parties perdues : " + joueur.getPLoos()));
+        JButton boutonQuitter = new JButton("Quitter");
 
         JPanel profilMain = new JPanel(new FlowLayout(FlowLayout.CENTER));
         profilMain.add(profil);
@@ -139,7 +133,7 @@ public class FenetrePartie extends JFrame {
         JPanel listIndPan = new JPanel();
         listIndPan.setBorder(BorderFactory
                 .createTitledBorder("Liste des indices : "));
-        JListIndice = new JList();
+        JListIndice = new JList<>();
         JListIndice.setPreferredSize(new Dimension(150,120));
         listIndPan.add(JListIndice);
 
@@ -376,7 +370,6 @@ public class FenetrePartie extends JFrame {
      *          i = 1 : partie gagnée
      */
     public void retour(int i) {
-        JOptionPane d = new JOptionPane();
         if (timerAttenteJ2.isRunning())
             this.stopAttenteJ2();
         if (timerState.isRunning())
@@ -396,7 +389,7 @@ public class FenetrePartie extends JFrame {
             }
             joueur.partieLoosUp();
             joueur.updateWin(false);
-            d.showMessageDialog(this,
+            JOptionPane.showMessageDialog(this,
                     "Vous avez abandonné la partie, cela compte comme une défaite..",
                     "",
                     JOptionPane.INFORMATION_MESSAGE);
@@ -405,7 +398,7 @@ public class FenetrePartie extends JFrame {
             joueur.partieWinUp();
             joueur.updateWin(true);
 
-            d.showMessageDialog(this,
+            JOptionPane.showMessageDialog(this,
                     "Félicitation vous avez gagné la partie !",
                     "",
                     JOptionPane.INFORMATION_MESSAGE);
@@ -413,7 +406,7 @@ public class FenetrePartie extends JFrame {
         if (i == 0){
             joueur.partieLoosUp();
             joueur.updateWin(false);
-            d.showMessageDialog(this,
+            JOptionPane.showMessageDialog(this,
                     "Pas de chance vous avez perdu...",
                     "",
                     JOptionPane.INFORMATION_MESSAGE);

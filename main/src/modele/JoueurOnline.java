@@ -1,7 +1,3 @@
-/**
- * @author Les Infopotes
- * @version 4
- */
 package modele;
 
 import codenames.CodeNamesClient;
@@ -17,6 +13,9 @@ import java.util.Objects;
  * Classe JoueurOnline, spécifie les joueurs dont on connait le login mais dont on ne connaît pas le password
  * Nous avons créé cette classe pour pouvoir redéfinir le equals qui nous sert dans les méthodes List.contains(..)
  * qu'on utilise pour généré le classement.
+ *
+ * @author Paul Vernin, Thomas Peray, Matéo Esteves, Mathys Gagner
+ * @version 4.6
  */
 public class JoueurOnline extends Joueur {
     String login;
@@ -63,8 +62,8 @@ public class JoueurOnline extends Joueur {
      * @return un string représentant le classement du joueuer j.
      */
     public static String getClassementOnline(JoueurOnline j, CodeNamesClient serv) {
-        List<Integer> wonGames = null;
-        List<Integer> lostGames = null;
+        List<Integer> wonGames;
+        List<Integer> lostGames;
         List<JoueurOnline> listJ = new ArrayList<>();
         State etat;
         JoueurOnline jCourant;

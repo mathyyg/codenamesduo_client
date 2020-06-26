@@ -1,8 +1,3 @@
-/**
- * @author Les Infopotes
- * @version 4
- */
-
 package modele;
 
 import codenames.CodeNamesClient;
@@ -13,9 +8,14 @@ import codenames.exceptions.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Classe Partie qui permet d'enregistrer les informations lors de l'initialisation d'une partie.
+ *
+ * @author Paul Vernin, Thomas Peray, Matéo Esteves, Mathys Gagner
+ * @version 4.6
+ */
 public class Partie {
 
-    private CodeNamesClient serveur;
     private int idPartie;
     private int nbTour;
     private State etat;
@@ -34,28 +34,21 @@ public class Partie {
      * @param lidPartie int correspond au numéro de la partie
      */
     public Partie(CodeNamesClient leserv, int lenbTour, Joueur lej, int lidPartie) {
-        serveur = leserv;
         nbTour = lenbTour;
         j = lej;
         idPartie = lidPartie;
         try {
-            etat = serveur.consultGame(idPartie);
+            etat = leserv.consultGame(idPartie);
             words = etat.words();
-            keyCard = serveur.keyCards(idPartie,j,j.getMdp());
+            keyCard = leserv.keyCards(idPartie,j,j.getMdp());
 
             plateau = new ArrayList<>();
             for (String word : words) {
                 plateau.add(new Carte(word, TYPE_CARTE.PAS_TROUVE));
             }
 
-        } catch (CnNetworkException e) {
-            e.printStackTrace();
-        } catch (CnBadIdException e) {
-            e.printStackTrace();
-        } catch (CnBadLoginException e) {
-            e.printStackTrace();
-        } catch (CnBadPwdException e) {
-            e.printStackTrace();
+        } catch (CnNetworkException | CnBadPwdException | CnBadLoginException | CnBadIdException e) {
+            System.err.println("Erreur de création de l'intance de classe partie");
         }
     }
 

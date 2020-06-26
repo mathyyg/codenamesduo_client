@@ -1,12 +1,14 @@
-/**
- * @author Les Infopotes
- * @version 4
- */
 package swing;
 
 import codenames.CodeNamesClient;
 import swing.vue.FenetreLogin;
 
+/**
+ * Classe Application qui lance le jeu
+ *
+ * @author Paul Vernin, Thomas Peray, Matéo Esteves, Mathys Gagner
+ * @version 4.6
+ */
 public class Appli {
 
     public static void main(String[] args) {

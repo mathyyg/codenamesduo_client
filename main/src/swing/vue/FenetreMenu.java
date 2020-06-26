@@ -1,7 +1,3 @@
-/**
- * @author Les Infopotes
- * @version 4
- */
 package swing.vue;
 
 import codenames.CodeNamesClient;
@@ -9,12 +5,16 @@ import codenames.exceptions.CnNetworkException;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Vector;
 import modele.*;
 import swing.controleur.*;
 
+/**
+ * Classe de la fenêtre Menu
+ *
+ * @author Paul Vernin, Thomas Peray, Matéo Esteves, Mathys Gagner
+ * @version 4.6
+ */
 public class FenetreMenu extends JFrame {
 
     private Joueur joueur;
@@ -22,13 +22,8 @@ public class FenetreMenu extends JFrame {
 
     private JCheckBox nbTour;
     private JTextField nbTourText;
-    private JButton creer;
-    private JButton rejoindre;
-    private JButton refresh;
-    private JButton quitter;
-    private JButton regle;
-    private JList partiesAttente;
-    private Vector parties;
+    private JList<Integer> partiesAttente;
+    private Vector<Integer> parties;
 
     JLabel pseudo;
     JLabel mdp;
@@ -55,14 +50,14 @@ public class FenetreMenu extends JFrame {
             ouvrirMessageErreur("Erreur de connexion au réseau:\n" +
                     "Erreur de récupération des parties en attente","Erreur serveur");
         }
-        DefaultListModel model = new DefaultListModel();
-        model.addAll(parties);
-        partiesAttente = new JList(model);
+        partiesAttente = new JList<>(parties);
         JScrollPane scroll = new JScrollPane(partiesAttente, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
         recherchePan.add(scroll);
         JPanel butPan = new JPanel(new GridLayout(2,1));
+        JButton rejoindre;
         butPan.add(rejoindre = new JButton("Rejoindre"));
+        JButton refresh;
         butPan.add(refresh = new JButton("Refresh"));
         recherchePan.add(butPan);
 
@@ -94,16 +89,17 @@ public class FenetreMenu extends JFrame {
         tourPan.add(nbTourText);
         creerPan.add(tourPan);
         JPanel creerbutPan = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        creer = new JButton("Créer");
+        JButton creer = new JButton("Créer");
         creer.setPreferredSize(new Dimension(150,30));
         creerbutPan.add(creer);
         creerPan.add(creerbutPan);
-        regle = new JButton("règle");
+        JButton regle = new JButton("règle");
         gauche.add(creerPan);
         JPanel pan3 = new JPanel(new GridLayout(1,2));
         pan3.add(profil);
         JPanel panRegleQuit = new JPanel(new GridLayout(2,1));
         panRegleQuit.add(regle);
+        JButton quitter;
         panRegleQuit.add(quitter = new JButton("Quitter"));
         pan3.add(panRegleQuit);
         gauche.add(pan3);
@@ -114,14 +110,11 @@ public class FenetreMenu extends JFrame {
         nbTour.addItemListener(new controleurRechercheTours(this));
         creer.addActionListener(new controleurCreerPartie(this, serv, joueur));
         rejoindre.addActionListener(new controleurRejoindrePartie(this, serv, joueur));
-        quitter.addActionListener(new controleurQuitterRecherche(this));
+        quitter.addActionListener(new controleurQuitterMenu(this));
         refresh.addActionListener(new controleurRefreshPAttente(this));
-        regle.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                FenetreRegle fnregle = new FenetreRegle("Règle");
-                fnregle.setVisible(true);
-            }
+        regle.addActionListener(e -> {
+            FenetreRegle fnregle = new FenetreRegle("Règle");
+            fnregle.setVisible(true);
         });
 
         // vue
@@ -166,7 +159,7 @@ public class FenetreMenu extends JFrame {
      * getter de l'identifiant de la partie
      * @return id de la partie (int)
      */
-    public int getIDPartieSelected() { return (int) partiesAttente.getSelectedValue();}
+    public int getIDPartieSelected() { return partiesAttente.getSelectedValue();}
 
     /**
      * Méthode qui ouvre une boîte de dialogue d'erreur
@@ -182,6 +175,7 @@ public class FenetreMenu extends JFrame {
 
     /**
      * Méthode second qui permet de passer à la fenêtre suivante (Fenetre partie) et de fermer cette fenêtre
+     * @param partie partie en cours
      */
     public void second(Partie partie) {
         FenetrePartie next = new FenetrePartie("Bureau des légendes "+"(id: "+partie.getIdPartie()+")", getJoueur(), serv, partie);

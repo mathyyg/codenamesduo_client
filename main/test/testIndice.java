@@ -1,7 +1,3 @@
-/**
- * @author Les Infopotes
- * @version 4
- */
 import static org.junit.jupiter.api.Assertions.*;
 
 import modele.Indice;
@@ -13,12 +9,15 @@ import codenames.exceptions.CnNetworkException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Classe de test de la classe Indice
+ */
 public class testIndice {
 
     Indice indiceTest;
     CodeNamesClient serv;
     Partie p;
-    Joueur j = new Joueur("JTEST","p77231");
+    Joueur j = new Joueur("JTEST");
 
     /* Les mots sont :
     * "THÉ", "PUCE", "SAHARA", "SAPIN", "MARIAGE",
@@ -42,33 +41,33 @@ public class testIndice {
     @Test
     public void estValide0() {
         indiceTest = new Indice("THÉ",3);
-        assertEquals(false, indiceTest.estValide(p));
+        assertFalse(indiceTest.estValide(p));
     }
     @Test
     public void estValide1() {
         indiceTest = new Indice("THE",3);
-        assertEquals(true, indiceTest.estValide(p));
+        assertTrue(indiceTest.estValide(p));
     }
     @Test
     public void estValide2() {
         indiceTest = new Indice("thé",3);
-        assertEquals(false, indiceTest.estValide(p));
+        assertFalse(indiceTest.estValide(p));
     }
 
     @Test
     public void estValide3() {
         indiceTest = new Indice("oreille",3);
-        assertEquals(false, indiceTest.estValide(p));
+        assertFalse(indiceTest.estValide(p));
     }
     @Test
     public void estValide4() {
         indiceTest = new Indice("GOÛTER",3);
-        assertEquals(false, indiceTest.estValide(p));
+        assertFalse(indiceTest.estValide(p));
     }
     @Test
     public void estValide5() {
         indiceTest = new Indice("goûter",3);
-        assertEquals(false, indiceTest.estValide(p));
+        assertFalse(indiceTest.estValide(p));
     }
 
     /**
@@ -77,31 +76,31 @@ public class testIndice {
     @Test
     public void estValide6() {
         indiceTest = new Indice("plusieurs mots",3);
-        assertEquals(false, indiceTest.estValide(p));
+        assertFalse(indiceTest.estValide(p));
     }
 
     @Test
     public void estValide7() {
         indiceTest = new Indice("mot-composé",3);
-        assertEquals(true, indiceTest.estValide(p));
+        assertTrue(indiceTest.estValide(p));
     }
 
     @Test
     public void estValide8() {
         indiceTest = new Indice("mot-trop-composé",3);
-        assertEquals(false, indiceTest.estValide(p));
+        assertFalse(indiceTest.estValide(p));
     }
 
     @Test
     public void estValide9() {
         indiceTest = new Indice("mot--------composé",3);
-        assertEquals(false, indiceTest.estValide(p));
+        assertFalse(indiceTest.estValide(p));
     }
 
     @Test
     public void estValide10() {
         indiceTest = new Indice("",3);
-        assertEquals(false, indiceTest.estValide(p));
+        assertFalse(indiceTest.estValide(p));
     }
 
 
