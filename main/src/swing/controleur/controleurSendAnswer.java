@@ -31,9 +31,11 @@ public class controleurSendAnswer implements ActionListener {
 
         try {
             cards = serv.sendAnswer(partie.getIdPartie(), partie.getJ(), listReponses);
+            System.out.println(cards.toString());
             if (cards.get(cards.size()-1).cardRole().equals(CARD_ROLE.NO_MORE_CODE)){
                 fn.updateConsole("Vous avez fini de trouver vos CODE. Vous ne pourrez que soumettre des indices à votre coéquipier à" +
                         "partir de maintenant.");
+                fn.setNoMoreCard(true);
                 cards.remove(cards.size()-1);
             }
 

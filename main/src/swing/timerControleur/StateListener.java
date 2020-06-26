@@ -17,6 +17,7 @@ public class StateListener implements ActionListener {
     private Partie partie;
     private State EtatActuel;
     int i;
+    boolean modeNo_MORE_CARD;
 
     public StateListener(FenetrePartie lafn, Partie lapartie, CodeNamesClient leserv) {
         fn = lafn;
@@ -71,7 +72,7 @@ public class StateListener implements ActionListener {
             }
             if (partie.getEtat().state().equals(STATE_STEP.ANSWER_SENT)) {
                 //Tout se fait dans le controleurSendAnswer pour cet état.
-                if (i == 1){
+                if (i == 1 && !fn.getNoMoreCard()){
                     fn.modeDeJeuTab(0);
                 }
             }

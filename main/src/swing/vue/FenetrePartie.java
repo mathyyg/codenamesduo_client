@@ -30,6 +30,7 @@ public class FenetrePartie extends JFrame {
     private Timer timerAttenteJ2;
     private Timer timerState;
     private Vector<Indice> ListIndice;
+    private boolean NO_MORE_CARD;
 
     JTabbedPane indiceRepTabPan;
     private JTextArea console;
@@ -285,7 +286,8 @@ public class FenetrePartie extends JFrame {
             indiceRepTabPan.setEnabledAt(1, false);
         }
     }
-
+    public void setNoMoreCard(boolean b) { NO_MORE_CARD = b;}
+    public boolean getNoMoreCard() { return NO_MORE_CARD;}
     public void retour(int i) {
         JOptionPane d = new JOptionPane();
         if (i == -1){
@@ -326,6 +328,5 @@ public class FenetrePartie extends JFrame {
         if (timerState.isRunning())
             this.stopState();
         dispose();
-
     }
 }
