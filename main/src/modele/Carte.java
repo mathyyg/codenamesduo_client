@@ -6,6 +6,10 @@
 package modele;
 
 import codenames.cards.*;
+
+/**
+ * La classe Carte est un substitue de la classe Card proposé du serveur.
+ */
 public class Carte {
 
     private String mot;
@@ -13,7 +17,7 @@ public class Carte {
 
 
     /**
-     * Méthode Carte
+     * Constructeur Carte
      * Cette méthode permet de vérifier et attribuer le type à sa carte (Assasin, innocent, code)
      * @param c qui est une carte
      */
