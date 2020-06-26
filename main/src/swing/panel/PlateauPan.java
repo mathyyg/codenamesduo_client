@@ -7,13 +7,11 @@ package swing.panel;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import modele.*;
-import swing.controleur.controleurAjoutLAnswer;
 
 public class PlateauPan extends JPanel {
     private List<JToggleButton> listBut;
@@ -53,7 +51,8 @@ public class PlateauPan extends JPanel {
         this.setLayout(new GridLayout(5,5));
         mots = new ArrayList<>();
         listBut = new ArrayList<>();
-        this.add(nc1); listBut.add(nc1); //nc1.addItemListener(new controleurAjoutLAnswer(this, nc1));
+
+        this.add(nc1); listBut.add(nc1);
         this.add(nc2); listBut.add(nc2);
         this.add(nc3); listBut.add(nc3);
         this.add(nc4); listBut.add(nc4);
@@ -80,13 +79,37 @@ public class PlateauPan extends JPanel {
         this.add(nc25); listBut.add(nc25);
 
         for (JToggleButton b : listBut){
-            b.addItemListener(new controleurAjoutLAnswer(this, b));
+            b.addItemListener(itemEvent ->{
+                if (itemEvent.getStateChange()==ItemEvent.SELECTED){
+                    this.addListMot(b.getText());
+                } else {
+                    this.removeListMot(b.getText());
+                }
+            });
         }
 
     }
 
+    /**
+     * Méthode qui ajoute le mot à la liste lorqu'on clique sur le boutton
+     * @param s le mot
+     */
     public void addListMot(String s) { mots.add(s); }
+
+    /**
+     * Méthode qui retire le mot à la liste lorqu'on reclique sur le boutton (déselectionne)
+     * @param s le mot
+     */
     public void removeListMot(String s) { mots.remove(s); }
+
+
+    /**
+     * méthode qui renvoie les mots séléectionnés par l'autre joueur comme réponse
+     * @return une liste de String
+     */
+    public List<String> getMotSelected() {
+        return mots;
+    }
 
     /**
      * méthode qui attribue aux 25 boutons les mots selon une liste entrée en paramètre
@@ -122,13 +145,5 @@ public class PlateauPan extends JPanel {
                 }
             }
         }
-    }
-
-    /**
-     * méthode qui renvoie les mots séléectionnés par l'autre joueur comme réponse
-     * @return une liste de String
-     */
-    public List<String> getMotSelected() {
-        return mots;
     }
 }

@@ -182,11 +182,10 @@ public class FenetrePartie extends JFrame {
             timerAttenteJ2.start();
         }
         else {
+            modeDeJeuTab(0);
             initGame();
             timerState.start();
-
         }
-
 
         // Listener
         sendIndice.addActionListener(new controleurSendClue(this, serv, partie));
@@ -196,9 +195,7 @@ public class FenetrePartie extends JFrame {
 
         // vue
         this.pack();
-
         this.setSize(new Dimension(1150, 800));
-
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
         int x = (int) ((dimension.getWidth() - this.getWidth()) /2 );
         int y = (int) ((dimension.getHeight() - this.getHeight()) / 2 );
