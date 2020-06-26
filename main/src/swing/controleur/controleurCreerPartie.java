@@ -39,7 +39,6 @@ public class controleurCreerPartie implements ActionListener{
         int idPartie;
         Partie partie;
         if (fn.getNbTourSelect()) {
-
             try {
                 idPartie = serv.createGame(fn.getJoueur(), Integer.parseInt(fn.getNbTour()));
                 System.out.println("Créé une partie de X tours du joueur " +joueur +" avec comme ID : " + idPartie);

@@ -130,10 +130,10 @@ public class Partie {
 
 
     /**
-     * Méthode plateauMAJ, met à jour le type des cartes qui ont été trouvé par les joueurs
+     * Méthode updatePlateau, met à jour le type des cartes qui ont été trouvé par les joueurs
      * @param CardList , liste des cartes dont on a découvert le TYPE.
      */
-    public void plateauMAJ(List<Carte> CardList) {
+    public void updatePlateau(List<Carte> CardList) {
         for (Carte cPlat : plateau)
             for (Carte cCardList : CardList)
                 if (cPlat.getMot().equals(cCardList.getMot()))

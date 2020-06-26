@@ -5,7 +5,7 @@
 package swing;
 
 import codenames.CodeNamesClient;
-import swing.vue.*;
+import swing.vue.FenetreLogin;
 
 public class Appli {
 
@@ -15,6 +15,7 @@ public class Appli {
         FenetreLogin fenetre = new FenetreLogin("Accueil", serv);
         fenetre.pack();
         fenetre.setVisible(true);
+
 
     }
 }

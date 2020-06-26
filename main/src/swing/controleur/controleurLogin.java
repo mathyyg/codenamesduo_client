@@ -34,16 +34,16 @@ public class controleurLogin implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         Joueur j = new Joueur(pan.getPseudoLog(), pan.getmdpLog());
 
-        if (pan.getPseudoLog().isBlank() || pan.getmdpLog().isBlank())
+        if (pan.getPseudoLog().isBlank() || pan.getmdpLog().isBlank()){
             pan.ouvrirMessageErreur("zone de texte vide", "Erreur d'input");
+            return;
+        }
 
         try {
             if (Joueur.listEnregistrement().contains(j)
                 && serv.isRegisteredPlayer(pan.getPseudoLog())){
-                System.out.println("authentification réussite.");
                 int i = Joueur.listEnregistrement().indexOf(j);
                 j = Joueur.listEnregistrement().get(i);
-                System.out.println(j);
                 pan.setJoueur(j);
                 pan.second();
             } else if (serv.isRegisteredPlayer(pan.getPseudoLog())){

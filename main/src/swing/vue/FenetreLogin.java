@@ -175,6 +175,11 @@ public class FenetreLogin extends JFrame {
     }
 
     /**
+     * setter du JTextField pseudoLog
+     * @param s texte à set
+     */
+    public void setPseudoLog(String s) { pseudoLog.setText(s);}
+    /**
      * Méthode qui affiche en multicolor
      * @param color
      */

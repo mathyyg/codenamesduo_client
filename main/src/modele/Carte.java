@@ -14,8 +14,6 @@ public class Carte {
 
     private String mot;
     private TYPE_CARTE type;
-
-
     /**
      * Constructeur Carte
      * Cette méthode permet de vérifier et attribuer le type à sa carte (Assasin, innocent, code)

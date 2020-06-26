@@ -96,7 +96,6 @@ public class FenetrePartie extends JFrame {
         profil.add(mdp = new JLabel("Mdp : " + joueur.getMdp()));
         profil.add(pWin = new JLabel("Parties gagnées : " + joueur.getPWin()));
         profil.add(pLoos = new JLabel("Parties perdues : " + joueur.getPLoos()));
-        profil.add(new JLabel("Classement local : " + joueur.getClassement()));
         boutonQuitter = new JButton("Quitter");
 
         JPanel profilMain = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -139,7 +138,7 @@ public class FenetrePartie extends JFrame {
 
         JPanel listIndPan = new JPanel();
         listIndPan.setBorder(BorderFactory
-                .createTitledBorder("Liste des indices donnés : "));
+                .createTitledBorder("Liste des indices : "));
         JListIndice = new JList();
         JListIndice.setPreferredSize(new Dimension(150,120));
         listIndPan.add(JListIndice);
@@ -184,7 +183,6 @@ public class FenetrePartie extends JFrame {
         }
         else {
             initGame();
-            System.out.println("Le 2eme joueur est arrivé la partie va commencer.");
             timerState.start();
 
         }
@@ -302,7 +300,7 @@ public class FenetrePartie extends JFrame {
      * @param cList listes des cartes découvertes
      */
     public void updatePlateau(List<Carte> cList) {
-        partie.plateauMAJ(cList);
+        partie.updatePlateau(cList);
         plateau.updatePlateau(cList);
     }
 
@@ -382,6 +380,10 @@ public class FenetrePartie extends JFrame {
      */
     public void retour(int i) {
         JOptionPane d = new JOptionPane();
+        if (timerAttenteJ2.isRunning())
+            this.stopAttenteJ2();
+        if (timerState.isRunning())
+            this.stopState();
         if (i == -1){
             try {
                 if (serv.abortGame(partie.getIdPartie(), joueur, joueur.getMdp()))
@@ -421,10 +423,6 @@ public class FenetrePartie extends JFrame {
         }
         FenetreMenu nouveau = new FenetreMenu("Menu",joueur,serv);
         nouveau.setVisible(true);
-        if (timerAttenteJ2.isRunning())
-            this.stopAttenteJ2();
-        if (timerState.isRunning())
-            this.stopState();
         dispose();
     }
 }

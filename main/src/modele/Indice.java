@@ -57,28 +57,20 @@ public class Indice {
      * @return un boolean qui représente la validité ou non de l'indice
      */
     public boolean estValide(Partie p) {
-        boolean valid = true;
-
-        /* Cas où l'indice est invalide : */
-        if (this == null) {                           // Si l'indice proposé est vide
+        if (this == null)
             return false;
-        }
 
-        List<String> mots = p.getWords();             // Si l'indice proposé comporte un mot du plateau
-        for (String m : mots) {
-            if (indice.toLowerCase().contains(m.toLowerCase()) || m.toLowerCase().contains(indice.toLowerCase())) {
-                valid=false;
-            }
-        }
+        List<String> mots = p.getWords();
+        for (String m : mots)
+            if (indice.toLowerCase().contains(m.toLowerCase()) || m.toLowerCase().contains(indice.toLowerCase()))
+                return false;
 
-        System.out.println("Utilise pattern");
         Pattern patternMin = Pattern.compile("^[a-zÀ-ÿ]*-?[a-zÀ-ÿ]*$");
         Pattern patternMaj = Pattern.compile("^[A-ZÀ-ÿ]*-?[A-ZÀ-ÿ]*$");
 
-        if (!patternMin.matcher(this.indice).matches() && !patternMaj.matcher(this.indice).matches()) {
-            valid=false;
-        }
-        return valid;
+        if (!patternMin.matcher(this.indice).matches() && !patternMaj.matcher(this.indice).matches())
+            return false;
+        return true;
     }
 
     /**

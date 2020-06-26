@@ -41,7 +41,6 @@ public class controleurSendClue implements ActionListener {
         if (indice.estValide(partie)) {
             try {
                 serv.sendClue(partie.getIdPartie(), partie.getJ(), indice.getIndice(), indice.getNbMotPourIndice());
-                System.out.println("Envoie clue réussi, state : " + serv.consultGame(partie.getIdPartie()).state());
             } catch (CnNetworkException ex) {
                 fn.ouvrirMessageErreur("Le serveur semble être inaccessible","Erreur d'envoie d'indice");
             } catch (CnBadIdException ex) {

@@ -59,8 +59,8 @@ public class controleurRegister implements ActionListener {
             pan.ouvrirMessageErreur("Il n'existe pas de login ayant ce nom sur le serveur\n" +
                     "OU erreur de login autre","Erreur login");
         }
-        System.out.println("Création du nouveau joueur et authentification réussite");
         pan.setJoueur(j);
         pan.setLabelMdp(j.getMdp());
+        pan.setPseudoLog(j.getPseudo());
     }
 }

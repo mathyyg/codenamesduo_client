@@ -76,7 +76,7 @@ public class JoueurOnline extends Joueur {
             return "NaN";
         }
         try {
-        for (Integer wG : wonGames){
+            for (Integer wG : wonGames){
                 etat = serv.consultGame(wG);
                 if (listJ.contains(etat.creator()))
                     listJ.get(listJ.indexOf(etat.creator())).partieWinUp();
@@ -93,24 +93,23 @@ public class JoueurOnline extends Joueur {
                     listJ.add(jCourant);
                 }
         }
-        for (Integer lG : lostGames){
+        for (Integer lG : lostGames) {
 
-                etat = serv.consultGame(lG);
-                if (listJ.contains(etat.creator()))
-                    listJ.get(listJ.indexOf(etat.creator())).partieLoosUp();
-                else if (!listJ.contains(etat.creator())){
-                    jCourant = new JoueurOnline(etat.creator());
-                    jCourant.partieLoosUp();
-                    listJ.add(jCourant);
-                }
-                else if (listJ.contains(etat.secondPlayer()))
-                    listJ.get(listJ.indexOf(etat.secondPlayer())).partieLoosUp();
-                else if (!listJ.contains(etat.secondPlayer())){
-                    jCourant = new JoueurOnline(etat.secondPlayer());
-                    jCourant.partieLoosUp();
-                    listJ.add(jCourant);
-                }
+            etat = serv.consultGame(lG);
+            if (listJ.contains(etat.creator()))
+                listJ.get(listJ.indexOf(etat.creator())).partieLoosUp();
+            else if (!listJ.contains(etat.creator())) {
+                jCourant = new JoueurOnline(etat.creator());
+                jCourant.partieLoosUp();
+                listJ.add(jCourant);
+            } else if (listJ.contains(etat.secondPlayer()))
+                listJ.get(listJ.indexOf(etat.secondPlayer())).partieLoosUp();
+            else if (!listJ.contains(etat.secondPlayer())) {
+                jCourant = new JoueurOnline(etat.secondPlayer());
+                jCourant.partieLoosUp();
+                listJ.add(jCourant);
             }
+        }
         } catch (CnNetworkException e) {
             System.err.println("Erreur serveur");
         } catch (CnBadIdException e) {
@@ -121,7 +120,6 @@ public class JoueurOnline extends Joueur {
         if (!listJ.contains(j))
             listJ.add(j);
         listJ.sort(new ComparateurWinrate());
-
         return listJ.indexOf(j)+1 +"/"+listJ.size();
     }
 }

@@ -35,7 +35,7 @@ public class TestPartie {
         Answer.add(c2 = new Carte("PUCE", TYPE_CARTE.NEUTRAL));
         Answer.add(c3 = new Carte("SAHARA", TYPE_CARTE.NEUTRAL));
 
-        partieTest.plateauMAJ(Answer);
+        partieTest.updatePlateau(Answer);
         List<Carte> l = partieTest.getPlateau();
 
         assertEquals(c1.getMot(), l.get(0).getMot());
