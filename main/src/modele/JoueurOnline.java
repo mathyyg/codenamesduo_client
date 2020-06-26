@@ -11,25 +11,37 @@ import java.util.Objects;
 
 /**
  * Classe JoueurOnline, spécifie les joueurs dont on connait le login mais dont on ne connaît pas le password
- * Nous avons créé cette classe pour pouvoir redéfinir le equals qui nous sert dans les méthodes List.contains(..), etc..
+ * Nous avons créé cette classe pour pouvoir redéfinir le equals qui nous sert dans les méthodes List.contains(..)
+ * qu'on utilise pour généré le classement.
  */
 public class JoueurOnline extends Joueur {
     String login;
 
+    /**
+     * Constructeur n°1 : constructeur à partir d'un simple login
+     * ce constructeur sert à créer des instances de JoueurOnline à partir des logins obtenus dans les listes
+     * des parties finies (win/loos)
+     * @param lenom le login
+     */
     public JoueurOnline(String lenom) {
         super(lenom);
         login = lenom;
     }
 
-    public JoueurOnline(String lenom, int pWin, int pLoos) {
-        super(lenom, null, pWin, pLoos);
-        login = lenom;
-    }
-
+    /**
+     * Constructeur n°2 : constructeur à partir d'un joueur déjà existant
+     * @param j un joueur
+     */
     public JoueurOnline(Joueur j){
         super(j.login(), j.getMdp(), j.getPWin(), j.getPLoos());
         login = j.login();
     }
+
+    /**
+     * Méthode equals qui compare seulement le login des deux joueurs.
+     * @param o l'objet auquel this est comparé
+     * @return <code>true</code> si this et o sont identiques, sinon <code>false</code>
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -39,6 +51,13 @@ public class JoueurOnline extends Joueur {
         return Objects.equals(login, that.login);
     }
 
+    /**
+     * Méthode qui calcule le classement du joueur entré en paramètre par rapport aux autres
+     * users qui ont fini des parties sur le serveur.
+     * @param j le joueur dont on veut connaître le classement.
+     * @param serv le serveur d'où on récupère les listes de parties finies (Win/Loos).
+     * @return un string représentant le classement du joueuer j.
+     */
     public static String getClassementOnline(JoueurOnline j, CodeNamesClient serv) {
         List<Integer> wonGames = null;
         List<Integer> lostGames = null;
@@ -95,7 +114,6 @@ public class JoueurOnline extends Joueur {
         } catch (IllegalAccessException e) {
             System.err.println("Erreur IllegalAcessException");
         }
-
         if (!listJ.contains(j))
             listJ.add(j);
         listJ.sort(new ComparateurWinrate());
