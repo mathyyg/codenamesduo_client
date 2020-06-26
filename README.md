@@ -13,5 +13,5 @@ Ce qu'on a ajouté en plus :<br>
  </ul>
  Ce n'était pas demandé explicitement  (même si ça paraît évident de le rendre) mais on a aussi ajouté un diagramme de classes et la javadoc.
  <br><br>
- NB: pour tout ce qui est gestion de travail, on a principalement utilisé GitLab et discord, on pensait utiliser Trello pour gérer nos objectifs en fonction du temps mais on s'est rendu compte qu'en l'espace de 5 jours ce n'était pas nécessaire.<br>
- On a donc préféré entretenir une ToDoList (avec liste de chose à faire et leur avancement) dans un salon privé sur discord.
+ NB: pour tout ce qui est gestion de travail, on a principalement utilisé GitLab et Discord, on pensait utiliser Trello pour gérer nos objectifs en fonction du temps mais on s'est rendu compte qu'en l'espace de 5 jours ce n'était pas nécessaire.<br>
+ On a donc préféré entretenir une ToDoList (avec liste de chose à faire et leur avancement) dans un salon privé sur Discord.
