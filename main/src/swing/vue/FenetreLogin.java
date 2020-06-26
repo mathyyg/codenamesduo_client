@@ -6,10 +6,12 @@ import swing.controleur.controleurLogin;
 import swing.controleur.controleurRegister;
 
 import javax.imageio.ImageIO;
+import java.awt.event.ActionListener;
 import java.io.File;
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class FenetreLogin extends JFrame {
 
@@ -23,6 +25,8 @@ public class FenetreLogin extends JFrame {
 
     private JButton logBut;
     private JButton regBut;
+    private JLabel labelMadeby;
+    private Timer labelColor;
 
     public FenetreLogin(String titre, CodeNamesClient leserv) {
 
@@ -85,6 +89,15 @@ public class FenetreLogin extends JFrame {
         } catch (IOException e) { ouvrirMessageErreur(e.getMessage()+"\nMauvais fichier?","Erreur entrée/sortie"); }
         JLabel logoLab2 = new JLabel(new ImageIcon(imgSized));
         identif.add(logoLab2);
+
+        JPanel credits = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        labelMadeby = new JLabel("Made by Infopotes");
+        credits.add(labelMadeby);
+        identif.add(credits);
+
+        Color[] colorTable = new Color[]{Color.red, Color.ORANGE, Color.YELLOW, Color.GREEN, Color.blue, Color.MAGENTA, Color.black};
+        labelColor = new Timer(300,e -> setMadeBy(colorTable[ThreadLocalRandom.current().nextInt(0,7)]));
+        labelColor.start();
         this.add(identif);
 
 
@@ -98,7 +111,7 @@ public class FenetreLogin extends JFrame {
         int x = (int) ((dimension.getWidth() - this.getWidth()) /2 -250);
         int y = (int) ((dimension.getHeight() - this.getHeight()) / 2 -150);
         this.setLocation(x, y);
-        setPreferredSize(new Dimension(520,250));
+        setPreferredSize(new Dimension(520,260));
     }
 
     /**
@@ -148,4 +161,5 @@ public class FenetreLogin extends JFrame {
     public void setLabelMdp(String s) {
         mdp.setText("Votre mdp : " + s);
     }
+    public void setMadeBy(Color color) { labelMadeby.setForeground(color); labelColor.start();}
 }
