@@ -16,11 +16,23 @@ public class controleurRejoindrePartie implements ActionListener {
     private CodeNamesClient serv;
     private Joueur joueur;
 
+    /**
+     * Constructeur du contrôleur pour rejoindre une partie
+     * @param lafn
+     * @param leserv
+     * @param lejoueur
+     */
     public controleurRejoindrePartie(FenetreRecherchePartie lafn, CodeNamesClient leserv, Joueur lejoueur) {
         fn = lafn;
         serv = leserv;
         joueur = lejoueur;
     }
+
+    /**
+     * Essaye de rejoindre la partie selectionée
+     * affiche des erreurs suivant l'exception sinon
+     * @param e
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         Partie partie;

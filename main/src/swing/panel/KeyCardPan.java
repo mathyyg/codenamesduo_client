@@ -11,6 +11,7 @@ import java.util.List;
 public class KeyCardPan extends JPanel {
     private List<JButton> listBut;
 
+    // boutons de la key card
     private JButton nc1 = new JButton();
     private JButton nc2 = new JButton();
     private JButton nc3 = new JButton();
@@ -37,6 +38,10 @@ public class KeyCardPan extends JPanel {
     private JButton nc24 = new JButton();
     private JButton nc25 = new JButton();
 
+    /**
+     * Constructeur de KeyCardPan
+     */
+    // on ajoute les 25 boutons à la fenêtre et dans une liste
     public KeyCardPan(){
         listBut = new ArrayList<>();
         this.setLayout(new GridLayout(5,5));
@@ -67,6 +72,10 @@ public class KeyCardPan extends JPanel {
         this.add(nc25); listBut.add(nc25);
     }
 
+    /**
+     * méthode qui attribue les couleurs aux boutons selon leur rôle
+     * @param keyCards liste de cartes générée par le serveur
+     */
     public void init(List<CARD_ROLE> keyCards) {
         Iterator<CARD_ROLE> itKeyCard = keyCards.iterator();
         Iterator<JButton> itButton = listBut.iterator();

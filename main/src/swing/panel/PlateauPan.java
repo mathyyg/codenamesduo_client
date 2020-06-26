@@ -11,7 +11,7 @@ import modele.*;
 public class PlateauPan extends JPanel {
     private List<JToggleButton> listBut;
 
-
+    //on crée 25 boutons pour l'affichage des mots trouvés par le deuxième joueur
     private JToggleButton nc1 = new JToggleButton("Button");
     private JToggleButton nc2 = new JToggleButton("Button");
     private JToggleButton nc3 = new JToggleButton("Button");
@@ -38,6 +38,9 @@ public class PlateauPan extends JPanel {
     private JToggleButton nc24 = new JToggleButton("Button");
     private JToggleButton nc25 = new JToggleButton("Button");
 
+    /**
+     * Constructeur de PlateauPan: on ajoute les 25 boutons à la fenêtre et dans une liste
+     */
     public PlateauPan() {
         this.setLayout(new GridLayout(5,5));
 
@@ -69,6 +72,10 @@ public class PlateauPan extends JPanel {
         this.add(nc25); listBut.add(nc25);
     }
 
+    /**
+     * méthode qui attribue aux 25 boutons les mots selon une liste entrée en paramètre
+     * @param words liste de mots à attribuer aux boutons
+     */
     public void init(List<String> words) {
         Iterator<String> itWords = words.iterator();
         Iterator<JToggleButton> itButton = listBut.iterator();
@@ -80,6 +87,11 @@ public class PlateauPan extends JPanel {
             butCourant.setText(wordCourant);
         }
     }
+
+    /**
+     * méthode qui rafraîchit le plateau selon une liste de boutons à rendre non éditable
+     * @param cList liste de cartes correspondant aux boutons à rendre non éditable car trouvés
+     */
     public void updatePlateau(List<Carte> cList){
         for (JToggleButton b : listBut){
             for (Carte c : cList){
@@ -96,6 +108,10 @@ public class PlateauPan extends JPanel {
         }
     }
 
+    /**
+     * méthode qui renvoie les mots séléectionnés par l'autre joueur comme réponse
+     * @return une liste de String
+     */
     public List<String> getMotSelected() {
         List<String> mots = new ArrayList<>();
         for (JToggleButton b : listBut){
@@ -107,5 +123,4 @@ public class PlateauPan extends JPanel {
         }
         return mots;
     }
-
 }

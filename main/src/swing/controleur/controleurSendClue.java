@@ -13,12 +13,23 @@ public class controleurSendClue implements ActionListener {
     private FenetrePartie fn;
     private CodeNamesClient serv;
 
+    /**
+     * Constructeur du contrôleur pour envoyer un indice
+     * @param lafn
+     * @param leserv
+     * @param lapartie
+     */
     public controleurSendClue(FenetrePartie lafn, CodeNamesClient leserv, Partie lapartie) {
         fn = lafn;
         partie = lapartie;
         serv = leserv;
     }
 
+    /**
+     * Envoie un indice s'il est valide
+     * affiche des erreurs suivant l'exception sinon
+     * @param e
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
 
@@ -27,21 +38,21 @@ public class controleurSendClue implements ActionListener {
             try {
                 serv.sendClue(partie.getIdPartie(), partie.getJ(), indice.getIndice(), indice.getNbMotPourIndice());
                 System.out.println("Envoie clue réussi, state : " + serv.consultGame(partie.getIdPartie()).state());
-                } catch (CnNetworkException ex) {
-                    fn.ouvrirMessageErreur("Le serveur semble être inaccessible","Erreur d'envoie d'indice");
-                } catch (CnBadIdException ex) {
-                  fn.ouvrirMessageErreur("L'ID de la partie est inaccessible","Erreur d'envoie d'indice");
-                } catch (CnBadLoginException ex) {
+            } catch (CnNetworkException ex) {
+                fn.ouvrirMessageErreur("Le serveur semble être inaccessible","Erreur d'envoie d'indice");
+            } catch (CnBadIdException ex) {
+                fn.ouvrirMessageErreur("L'ID de la partie est inaccessible","Erreur d'envoie d'indice");
+            } catch (CnBadLoginException ex) {
                 fn.ouvrirMessageErreur("Votre login semble être inaccessible","Erreur d'envoie d'indice");
-                } catch (CnWaitPlayerException ex) {
-                    fn.ouvrirMessageErreur("Aucun autre joueur n'a rejoint votre partie", "Error WaitPlayerException");
-                } catch (CnNotYourTurnException ex) {
-                    fn.ouvrirMessageErreur("Ce n'est pas votre tour", "Error NotYourTurn");
-                } catch (CnWaitAnswerException ex) {
-                    fn.ouvrirMessageErreur("Une réponse est attendu et pas un indice", "Error WaitAnswerException");
-                } catch (CnClosedGameException ex) {
-                    fn.ouvrirMessageErreur("La partie est terminé", "Error partie gagné/perdu");
-                }
+            } catch (CnWaitPlayerException ex) {
+                fn.ouvrirMessageErreur("Aucun autre joueur n'a rejoint votre partie", "Error WaitPlayerException");
+            } catch (CnNotYourTurnException ex) {
+                fn.ouvrirMessageErreur("Ce n'est pas votre tour", "Error NotYourTurn");
+            } catch (CnWaitAnswerException ex) {
+                fn.ouvrirMessageErreur("Une réponse est attendu et pas un indice", "Error WaitAnswerException");
+            } catch (CnClosedGameException ex) {
+                fn.ouvrirMessageErreur("La partie est terminé", "Error partie gagné/perdu");
+            }
             fn.resetClue();
         }
     }

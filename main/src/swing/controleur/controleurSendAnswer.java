@@ -17,12 +17,23 @@ public class controleurSendAnswer implements ActionListener {
     private FenetrePartie fn;
     private CodeNamesClient serv;
 
+    /**
+     * Constructeur du contrôleur pour envoyer une réponse
+     * @param lafn
+     * @param leserv
+     * @param lapartie
+     */
     public controleurSendAnswer(FenetrePartie lafn, CodeNamesClient leserv, Partie lapartie) {
         fn = lafn;
         partie = lapartie;
         serv = leserv;
     }
 
+    /**
+     * Envoie une réponse de la liste des cartes sélectionée; impossible s'il n'y a plus de carte.
+     * affiche des erreurs suivant l'exception sinon
+     * @param e
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
 
