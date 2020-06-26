@@ -93,8 +93,9 @@ public class StateListener implements ActionListener {
             }
             if (partie.getEtat().state().equals(STATE_STEP.ANSWER_SENT)) {
                 //Tout se fait dans le controleurSendAnswer pour cet état.
-                if (i == 1 && !fn.getNoMoreCard()){
+                if (i == 1 && fn.getNoMoreCard()){
                     fn.modeDeJeuTab(0);
+                    fn.updateConsole("Veuillez choisir un nouvel indice.");
                 }
             }
             if (partie.getEtat().state().equals(STATE_STEP.GAME_WON)) {
