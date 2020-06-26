@@ -4,10 +4,10 @@
  */
 package swing.controleur;
 
-import modele.Joueur;
 import codenames.CodeNamesClient;
 import codenames.exceptions.CnBadLoginException;
 import codenames.exceptions.CnNetworkException;
+import modele.Joueur;
 import swing.vue.FenetreLogin;
 
 import java.awt.event.ActionEvent;

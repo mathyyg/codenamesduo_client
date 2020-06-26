@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Objects;
 
 public class Joueur implements iPlayer {
-
     private String pseudo;
     private String mdp;
     private int partieWin, partieLoos;

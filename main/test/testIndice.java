@@ -5,15 +5,13 @@
 import static org.junit.jupiter.api.Assertions.*;
 
 import modele.Indice;
+import modele.Joueur;
 import modele.Partie;
 import codenames.CodeNamesClient;
 import codenames.exceptions.CnBadLoginException;
 import codenames.exceptions.CnNetworkException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-
-import modele.Joueur;
 
 public class testIndice {
 

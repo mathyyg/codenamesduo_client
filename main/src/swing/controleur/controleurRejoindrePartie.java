@@ -10,13 +10,13 @@ import codenames.exceptions.CnBadIdException;
 import codenames.exceptions.CnBadLoginException;
 import codenames.exceptions.CnFullPlayersException;
 import codenames.exceptions.CnNetworkException;
-import swing.vue.FenetreRecherchePartie;
+import swing.vue.FenetreMenu;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class controleurRejoindrePartie implements ActionListener {
-    private FenetreRecherchePartie fn;
+    private FenetreMenu fn;
     private CodeNamesClient serv;
     private Joueur joueur;
 
@@ -26,7 +26,7 @@ public class controleurRejoindrePartie implements ActionListener {
      * @param leserv
      * @param lejoueur
      */
-    public controleurRejoindrePartie(FenetreRecherchePartie lafn, CodeNamesClient leserv, Joueur lejoueur) {
+    public controleurRejoindrePartie(FenetreMenu lafn, CodeNamesClient leserv, Joueur lejoueur) {
         fn = lafn;
         serv = leserv;
         joueur = lejoueur;

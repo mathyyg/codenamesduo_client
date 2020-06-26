@@ -4,18 +4,18 @@
  */
 package swing.controleur;
 
-import swing.vue.FenetreRecherchePartie;
+import swing.vue.FenetreMenu;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
 public class controleurRechercheTours implements ItemListener {
-    private FenetreRecherchePartie fn;
+    private FenetreMenu fn;
 
     /**
      * Constructeur du contrôleur permettant l'entrée d'un nombre de tours ou non
      * @param lafn
      */
-    public controleurRechercheTours(FenetreRecherchePartie lafn) {
+    public controleurRechercheTours(FenetreMenu lafn) {
         this.fn = lafn;
     }
 

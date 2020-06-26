@@ -4,13 +4,12 @@
  */
 package swing.vue;
 
-import modele.Joueur;
 import codenames.CodeNamesClient;
+import modele.Joueur;
 import swing.controleur.controleurLogin;
 import swing.controleur.controleurRegister;
 
 import javax.imageio.ImageIO;
-import java.awt.event.ActionListener;
 import java.io.File;
 import javax.swing.*;
 import java.awt.*;
@@ -125,7 +124,7 @@ public class FenetreLogin extends JFrame {
      * Méthode second qui permet de passer à la fenêtre suivante (Fenetre Menu) et de fermer cette fenêtre
      */
     public void second() {
-        FenetreRecherchePartie next = new FenetreRecherchePartie("Menu", joueur, serv);
+        FenetreMenu next = new FenetreMenu("Menu", joueur, serv);
         next.setVisible(true);
         this.dispose();
     }

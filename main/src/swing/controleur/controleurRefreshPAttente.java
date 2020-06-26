@@ -4,19 +4,19 @@
  */
 package swing.controleur;
 
-import swing.vue.FenetreRecherchePartie;
+import swing.vue.FenetreMenu;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class controleurRefreshPAttente implements ActionListener {
-    private FenetreRecherchePartie fn;
+    private FenetreMenu fn;
 
     /**
      * Constructeur du contrôleur permettant le rafraîchissement des parties en attente
      * @param lafn
      */
-    public controleurRefreshPAttente(FenetreRecherchePartie lafn) {
+    public controleurRefreshPAttente(FenetreMenu lafn) {
         fn = lafn;
     }
 

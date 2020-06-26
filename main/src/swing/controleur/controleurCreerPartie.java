@@ -8,13 +8,13 @@ import modele.*;
 import codenames.CodeNamesClient;
 import codenames.exceptions.CnBadLoginException;
 import codenames.exceptions.CnNetworkException;
-import swing.vue.FenetreRecherchePartie;
+import swing.vue.FenetreMenu;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class controleurCreerPartie implements ActionListener{
-    private FenetreRecherchePartie fn;
+    private FenetreMenu fn;
     private CodeNamesClient serv;
     private Joueur joueur;
 
@@ -24,7 +24,7 @@ public class controleurCreerPartie implements ActionListener{
      * @param leserv serveur associé
      * @param lejoueur joueur créateur
      */
-    public controleurCreerPartie(FenetreRecherchePartie lafn, CodeNamesClient leserv, Joueur lejoueur) {
+    public controleurCreerPartie(FenetreMenu lafn, CodeNamesClient leserv, Joueur lejoueur) {
         fn = lafn;
         serv = leserv;
         joueur = lejoueur;

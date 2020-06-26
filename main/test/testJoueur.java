@@ -2,14 +2,14 @@
  * @author Les Infopotes
  * @version 4
  */
-import static org.junit.jupiter.api.Assertions.*;
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
 import modele.Joueur;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
-    public class testJoueur {
+
+public class testJoueur {
 
         Joueur joueurTest;
 

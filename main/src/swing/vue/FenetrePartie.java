@@ -419,7 +419,7 @@ public class FenetrePartie extends JFrame {
                     "",
                     JOptionPane.INFORMATION_MESSAGE);
         }
-        FenetreRecherchePartie nouveau = new FenetreRecherchePartie("Menu",joueur,serv);
+        FenetreMenu nouveau = new FenetreMenu("Menu",joueur,serv);
         nouveau.setVisible(true);
         if (timerAttenteJ2.isRunning())
             this.stopAttenteJ2();
