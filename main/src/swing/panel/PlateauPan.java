@@ -6,14 +6,18 @@ package swing.panel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import modele.*;
+import swing.controleur.controleurAjoutLAnswer;
 
 public class PlateauPan extends JPanel {
     private List<JToggleButton> listBut;
+    private List<String> mots;
 
     //on crée 25 boutons pour l'affichage des mots trouvés par le deuxième joueur
     private JToggleButton nc1 = new JToggleButton("Button");
@@ -47,9 +51,9 @@ public class PlateauPan extends JPanel {
      */
     public PlateauPan() {
         this.setLayout(new GridLayout(5,5));
-
+        mots = new ArrayList<>();
         listBut = new ArrayList<>();
-        this.add(nc1); listBut.add(nc1);
+        this.add(nc1); listBut.add(nc1); //nc1.addItemListener(new controleurAjoutLAnswer(this, nc1));
         this.add(nc2); listBut.add(nc2);
         this.add(nc3); listBut.add(nc3);
         this.add(nc4); listBut.add(nc4);
@@ -74,7 +78,15 @@ public class PlateauPan extends JPanel {
         this.add(nc23); listBut.add(nc23);
         this.add(nc24); listBut.add(nc24);
         this.add(nc25); listBut.add(nc25);
+
+        for (JToggleButton b : listBut){
+            b.addItemListener(new controleurAjoutLAnswer(this, b));
+        }
+
     }
+
+    public void addListMot(String s) { mots.add(s); }
+    public void removeListMot(String s) { mots.remove(s); }
 
     /**
      * méthode qui attribue aux 25 boutons les mots selon une liste entrée en paramètre
@@ -117,14 +129,6 @@ public class PlateauPan extends JPanel {
      * @return une liste de String
      */
     public List<String> getMotSelected() {
-        List<String> mots = new ArrayList<>();
-        for (JToggleButton b : listBut){
-            if (b.isSelected() &&
-                    !b.getBackground().equals(Color.GRAY) &&
-                    !b.getBackground().equals(Color.GREEN)
-            )
-                mots.add(b.getText());
-        }
         return mots;
     }
 }
