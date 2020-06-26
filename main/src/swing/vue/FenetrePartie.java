@@ -197,7 +197,7 @@ public class FenetrePartie extends JFrame {
         // Listener
         sendIndice.addActionListener(new controleurSendClue(this, serv, partie));
         sendReponse.addActionListener(new controleurSendAnswer(this, serv, partie));
-        boutonQuitter.addActionListener(e -> retour(-1));
+        boutonQuitter.addActionListener(e -> retour(0));
 
 
         // vue

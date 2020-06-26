@@ -11,6 +11,12 @@ import codenames.states.STATE_STEP;
 import codenames.states.State;
 import swing.vue.*;
 
+
+/**
+ * La classe StateListener est un listener appelé par l'instance timerState de la fenêtre partie
+ * Après être passé en JoinState, ce listener permet de récupérer l'état de la partie et de définir
+ * des actions à effectuer en fonction de l'état (il permet aussi de mettre fin à la partie).
+ */
 public class StateListener implements ActionListener {
     private FenetrePartie fn;
     private CodeNamesClient serv;
@@ -19,6 +25,12 @@ public class StateListener implements ActionListener {
     int i;
     boolean modeNo_MORE_CARD;
 
+    /**
+     * Constructeur de StateListener
+     * @param lafn la fenêtre de partie
+     * @param lapartie la partie contenant toutes les infos utiles (id, keycard, login, etc...)
+     * @param leserv le serveur qui nous sert à récupérer l'état de la partie
+     */
     public StateListener(FenetrePartie lafn, Partie lapartie, CodeNamesClient leserv) {
         fn = lafn;
         partie = lapartie;
@@ -32,6 +44,11 @@ public class StateListener implements ActionListener {
         }
     }
 
+    /**
+     * Action effectué par le timerAttenteJ2 toutes les 2 secondes. Elle regarde l'état de la partie renvoyé
+     * par le serveur et défini des actions à faire au joueur
+     * @param e actionEvent (non utilisé)
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         try {
