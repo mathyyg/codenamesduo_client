@@ -81,7 +81,7 @@ public class StateListener implements ActionListener {
                         //met à jour le plateau avec les previousAnswer.
                         fn.majPreviousAnswer();
                         //ajoute le nouvel indice à la list des indices
-                        fn.majListIndice();
+                        fn.updateListIndice();
                     }
                 } catch (IllegalAccessException ex) {
                     fn.ouvrirMessageErreur(ex.getMessage(),"Erreur : action interdite/impossible");

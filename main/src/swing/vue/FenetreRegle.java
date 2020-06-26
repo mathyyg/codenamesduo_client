@@ -8,6 +8,9 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * Classe de la fenêtre des règles
+ */
 public class FenetreRegle extends JFrame {
 
     private Image img;
@@ -102,9 +105,16 @@ public class FenetreRegle extends JFrame {
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
-    public void fermer() {
-        dispose();
-    }
+    /**
+     * ferme la fenêtre des règles
+     */
+    public void fermer() { dispose(); }
+
+    /**
+     * Méthode qui ouvre une boîte de dialogue d'erreur
+     * @param msg le message d'erreur
+     * @param titre le titre de la boîte de dialogue
+     */
     public void ouvrirMessageErreur(String msg, String titre) {
         JOptionPane.showMessageDialog(this,
                 msg,

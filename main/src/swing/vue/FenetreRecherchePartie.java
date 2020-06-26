@@ -104,8 +104,6 @@ public class FenetreRecherchePartie extends JFrame {
         pan3.add(panRegleQuit);
         gauche.add(pan3);
 
-        //TODO ajouter un bouton pour visualiser le profil
-
         main.add(gauche, BorderLayout.CENTER);
 
         // Listener
@@ -121,8 +119,6 @@ public class FenetreRecherchePartie extends JFrame {
                 fnregle.setVisible(true);
             }
         });
-        //TODO ajouter un listener sur le bouton pour visualiser profil
-        //(ajouter une fenetre profil)
 
         // vue
         this.pack();
@@ -137,13 +133,42 @@ public class FenetreRecherchePartie extends JFrame {
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
+    /**
+     * getter de la CheckBox nbtour
+     * @return <code>true</code> si la checkbox est selected, sinon <code>false</code>
+     */
     public boolean getNbTourSelect() { return nbTour.isSelected();}
+
+    /**
+     * getter du nombre de tour sélectionné
+     * @return nombre de tour (String)
+     */
     public String getNbTour() { return nbTourText.getText(); }
+
+    /**
+     * getter du joueur (nous)
+     * @return le joueur
+     */
     public Joueur getJoueur() { return joueur;}
+
+    /**
+     * Méthode qui rend éditable le JTextField du nombre de tour
+     * @param b <code>true</code> : rend éditable
+     *          <code>false</code> : rend non éditable
+     */
     public void toursEtat(boolean b) { nbTourText.setEditable(b); }
+
+    /**
+     * getter de l'identifiant de la partie
+     * @return id de la partie (int)
+     */
     public int getIDPartieSelected() { return (int) partiesAttente.getSelectedValue();}
 
-
+    /**
+     * Méthode qui ouvre une boîte de dialogue d'erreur
+     * @param msg le message d'erreur
+     * @param titre le titre de la boîte de dialogue
+     */
     public void ouvrirMessageErreur(String msg, String titre) {
         JOptionPane.showMessageDialog(this,
                 msg,
@@ -151,12 +176,18 @@ public class FenetreRecherchePartie extends JFrame {
                 JOptionPane.ERROR_MESSAGE);
     }
 
+    /**
+     * Méthode second qui permet de passer à la fenêtre suivante (Fenetre partie) et de fermer cette fenêtre
+     */
     public void second(Partie partie) {
         FenetrePartie next = new FenetrePartie("Bureau des légendes "+"(id: "+partie.getIdPartie()+")", getJoueur(), serv, partie);
         next.setVisible(true);
         this.dispose();
     }
 
+    /**
+     * Méthode qui met à jour la list des parties en attente
+     */
     public void refresh() {
         try {
             parties = new Vector<>(serv.waitingGames());

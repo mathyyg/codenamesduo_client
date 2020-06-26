@@ -6,22 +6,20 @@ import javax.swing.*;
 import java.awt.*;
 
 import codenames.cards.Card;
-import codenames.exceptions.CnBadLoginException;
-import codenames.exceptions.CnBadPwdException;
+import codenames.exceptions.*;
 import codenames.states.*;
-import codenames.exceptions.CnBadIdException;
-import codenames.exceptions.CnNetworkException;
 import swing.panel.KeyCardPan;
 import swing.panel.PlateauPan;
 import swing.controleur.*;
 import swing.timerControleur.*;
 import modele.*;
-import codenames.cards.CARD_ROLE;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
+/**
+ * Classe de la fenêtre de jeu
+ */
 public class FenetrePartie extends JFrame {
 
     private Joueur joueur;
@@ -44,7 +42,6 @@ public class FenetrePartie extends JFrame {
     private JButton sendIndice;
     private JTextField indiceInput;
     private JComboBox<Integer> indicechiffre;
-    private JTextField reponseInput;
     private JButton sendReponse;
     private JButton boutonQuitter;
 
@@ -129,11 +126,6 @@ public class FenetrePartie extends JFrame {
 
         JPanel reponsePan = new JPanel();
         reponsePan.setLayout(new BoxLayout(reponsePan, BoxLayout.Y_AXIS));
-        JPanel gLab = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        gLab.add(new JLabel("Listez vos réponses dans le cadre en les séparant avec une ',' : "));
-        reponsePan.add(gLab);
-        reponsePan.add(reponseInput = new JTextField());
-        reponseInput.setColumns(10);
         JPanel centerButPan = new JPanel(new FlowLayout(FlowLayout.CENTER));
         sendReponse = new JButton("Envoyer la réponse");
         centerButPan.add(sendReponse);
@@ -178,7 +170,7 @@ public class FenetrePartie extends JFrame {
         main.add(bas);
 
 
-        // timer
+        // timer listener
         timerAttenteJ2 = new Timer(5000, new AttenteDeJ2Listener(this, partie, serv));
         timerState = new Timer(2000, new StateListener(this,partie,serv));
         if (partie.getEtat().state().equals(STATE_STEP.GAME_INIT)){
@@ -197,7 +189,7 @@ public class FenetrePartie extends JFrame {
         // Listener
         sendIndice.addActionListener(new controleurSendClue(this, serv, partie));
         sendReponse.addActionListener(new controleurSendAnswer(this, serv, partie));
-        boutonQuitter.addActionListener(e -> retour(0));
+        boutonQuitter.addActionListener(e -> retour(-1));
 
 
         // vue
@@ -211,43 +203,111 @@ public class FenetrePartie extends JFrame {
         this.setLocation(x, y);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
+
+    /**
+     * Méthode qui ouvre une boîte de dialogue d'erreur
+     * @param msg le message d'erreur
+     * @param titre le titre de la boîte de dialogue
+     */
     public void ouvrirMessageErreur(String msg, String titre) {
         JOptionPane.showMessageDialog(this,
                 msg,
                 titre,
                 JOptionPane.ERROR_MESSAGE);
     }
+
+    /**
+     * Méthode qui récupere la liste des réponses séléctionnées sur le plateau
+     * @return une List de String (représentant les mots)
+     */
     public List<String> getAnswer() { return plateau.getMotSelected(); }
+
+    /**
+     * Méthode qui met à jour la console
+     * @param s le message à ajouter à la console
+     */
     public void updateConsole(String s) { console.append(s+"\n");}
+
+    /**
+     * Méthode qui récupère le contenu de la console
+     * @return message dans la console (String)
+     */
     public String getConsoleText() { return console.getText(); }
+
+    /**
+     * Méthode qui reset la console
+     */
     public void resetConsole() { console.setText("");}
+
+    /**
+     * Méthode qui récupère l'indice du JTextField
+     * @return l'indice (string)
+     */
     public String getClue() { return indiceInput.getText(); }
-    public void resetAnswer() { reponseInput.setText(""); }
-    public void resetClue() { indiceInput.setText(""); }
+
+    /**
+     * getter du nombre de mot correspondant à l'indice
+     * @return un nombre (int)
+     */
     public int getMotParClue() { return (int) indicechiffre.getSelectedItem(); }
+
+    /**
+     * Méthode qui reset le JTextField indiceInput
+     */
+    public void resetClue() { indiceInput.setText(""); }
+
+    /**
+     * Méthode qui lance le timerState
+     */
     public void startState() {
         timerState.start();
     }
+
+    /**
+     * Méthode qui arrête le timerState
+     */
     public void stopState() { timerState.stop(); }
+
+    /**
+     * Méthode qui arrête le timerAttenteJ2
+     */
     public void stopAttenteJ2() { timerAttenteJ2.stop();}
+
+    /**
+     * Méthode qui rend actif ou inactif le bouton pour envoyer une réponse
+     * @param b boolean pour choisir entre actif/inactif
+     */
     public void setEnableSendAnswer(boolean b) { sendReponse.setEnabled(b);}
+
+    /**
+     * Méthode qui rend actif ou inactif le bouton pour envoyer un indice
+     * @param b boolean pour choisir entre actif/inactif
+     */
     public void setEnableSendClue(boolean b) { sendIndice.setEnabled(b);}
 
-
+    /**
+     * Méthode qui initialise le plateau et la KeyCard.
+     */
     public void initGame() {
         plateau.init(partie.getWords());
         keyCardPan.init(partie.getKeyCard());
     }
 
-
+    /**
+     * Méthode qui update le plateau en changeant la couleur des cases découvertes
+     * @param cList listes des cartes découvertes
+     */
     public void updatePlateau(List<Carte> cList) {
         partie.plateauMAJ(cList);
         plateau.updatePlateau(cList);
     }
 
+    /**
+     * Méthode qui met à jour le plateau par rapport à la liste renvoyé par
+     * la méthode previousAnswer du serveur
+     */
     public void majPreviousAnswer() {
         try {
-            System.out.println(partie.getEtat().previousAnswer());
             List<Card> cardList = partie.getEtat().previousAnswer();
             List<Carte> carteList = new ArrayList<>();
             for (Card c : cardList)
@@ -257,7 +317,11 @@ public class FenetrePartie extends JFrame {
             ouvrirMessageErreur(e.getMessage(),"Erreur : action interdite/impossible");
         }
     }
-    public void majListIndice() {
+
+    /**
+     * Méthode qui met à jour la liste des indices.
+     */
+    public void updateListIndice() {
         try {
             Indice i = new Indice(
                     serv.consultGame(partie.getIdPartie()).currentClue(),
@@ -272,6 +336,12 @@ public class FenetrePartie extends JFrame {
             ouvrirMessageErreur(e.getMessage(), "Erreur ID partie");
         }
     }
+
+    /**
+     * Méthode qui change l'aspect et les droits d'accès aux différents onglets du JTabbedPan
+     * @param i indice correspondant 0 : mode envoie indice
+     *                               1 : mode envoie de réponse
+     */
     public void modeDeJeuTab(int i ) {
         if (i == 0){
             indiceRepTabPan.setEnabledAt(1, false);
@@ -286,8 +356,26 @@ public class FenetrePartie extends JFrame {
             indiceRepTabPan.setEnabledAt(1, false);
         }
     }
+
+    /**
+     * setter de NO_MORE_CARD
+     * @param b boolean : <code>true</code> si il n'y a plus de carte, sinon <code>false</code>
+     */
     public void setNoMoreCard(boolean b) { NO_MORE_CARD = b;}
+
+    /**
+     * Méthode qui retourne si oui ou non, on n'a plus de cartes CODE
+     * @return <code>true</code> si il n'y a plus de carte CODE, sinon <code>false</code>
+     */
     public boolean getNoMoreCard() { return NO_MORE_CARD;}
+
+    /**
+     * Méthode qui permet de quitter la partie et de revenir au menu.
+     * @param i spécifie le type de retour()
+     *          i = -1 : abandon de la partie (partie perdue)
+     *          i = 0 : partie perdue
+     *          i = 1 : partie gagnée
+     */
     public void retour(int i) {
         JOptionPane d = new JOptionPane();
         if (i == -1){
@@ -303,6 +391,12 @@ public class FenetrePartie extends JFrame {
             } catch (CnBadPwdException e) {
                 this.ouvrirMessageErreur("Le mot de passe ne correspond pas","Erreur abortGame");
             }
+            joueur.partieLoosUp();
+            joueur.updateWin(false);
+            d.showMessageDialog(this,
+                    "Vous avez abandonné la partie, cela compte comme une défaite..",
+                    "",
+                    JOptionPane.INFORMATION_MESSAGE);
         }
         if (i == 1){
             joueur.partieWinUp();

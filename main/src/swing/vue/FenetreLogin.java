@@ -1,3 +1,7 @@
+/**
+ * @author Les Infopotes
+ * @version 3.1.1
+ */
 package swing.vue;
 
 import modele.Joueur;
@@ -13,6 +17,9 @@ import java.awt.*;
 import java.io.IOException;
 import java.util.concurrent.ThreadLocalRandom;
 
+/**
+ * Classe de la fenêtre de login
+ */
 public class FenetreLogin extends JFrame {
 
     private Joueur joueur;
@@ -118,7 +125,7 @@ public class FenetreLogin extends JFrame {
      * Méthode second qui permet de passer à la fenêtre suivante (Fenetre Menu) et de fermer cette fenêtre
      */
     public void second() {
-        FenetreRecherchePartie next = new FenetreRecherchePartie("Menu", getJoueur(), serv);
+        FenetreRecherchePartie next = new FenetreRecherchePartie("Menu", joueur, serv);
         next.setVisible(true);
         this.dispose();
     }
@@ -142,9 +149,11 @@ public class FenetreLogin extends JFrame {
      */
     public String getPseudoReg() { return pseudoReg.getText(); }
 
+    /**
+     * Setter de l'instance joueur
+     * @param j le joueur
+     */
     public void setJoueur(Joueur j) { joueur = j; }
-    public Joueur getJoueur() { return joueur; }
-
 
     /**
      * Méthode qui ouvre une boîte de dialogue pour signaler une erreur
@@ -158,8 +167,17 @@ public class FenetreLogin extends JFrame {
                 JOptionPane.ERROR_MESSAGE);
     }
 
+    /**
+     * Méthode qui affiche  le mot de passe du compte registered (enregistré)
+     * @param s le mot de passe
+     */
     public void setLabelMdp(String s) {
         mdp.setText("Votre mdp : " + s);
     }
+
+    /**
+     * Méthode qui affiche en multicolor
+     * @param color
+     */
     public void setMadeBy(Color color) { labelMadeby.setForeground(color); labelColor.start();}
 }
