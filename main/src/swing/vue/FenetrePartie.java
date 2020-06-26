@@ -180,8 +180,11 @@ public class FenetrePartie extends JFrame {
         // timer
         timerAttenteJ2 = new Timer(5000, new AttenteDeJ2Listener(this, partie, serv));
         timerState = new Timer(2000, new StateListener(this,partie,serv));
-        if (partie.getEtat().state().equals(STATE_STEP.GAME_INIT))
+        if (partie.getEtat().state().equals(STATE_STEP.GAME_INIT)){
+            sendIndice.setEnabled(false);
+            sendReponse.setEnabled(false);
             timerAttenteJ2.start();
+        }
         else {
             initGame();
             System.out.println("Le 2eme joueur est arrivé la partie va commencer.");
@@ -213,9 +216,7 @@ public class FenetrePartie extends JFrame {
                 titre,
                 JOptionPane.ERROR_MESSAGE);
     }
-
-    public String getAnswer() {return reponseInput.getText(); }
-    public List<String> getAnswerFromPlateau() { return plateau.getMotSelected(); }
+    public List<String> getAnswer() { return plateau.getMotSelected(); }
     public void updateConsole(String s) { console.append(s+"\n");}
     public String getConsoleText() { return console.getText(); }
     public void resetConsole() { console.setText("");}
@@ -228,6 +229,8 @@ public class FenetrePartie extends JFrame {
     }
     public void stopState() { timerState.stop(); }
     public void stopAttenteJ2() { timerAttenteJ2.stop();}
+    public void setEnableSendAnswer(boolean b) { sendReponse.setEnabled(b);}
+    public void setEnableSendClue(boolean b) { sendIndice.setEnabled(b);}
 
 
     public void initGame() {

@@ -28,6 +28,8 @@ public class AttenteDeJ2Listener implements ActionListener {
                 fn.resetConsole();
                 fn.updateConsole("Un joueur a été trouvé.\nFin de l'attente.");
                 fn.initGame();
+                fn.setEnableSendAnswer(true);
+                fn.setEnableSendClue(true);
                 fn.modeDeJeuTab(0);
                 fn.startState();
                 fn.stopAttenteJ2();

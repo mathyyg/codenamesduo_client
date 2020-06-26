@@ -83,6 +83,7 @@ public class KeyCardPan extends JPanel {
             if (cardCourant.equals(CARD_ROLE.NEUTRAL))
                 butCourant.setBackground(Color.GRAY);
             butCourant.setOpaque(true);
+            butCourant.setEnabled(false);
         }
     }
 }
